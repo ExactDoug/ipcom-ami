@@ -5211,6 +5211,14 @@ export type QueueEntry = BaseEvent & {
 	Priority: string;
 };
 
+/**
+ * QueueSummary event - Asterisk 20+
+ *
+ * Provides aggregate queue statistics in response to a QueueSummary AMI action.
+ * This event includes summary information about a queue without detailed member data.
+ *
+ * @since Asterisk 20
+ */
 export type QueueSummary = BaseEvent & {
 	Event: "QueueSummary";
 	Queue: string;
@@ -5224,6 +5232,14 @@ export type QueueSummary = BaseEvent & {
 	TimeEvent: number;
 };
 
+/**
+ * QueueSummaryComplete event - Asterisk 20+
+ *
+ * Marks the completion of a QueueSummary action response.
+ * This event indicates that all QueueSummary events have been sent for the requested action.
+ *
+ * @since Asterisk 20
+ */
 export type QueueSummaryComplete = BaseEvent & {
 	Event: "QueueSummaryComplete";
 	ActionID: number;

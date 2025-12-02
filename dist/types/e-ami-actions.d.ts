@@ -1,14 +1,15 @@
 import { type eAmi } from "./index.js";
+import type { AsteriskVersion } from "./types/version.js";
 import type { I_ActionBridgeInfo, I_ActionBridgeList, I_ActionCoreShowChannels, I_ActionHangup, I_ActionLogin, I_ActionOriginate, I_ActionQueueAdd, I_ActionQueuePause, I_ActionQueuePenalty, I_ActionQueueRemove, I_ActionQueueStatus, I_ActionQueueSummary, I_ActionStatus } from "./interfaces/actions.interface.js";
 import type { I_QueueMember, I_QueueMemberAdded, I_QueueMemberPause, I_QueueMemberPenalty, I_QueueMemberRemoved, I_QueueSummary } from "./interfaces/queue.js";
 import type { I_Status } from "./interfaces/status.interface.js";
 import type { I_BridgeInfoChannel, I_BridgeListItem } from "./interfaces/bridge.interface.js";
 import type { I_CoreShowChannel } from "./interfaces/core-interface.js";
 import type { I_DualHangup } from "./interfaces/hangup.interface.js";
-export declare class eAmiActions {
+export declare class eAmiActions<V extends AsteriskVersion = '18'> {
     private eAmi;
     private timeOutAction;
-    constructor(eAmi: eAmi);
+    constructor(eAmi: eAmi<V>);
     BridgeInfo(options: I_ActionBridgeInfo): Promise<I_BridgeInfoChannel>;
     BridgeList(options: I_ActionBridgeList): Promise<I_BridgeListItem[]>;
     CoreShowChannels(options: I_ActionCoreShowChannels): Promise<I_CoreShowChannel[]>;
