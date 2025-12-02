@@ -4,6 +4,22 @@
  * This file contains tests that SHOULD FAIL compilation.
  * These tests verify that incorrect types are properly rejected.
  *
+ * Coverage:
+ * - Exten (string, not number)
+ * - CallerID (string, not number)
+ * - ChannelState (number 0-9, not string)
+ * - CallerIDNum (number, not string)
+ * - CallerIDName (string, not number)
+ * - Context (string, not number)
+ * - Priority (string, not number)
+ * - Version (strict literal values)
+ * - Timeout (number, not string)
+ * - Uniqueid/Linkedid (string, not number)
+ * - DestUniqueid/DestLinkedid (string, not number)
+ * - SwapUniqueid (string, not number)
+ *
+ * Total Tests: 15 (was 10, +5)
+ *
  * To verify these tests work:
  * 1. Uncomment ONE test at a time
  * 2. Run: npx tsc --noEmit tests/type-negative-tests.ts
@@ -19,6 +35,8 @@ import type {
 import type {
     I_NewChannel,
 } from '../src/interfaces/new.interface.js';
+import type { I_DialBegin } from '../src/interfaces/dial.interface.js';
+import type { I_BridgeEnter } from '../src/interfaces/bridge.interface.js';
 import { eAmi } from '../src/index.js';
 
 // ============================================================================
@@ -182,6 +200,158 @@ import { eAmi } from '../src/index.js';
 //     Context: 'default',
 //     Priority: '1',
 //     Timeout: '30000',      // ✗ Should cause error (string)
+// };
+
+// ============================================================================
+// NEGATIVE TEST 11: Uniqueid should NOT accept number
+// ============================================================================
+// EXPECTED ERROR: Type 'number' is not assignable to type 'string'
+// const badUniqueidNumber: I_NewChannel = {
+//     Event: 'Newchannel',
+//     Privilege: 'call,all',
+//     Channel: 'SIP/1001-00000001',
+//     ChannelState: 0,
+//     ChannelStateDesc: 'Down',
+//     CallerIDNum: 1001,
+//     CallerIDName: 'Alice',
+//     ConnectedLineNum: 0,
+//     ConnectedLineName: '<unknown>',
+//     Language: 'en',
+//     AccountCode: 0,
+//     Context: 'default',
+//     Exten: '1000',
+//     Priority: '1',
+//     Uniqueid: 1527247326556790,    // ✗ Should cause error (number)
+//     Linkedid: '1527247326.556790',
+// };
+
+// ============================================================================
+// NEGATIVE TEST 12: Linkedid should NOT accept number
+// ============================================================================
+// EXPECTED ERROR: Type 'number' is not assignable to type 'string'
+// const badLinkedidNumber: I_NewChannel = {
+//     Event: 'Newchannel',
+//     Privilege: 'call,all',
+//     Channel: 'SIP/1001-00000001',
+//     ChannelState: 0,
+//     ChannelStateDesc: 'Down',
+//     CallerIDNum: 1001,
+//     CallerIDName: 'Alice',
+//     ConnectedLineNum: 0,
+//     ConnectedLineName: '<unknown>',
+//     Language: 'en',
+//     AccountCode: 0,
+//     Context: 'default',
+//     Exten: '1000',
+//     Priority: '1',
+//     Uniqueid: '1527247326.556790',
+//     Linkedid: 1527247326556790,    // ✗ Should cause error (number)
+// };
+
+// ============================================================================
+// NEGATIVE TEST 13: DestUniqueid should NOT accept number
+// ============================================================================
+// EXPECTED ERROR: Type 'number' is not assignable to type 'string'
+// const badDestUniqueid: I_DialBegin = {
+//     Privilege: 'call,all',
+//     Channel: 'SIP/1001-00000001',
+//     ChannelState: 6,
+//     ChannelStateDesc: 'Up',
+//     CallerIDNum: 1001,
+//     CallerIDName: 'Alice',
+//     ConnectedLineNum: 1002,
+//     ConnectedLineName: 'Bob',
+//     Language: 'en',
+//     AccountCode: 0,
+//     Context: 'default',
+//     Exten: '1002',
+//     Priority: '1',
+//     Uniqueid: '1528262325.580184',
+//     Linkedid: '1528262325.580183',
+//     DestChannel: 'SIP/1002-00000002',
+//     DestChannelState: 5,
+//     DestChannelStateDesc: 'Ringing',
+//     DestCallerIDNum: 1002,
+//     DestCallerIDName: 'Bob',
+//     DestConnectedLineNum: 1001,
+//     DestConnectedLineName: 'Alice',
+//     DestLanguage: 'en',
+//     DestAccountCode: 0,
+//     DestContext: 'default',
+//     DestExten: '1002',
+//     DestPriority: '1',
+//     DestUniqueid: 1528262348580187,  // ✗ Should cause error (number)
+//     DestLinkedid: '1528262325.580183',
+//     DialStatus: 'RINGING',
+// };
+
+// ============================================================================
+// NEGATIVE TEST 14: DestLinkedid should NOT accept number
+// ============================================================================
+// EXPECTED ERROR: Type 'number' is not assignable to type 'string'
+// const badDestLinkedid: I_DialBegin = {
+//     Privilege: 'call,all',
+//     Channel: 'SIP/1001-00000001',
+//     ChannelState: 6,
+//     ChannelStateDesc: 'Up',
+//     CallerIDNum: 1001,
+//     CallerIDName: 'Alice',
+//     ConnectedLineNum: 1002,
+//     ConnectedLineName: 'Bob',
+//     Language: 'en',
+//     AccountCode: 0,
+//     Context: 'default',
+//     Exten: '1002',
+//     Priority: '1',
+//     Uniqueid: '1528262325.580184',
+//     Linkedid: '1528262325.580183',
+//     DestChannel: 'SIP/1002-00000002',
+//     DestChannelState: 5,
+//     DestChannelStateDesc: 'Ringing',
+//     DestCallerIDNum: 1002,
+//     DestCallerIDName: 'Bob',
+//     DestConnectedLineNum: 1001,
+//     DestConnectedLineName: 'Alice',
+//     DestLanguage: 'en',
+//     DestAccountCode: 0,
+//     DestContext: 'default',
+//     DestExten: '1002',
+//     DestPriority: '1',
+//     DestUniqueid: '1528262348.580187',
+//     DestLinkedid: 1528262325580183,  // ✗ Should cause error (number)
+//     DialStatus: 'RINGING',
+// };
+
+// ============================================================================
+// NEGATIVE TEST 15: SwapUniqueid should NOT accept number
+// ============================================================================
+// EXPECTED ERROR: Type 'number' is not assignable to type 'string'
+// const badSwapUniqueid: I_BridgeEnter = {
+//     Event: 'BridgeEnter',
+//     Privilege: 'call,all',
+//     BridgeUniqueid: '1234567890.1',
+//     BridgeType: 'basic',
+//     BridgeTechnology: 'simple_bridge',
+//     BridgeCreator: '<unknown>',
+//     BridgeName: '<unknown>',
+//     BridgeNumChannels: 2,
+//     BridgeVideoSourceMode: 'none',
+//     BridgeVideoSource: '',
+//     Channel: 'SIP/1001-00000001',
+//     ChannelState: 6,
+//     ChannelStateDesc: 'Up',
+//     CallerIDNum: 1001,
+//     CallerIDName: 'Alice',
+//     ConnectedLineNum: 1002,
+//     ConnectedLineName: 'Bob',
+//     Language: 'en',
+//     AccountCode: 0,
+//     Context: 'default',
+//     Exten: '1002',
+//     Priority: '1',
+//     Uniqueid: '1234567890.100',
+//     Linkedid: '1234567890.100',
+//     SwapUniqueid: 1234567890101,    // ✗ Should cause error (number)
 // };
 
 console.log('This file should not compile with any tests uncommented!');

@@ -27,6 +27,8 @@ import type {
 import type {
     I_CoreShowChannel,
 } from '../src/interfaces/core-interface.js';
+import type { I_DialBegin } from '../src/interfaces/dial.interface.js';
+import type { I_OriginateResponse } from '../src/interfaces/originate.interface.js';
 
 /**
  * TEST 1: Exten type correctness
@@ -223,6 +225,85 @@ const statusAction: I_ActionStatus = {
 };
 
 /**
+ * TEST 7: Uniqueid/Linkedid type correctness
+ * EXPECTED: Should accept string values (format: timestamp.number)
+ */
+const newChannelWithIds: I_NewChannel = {
+    Event: 'Newchannel',
+    Privilege: 'call,all',
+    Channel: 'SIP/1001-00000001',
+    ChannelState: 0,
+    ChannelStateDesc: 'Down',
+    CallerIDNum: 1001,
+    CallerIDName: 'Alice',
+    ConnectedLineNum: 0,
+    ConnectedLineName: '<unknown>',
+    Language: 'en',
+    AccountCode: 0,
+    Context: 'default',
+    Exten: '1000',
+    Priority: '1',
+    Uniqueid: '1527247326.556790',  // ✓ String timestamp format
+    Linkedid: '1527247326.556790',  // ✓ String timestamp format
+};
+
+/**
+ * TEST 8: Multiple ID fields in Dial events
+ * EXPECTED: All ID fields accept string values
+ */
+const dialBeginWithIds: I_DialBegin = {
+    Privilege: 'call,all',
+    Channel: 'SIP/1001-00000001',
+    ChannelState: 6,
+    ChannelStateDesc: 'Up',
+    CallerIDNum: 1001,
+    CallerIDName: 'Alice',
+    ConnectedLineNum: 1002,
+    ConnectedLineName: 'Bob',
+    Language: 'en',
+    AccountCode: 0,
+    Context: 'default',
+    Exten: '1002',
+    Priority: '1',
+    Uniqueid: '1528262325.580184',     // ✓ Source channel ID
+    Linkedid: '1528262325.580183',     // ✓ Call chain ID
+    DestChannel: 'SIP/1002-00000002',
+    DestChannelState: 5,
+    DestChannelStateDesc: 'Ringing',
+    DestCallerIDNum: 1002,
+    DestCallerIDName: 'Bob',
+    DestConnectedLineNum: 1001,
+    DestConnectedLineName: 'Alice',
+    DestLanguage: 'en',
+    DestAccountCode: 0,
+    DestContext: 'default',
+    DestExten: '1002',
+    DestPriority: '1',
+    DestUniqueid: '1528262348.580187', // ✓ Dest channel ID
+    DestLinkedid: '1528262325.580183', // ✓ Dest call chain ID
+    DialStatus: 'RINGING',
+};
+
+/**
+ * TEST 9: OriginateResponse has Uniqueid but no Linkedid
+ * EXPECTED: Uniqueid accepts string, Linkedid field absent
+ */
+const originateResponse: I_OriginateResponse = {
+    Event: 'OriginateResponse',
+    Response: 'Success',
+    Channel: 'SIP/1001-00000001',
+    Context: 'default',
+    Exten: '1000',
+    Application: '',
+    Data: '',
+    Reason: '4',
+    Uniqueid: '1234567890.123',  // ✓ String format
+    CallerIDNum: 1001,
+    CallerIDName: 'Alice',
+    // Note: No Linkedid field in this event type
+};
+
+/**
  * NEGATIVE TESTS (should cause compilation errors - commented out)
  * Uncomment these to verify that type checking is working correctly
  */
@@ -290,12 +371,17 @@ const statusAction: I_ActionStatus = {
  * ✓ Extension vs Exten both present where needed
  * ✓ Version parameter works with generic types ('18', '20')
  * ✓ Optional fields work correctly
+ * ✓ Uniqueid/Linkedid accept strings (not numbers)
+ * ✓ Multiple ID field handling (Dest*, Swap*)
  *
  * NEGATIVE TESTS (commented out, would fail compilation):
  * ✗ Exten rejects number values
  * ✗ CallerID rejects number values
  * ✗ ChannelState rejects string values
  * ✗ Version rejects invalid values
+ *
+ * For negative tests (should fail compilation), see:
+ * tests/type-negative-tests.ts
  */
 
 console.log('✓ All type compilation tests passed!');
@@ -304,3 +390,5 @@ console.log('✓ CallerID field correctly typed as string');
 console.log('✓ ChannelState field correctly typed as number');
 console.log('✓ Version parameter works correctly');
 console.log('✓ CallerIDNum/CallerIDName distinction maintained');
+console.log('✓ Uniqueid/Linkedid fields correctly typed as strings');
+console.log('✓ Dest*/Swap* ID field variants correctly typed');
