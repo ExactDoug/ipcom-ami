@@ -20,10 +20,10 @@ export interface I_BridgeEnter {
     AccountCode: number;
     Context: string;
     Exten: string;
-    Priority: number;
-    Uniqueid: number;
-    Linkedid: number;
-    SwapUniqueid: number;
+    Priority: string;
+    Uniqueid: string;
+    Linkedid: string;
+    SwapUniqueid: string;
 }
 export interface I_BridgeCreate {
     Event: string;
@@ -58,10 +58,10 @@ export interface I_BridgeLeave {
     AccountCode: number;
     Context: string;
     Exten: string;
-    Priority: number;
-    Uniqueid: number;
-    Linkedid: number;
-    SwapUniqueid?: number;
+    Priority: string;
+    Uniqueid: string;
+    Linkedid: string;
+    SwapUniqueid?: string;
 }
 export interface I_BridgeDestroy {
     Event: string;
@@ -117,9 +117,9 @@ export interface I_BridgeInfoChannel {
     AccountCode: number;
     Context: string;
     Exten: string;
-    Priority: number;
-    Uniqueid: number;
-    Linkedid: number;
+    Priority: string;
+    Uniqueid: string;
+    Linkedid: string;
 }
 export interface I_BridgeListComplete {
     Event: string;

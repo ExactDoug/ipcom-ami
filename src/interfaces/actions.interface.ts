@@ -116,7 +116,7 @@ export interface I_ActionOriginate extends I_Request {
 	//Context to use (requires Exten and Priority)
 	Context: string;
 	//Priority to use (requires Exten and Context)
-	Priority?: number;
+	Priority?: string;
 	//Application to execute.
 	Application?: string;
 	//Data to use (requires Application).

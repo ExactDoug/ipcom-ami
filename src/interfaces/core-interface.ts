@@ -12,9 +12,9 @@ export interface I_CoreShowChannel {
 	AccountCode: number
 	Context: string
 	Exten: string
-	Priority: number
-	Uniqueid: number
-	Linkedid: number
+	Priority: string
+	Uniqueid: string
+	Linkedid: string
 	BridgeId: string
 	Application: string
 	ApplicationData: string

@@ -10,9 +10,9 @@ export interface I_DTMFBegin {
     AccountCode: number;
     Context: string;
     Exten: string;
-    Priority: number;
-    Uniqueid: number;
-    Linkedid: number;
+    Priority: string;
+    Uniqueid: string;
+    Linkedid: string;
     Digit: string;
     Direction: "Received" | "Sent";
 }
@@ -28,9 +28,9 @@ export interface I_DTMFEnd {
     AccountCode: number;
     Context: string;
     Exten: string;
-    Priority: number;
-    Uniqueid: number;
-    Linkedid: number;
+    Priority: string;
+    Uniqueid: string;
+    Linkedid: string;
     Digit: string;
     DurationMs: number;
     Direction: "Received" | "Sent";

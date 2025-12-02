@@ -71,7 +71,7 @@ export interface I_ActionOriginate extends I_Request {
     Channel: string;
     Exten: string;
     Context: string;
-    Priority?: number;
+    Priority?: string;
     Application?: string;
     Data?: string;
     Timeout: number;

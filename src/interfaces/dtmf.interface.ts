@@ -10,9 +10,9 @@ export interface I_DTMFBegin {
 	AccountCode: number
 	Context: string
 	Exten: string
-	Priority: number
-	Uniqueid: number
-	Linkedid: number
+	Priority: string
+	Uniqueid: string
+	Linkedid: string
 	//DTMF digit received or transmitted (0-9, A-E, # or *
 	Digit: string
 	Direction: "Received" | "Sent"
@@ -29,9 +29,9 @@ export interface I_DTMFEnd {
 	AccountCode: number
 	Context: string
 	Exten: string
-	Priority: number
-	Uniqueid: number
-	Linkedid: number
+	Priority: string
+	Uniqueid: string
+	Linkedid: string
 	//DTMF digit received or transmitted (0-9, A-E, # or *
 	Digit: string
 	//Duration (in milliseconds) DTMF was sent/received

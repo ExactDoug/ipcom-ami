@@ -13,9 +13,9 @@ export interface I_NewChannel {
 	AccountCode: number         // null
 	Context: string             //'callcenter',
 	Exten: string               // 89*****4387
-	Priority: number            // 1
-	Uniqueid: number            // 1527247326.556790
-	Linkedid: number            // 1527247326.556790
+	Priority: string            // 1
+	Uniqueid: string            // 1527247326.556790
+	Linkedid: string            // 1527247326.556790
 }
 
 //Raised when a channel's state changes.
@@ -33,9 +33,9 @@ export interface I_NewState {
 	AccountCode: number         // null
 	Context: string             //'callcenter',
 	Exten: string               // 89*****4387
-	Priority: number            // 1
-	Uniqueid: number            // 1527247326.556790
-	Linkedid: number            // 1527247326.556790
+	Priority: string            // 1
+	Uniqueid: string            // 1527247326.556790
+	Linkedid: string            // 1527247326.556790
 }
 
 //Raised when a channel's connected line information is changed.
@@ -53,9 +53,9 @@ export interface I_NewConnectedLine {
 	AccountCode: number         // null
 	Context: string             //'callcenter',
 	Exten: string               // 89*****4387
-	Priority: number            // 1
-	Uniqueid: number            // 1527247326.556790
-	Linkedid: number            // 1527247326.556790
+	Priority: string            // 1
+	Uniqueid: string            // 1527247326.556790
+	Linkedid: string            // 1527247326.556790
 }
 
 //Raised when a channel enters a new context, extension, priority.
@@ -71,9 +71,9 @@ export interface I_NewExten {
 	AccountCode: number         // null
 	Context: string             //'callcenter',
 	Exten: string               // 89*****4387
-	Priority: number            // 1
-	Uniqueid: number            // 1527247326.556790
-	Linkedid: number            // 1527247326.556790
+	Priority: string            // 1
+	Uniqueid: string            // 1527247326.556790
+	Linkedid: string            // 1527247326.556790
 	// Deprecated in 12, but kept for backward compatability. Please use 'Exten' instead.
 	Extension: string
 	//The application about to be executed

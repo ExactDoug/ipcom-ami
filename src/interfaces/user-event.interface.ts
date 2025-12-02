@@ -13,9 +13,9 @@ export interface I_UserEvent {
 	AccountCode: number
 	Context: string
 	Exten: string
-	Priority: number
-	Uniqueid: number
-	Linkedid: number
+	Priority: string
+	Uniqueid: string
+	Linkedid: string
 	//The event name, as specified in the dialplan.
 
 	UserEvent: string

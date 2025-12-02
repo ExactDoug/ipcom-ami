@@ -12,9 +12,9 @@ export interface I_NewChannel {
     AccountCode: number;
     Context: string;
     Exten: string;
-    Priority: number;
-    Uniqueid: number;
-    Linkedid: number;
+    Priority: string;
+    Uniqueid: string;
+    Linkedid: string;
 }
 export interface I_NewState {
     Event: string;
@@ -30,9 +30,9 @@ export interface I_NewState {
     AccountCode: number;
     Context: string;
     Exten: string;
-    Priority: number;
-    Uniqueid: number;
-    Linkedid: number;
+    Priority: string;
+    Uniqueid: string;
+    Linkedid: string;
 }
 export interface I_NewConnectedLine {
     Event: string;
@@ -48,9 +48,9 @@ export interface I_NewConnectedLine {
     AccountCode: number;
     Context: string;
     Exten: string;
-    Priority: number;
-    Uniqueid: number;
-    Linkedid: number;
+    Priority: string;
+    Uniqueid: string;
+    Linkedid: string;
 }
 export interface I_NewExten {
     Event: string;
@@ -64,9 +64,9 @@ export interface I_NewExten {
     AccountCode: number;
     Context: string;
     Exten: string;
-    Priority: number;
-    Uniqueid: number;
-    Linkedid: number;
+    Priority: string;
+    Uniqueid: string;
+    Linkedid: string;
     Extension: string;
     Application: string;
     AppData: string;

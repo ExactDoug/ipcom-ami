@@ -11,9 +11,9 @@ export interface I_DialBegin {
     AccountCode: number;
     Context: string;
     Exten: string;
-    Priority: number;
-    Uniqueid: number;
-    Linkedid: number;
+    Priority: string;
+    Uniqueid: string;
+    Linkedid: string;
     DestChannel: string;
     DestChannelState: number;
     DestChannelStateDesc: string;
@@ -25,9 +25,9 @@ export interface I_DialBegin {
     DestAccountCode: number;
     DestContext: string;
     DestExten: string;
-    DestPriority: number;
-    DestUniqueid: number;
-    DestLinkedid: number;
+    DestPriority: string;
+    DestUniqueid: string;
+    DestLinkedid: string;
     DialStatus: string;
 }
 export interface I_DialEnd {
@@ -43,9 +43,9 @@ export interface I_DialEnd {
     AccountCode: number;
     Context: string;
     Exten: string;
-    Priority: number;
-    Uniqueid: number;
-    Linkedid: number;
+    Priority: string;
+    Uniqueid: string;
+    Linkedid: string;
     DestChannel: string;
     DestChannelState: number;
     DestChannelStateDesc: string;
@@ -57,9 +57,9 @@ export interface I_DialEnd {
     DestAccountCode: number;
     DestContext: string;
     DestExten: string;
-    DestPriority: number;
-    DestUniqueid: number;
-    DestLinkedid: number;
+    DestPriority: string;
+    DestUniqueid: string;
+    DestLinkedid: string;
     DialStatus: string;
 }
 export interface I_DialState {
@@ -75,9 +75,9 @@ export interface I_DialState {
     AccountCode: number;
     Context: string;
     Exten: string;
-    Priority: number;
-    Uniqueid: number;
-    Linkedid: number;
+    Priority: string;
+    Uniqueid: string;
+    Linkedid: string;
     DestChannel: string;
     DestChannelState: number;
     DestChannelStateDesc: string;
@@ -89,9 +89,9 @@ export interface I_DialState {
     DestAccountCode: number;
     DestContext: string;
     DestExten: string;
-    DestPriority: number;
-    DestUniqueid: number;
-    DestLinkedid: number;
+    DestPriority: string;
+    DestUniqueid: string;
+    DestLinkedid: string;
     DialStatus: string;
 }
 //# sourceMappingURL=dial.interface.d.ts.map

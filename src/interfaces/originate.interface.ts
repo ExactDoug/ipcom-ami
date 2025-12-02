@@ -8,7 +8,7 @@ export interface I_OriginateResponse {
 	Application: string
 	Data: string
 	Reason: string
-	Uniqueid: number
+	Uniqueid: string
 	CallerIDNum: number
 	CallerIDName: string
 }
