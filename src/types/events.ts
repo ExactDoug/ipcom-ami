@@ -10,6 +10,23 @@ type BaseEvent = {
 };
 
 /**
+ * Represents the valid values for ChannelState fields in Asterisk AMI events.
+ *
+ * Values correspond to:
+ * - 0: Down
+ * - 1: Rsrvd (Reserved)
+ * - 2: OffHook
+ * - 3: Dialing
+ * - 4: Ring
+ * - 5: Ringing
+ * - 6: Up
+ * - 7: Busy
+ * - 8: Dialing Offhook
+ * - 9: Pre-ring
+ */
+export type ChannelStateValue = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9;
+
+/**
  * Represents the data structure for the AGIExecEnd event in Asterisk.
  *
  * **Synopsis**: Raised when an AGI command finishes execution.
@@ -1212,7 +1229,7 @@ export type AorListComplete = BaseEvent & {
 export type AsyncAGIEnd = BaseEvent & {
 	Event: "AsyncAGIEnd";
 	Channel: string;
-	ChannelState: string;
+	ChannelState: ChannelStateValue;
 	ChannelStateDesc: string;
 	CallerIDNum: string | number;
 	CallerIDName: string;
@@ -1241,7 +1258,7 @@ export type AsyncAGIEnd = BaseEvent & {
 export type AsyncAGIExec = BaseEvent & {
 	Event: "AsyncAGIExec";
 	Channel: string;
-	ChannelState: string;
+	ChannelState: ChannelStateValue;
 	ChannelStateDesc: string;
 	CallerIDNum: string | number;
 	CallerIDName: string;
@@ -1295,7 +1312,7 @@ export type AsyncAGIExec = BaseEvent & {
 export type AsyncAGIStart = BaseEvent & {
 	Event: "AsyncAGIStart";
 	Channel: string;
-	ChannelState: string;
+	ChannelState: ChannelStateValue;
 	ChannelStateDesc: string;
 	CallerIDNum: string | number;
 	CallerIDName: string;
@@ -1383,7 +1400,7 @@ export type AttendedTransfer = BaseEvent & {
 	DestBridgeUniqueid?: string;
 	DestApp?: string;
 	LocalOneChannel: string;
-	LocalOneChannelState: string;
+	LocalOneChannelState: ChannelStateValue;
 	LocalOneChannelStateDesc: string;
 	LocalOneCallerIDNum: string | number;
 	LocalOneCallerIDName: string;
@@ -1397,7 +1414,7 @@ export type AttendedTransfer = BaseEvent & {
 	LocalOneUniqueid: string | number;
 	LocalOneLinkedid: number | string;
 	LocalTwoChannel: string;
-	LocalTwoChannelState: string;
+	LocalTwoChannelState: ChannelStateValue;
 	LocalTwoChannelStateDesc: string;
 	LocalTwoCallerIDNum: string | number;
 	LocalTwoCallerIDName: string;
@@ -2147,7 +2164,7 @@ export type ChallengeSent = BaseEvent & {
 export type ChanSpyStart = BaseEvent & {
 	Event: "ChanSpyStart";
 	SpyerChannel: string;
-	SpyerChannelState: string;
+	SpyerChannelState: ChannelStateValue;
 	SpyerChannelStateDesc:
 		| "Down"
 		| "Rsrvd"
@@ -2172,7 +2189,7 @@ export type ChanSpyStart = BaseEvent & {
 	SpyerUniqueid: string | number;
 	SpyerLinkedid: number | string;
 	SpyeeChannel: string;
-	SpyeeChannelState: string;
+	SpyeeChannelState: ChannelStateValue;
 	SpyeeChannelStateDesc:
 		| "Down"
 		| "Rsrvd"
@@ -2201,7 +2218,7 @@ export type ChanSpyStart = BaseEvent & {
 export type ChanSpyStop = BaseEvent & {
 	Event: "ChanSpyStop";
 	SpyerChannel: string;
-	SpyerChannelState: string;
+	SpyerChannelState: ChannelStateValue;
 	SpyerChannelStateDesc:
 		| "Down"
 		| "Rsrvd"
@@ -2226,7 +2243,7 @@ export type ChanSpyStop = BaseEvent & {
 	SpyerUniqueid: string | number;
 	SpyerLinkedid: number | string;
 	SpyeeChannel: string;
-	SpyeeChannelState: string;
+	SpyeeChannelState: ChannelStateValue;
 	SpyeeChannelStateDesc:
 		| "Down"
 		| "Rsrvd"
@@ -2255,7 +2272,7 @@ export type ChanSpyStop = BaseEvent & {
 export type ChannelTalkingStart = BaseEvent & {
 	Event: "ChannelTalkingStart";
 	Channel: string;
-	ChannelState: string;
+	ChannelState: ChannelStateValue;
 	ChannelStateDesc:
 		| "Down"
 		| "Rsrvd"
@@ -2284,7 +2301,7 @@ export type ChannelTalkingStart = BaseEvent & {
 export type ChannelTalkingStop = BaseEvent & {
 	Event: "ChannelTalkingStop";
 	Channel: string;
-	ChannelState: string;
+	ChannelState: ChannelStateValue;
 	ChannelStateDesc:
 		| "Down"
 		| "Rsrvd"
@@ -2336,7 +2353,7 @@ export type ConfbridgeJoin = BaseEvent & {
 	BridgeVideoSourceMode: "none" | "talker" | "single";
 	BridgeVideoSource?: string;
 	Channel: string;
-	ChannelState: string;
+	ChannelState: ChannelStateValue;
 	ChannelStateDesc:
 		| "Down"
 		| "Rsrvd"
@@ -2376,7 +2393,7 @@ export type ConfbridgeLeave = BaseEvent & {
 	BridgeVideoSourceMode: "none" | "talker" | "single";
 	BridgeVideoSource?: string;
 	Channel: string;
-	ChannelState: string;
+	ChannelState: ChannelStateValue;
 	ChannelStateDesc:
 		| "Down"
 		| "Rsrvd"
@@ -2415,7 +2432,7 @@ export type ConfbridgeList = BaseEvent & {
 	Talking: "Yes" | "No";
 	AnsweredTime: string;
 	Channel: string;
-	ChannelState: string;
+	ChannelState: ChannelStateValue;
 	ChannelStateDesc:
 		| "Down"
 		| "Rsrvd"
@@ -2475,7 +2492,7 @@ export type ConfbridgeMute = BaseEvent & {
 	BridgeVideoSourceMode: "none" | "talker" | "single";
 	BridgeVideoSource?: string;
 	Channel: string;
-	ChannelState: string;
+	ChannelState: ChannelStateValue;
 	ChannelStateDesc:
 		| "Down"
 		| "Rsrvd"
@@ -2553,7 +2570,7 @@ export type ConfbridgeTalking = BaseEvent & {
 	BridgeVideoSourceMode: "none" | "talker" | "single";
 	BridgeVideoSource?: string;
 	Channel: string;
-	ChannelState: string;
+	ChannelState: ChannelStateValue;
 	ChannelStateDesc:
 		| "Down"
 		| "Rsrvd"
@@ -2593,7 +2610,7 @@ export type ConfbridgeUnmute = BaseEvent & {
 	BridgeVideoSourceMode: "none" | "talker" | "single";
 	BridgeVideoSource?: string;
 	Channel: string;
-	ChannelState: string;
+	ChannelState: ChannelStateValue;
 	ChannelStateDesc:
 		| "Down"
 		| "Rsrvd"
@@ -2696,7 +2713,7 @@ export type CoreShowChannel = BaseEvent & {
 	Event: "CoreShowChannel";
 	ActionID: number;
 	Channel: string;
-	ChannelState: string;
+	ChannelState: ChannelStateValue;
 	ChannelStateDesc:
 		| "Down"
 		| "Rsrvd"
@@ -2763,7 +2780,7 @@ export type CoreShowChannelsComplete = BaseEvent & {
 export type DAHDIChannel = BaseEvent & {
 	Event: "DAHDIChannel";
 	Channel: string;
-	ChannelState: string;
+	ChannelState: ChannelStateValue;
 	ChannelStateDesc:
 		| "Down"
 		| "Rsrvd"
@@ -2811,7 +2828,7 @@ export type DNDState = BaseEvent & {
 export type DTMFBegin = BaseEvent & {
 	Event: "DTMFBegin";
 	Channel: string;
-	ChannelState: string;
+	ChannelState: ChannelStateValue;
 	ChannelStateDesc:
 		| "Down"
 		| "Rsrvd"
@@ -2842,7 +2859,7 @@ export type DTMFBegin = BaseEvent & {
 export type DTMFEnd = BaseEvent & {
 	Event: "DTMFEnd";
 	Channel: string;
-	ChannelState: string;
+	ChannelState: ChannelStateValue;
 	ChannelStateDesc:
 		| "Down"
 		| "Rsrvd"
@@ -2920,7 +2937,7 @@ export type DeviceStateListComplete = BaseEvent & {
 export type DialBegin = BaseEvent & {
 	Event: "DialBegin";
 	Channel: string;
-	ChannelState: string;
+	ChannelState: ChannelStateValue;
 	ChannelStateDesc:
 		| "Down"
 		| "Rsrvd"
@@ -2945,7 +2962,7 @@ export type DialBegin = BaseEvent & {
 	Uniqueid: string | number;
 	Linkedid: number | string;
 	DestChannel: string;
-	DestChannelState: string;
+	DestChannelState: ChannelStateValue;
 	DestChannelStateDesc:
 		| "Down"
 		| "Rsrvd"
@@ -2975,7 +2992,7 @@ export type DialBegin = BaseEvent & {
 export type DialEnd = BaseEvent & {
 	Event: "DialEnd";
 	Channel: string;
-	ChannelState: string;
+	ChannelState: ChannelStateValue;
 	ChannelStateDesc:
 		| "Down"
 		| "Rsrvd"
@@ -3000,7 +3017,7 @@ export type DialEnd = BaseEvent & {
 	Uniqueid: string | number;
 	Linkedid: number | string;
 	DestChannel: string;
-	DestChannelState: string;
+	DestChannelState: ChannelStateValue;
 	DestChannelStateDesc:
 		| "Down"
 		| "Rsrvd"
@@ -3040,7 +3057,7 @@ export type DialEnd = BaseEvent & {
 export type DialState = BaseEvent & {
 	Event: "DialState";
 	Channel: string;
-	ChannelState: string;
+	ChannelState: ChannelStateValue;
 	ChannelStateDesc:
 		| "Down"
 		| "Rsrvd"
@@ -3065,7 +3082,7 @@ export type DialState = BaseEvent & {
 	Uniqueid: string | number;
 	Linkedid: number | string;
 	DestChannel: string;
-	DestChannelState: string;
+	DestChannelState: ChannelStateValue;
 	DestChannelStateDesc:
 		| "Down"
 		| "Rsrvd"
@@ -3353,7 +3370,7 @@ export type FAXStats = BaseEvent & {
 export type FAXStatus = BaseEvent & {
 	Event: "FAXStatus";
 	Channel: string;
-	ChannelState: string;
+	ChannelState: ChannelStateValue;
 	ChannelStateDesc:
 		| "Down"
 		| "Rsrvd"
@@ -3401,7 +3418,7 @@ export type FailedACL = BaseEvent & {
 export type Flash = BaseEvent & {
 	Event: "Flash";
 	Channel: string;
-	ChannelState: string;
+	ChannelState: ChannelStateValue;
 	ChannelStateDesc:
 		| "Down"
 		| "Rsrvd"
@@ -3448,7 +3465,7 @@ export type FullyBooted = BaseEvent & {
 export type Hangup = BaseEvent & {
 	Event: "Hangup";
 	Channel: string;
-	ChannelState: string;
+	ChannelState: ChannelStateValue;
 	ChannelStateDesc:
 		| "Down"
 		| "Rsrvd"
@@ -3479,7 +3496,7 @@ export type Hangup = BaseEvent & {
 export type HangupHandlerPop = BaseEvent & {
 	Event: "HangupHandlerPop";
 	Channel: string;
-	ChannelState: string;
+	ChannelState: ChannelStateValue;
 	ChannelStateDesc:
 		| "Down"
 		| "Rsrvd"
@@ -3509,7 +3526,7 @@ export type HangupHandlerPop = BaseEvent & {
 export type HangupHandlerPush = BaseEvent & {
 	Event: "HangupHandlerPush";
 	Channel: string;
-	ChannelState: string;
+	ChannelState: ChannelStateValue;
 	ChannelStateDesc:
 		| "Down"
 		| "Rsrvd"
@@ -3539,7 +3556,7 @@ export type HangupHandlerPush = BaseEvent & {
 export type HangupHandlerRun = BaseEvent & {
 	Event: "HangupHandlerRun";
 	Channel: string;
-	ChannelState: string;
+	ChannelState: ChannelStateValue;
 	ChannelStateDesc:
 		| "Down"
 		| "Rsrvd"
@@ -3569,7 +3586,7 @@ export type HangupHandlerRun = BaseEvent & {
 export type HangupRequest = BaseEvent & {
 	Event: "HangupRequest";
 	Channel: string;
-	ChannelState: string;
+	ChannelState: ChannelStateValue;
 	ChannelStateDesc:
 		| "Down"
 		| "Rsrvd"
@@ -3599,7 +3616,7 @@ export type HangupRequest = BaseEvent & {
 export type Hold = BaseEvent & {
 	Event: "Hold";
 	Channel: string;
-	ChannelState: string;
+	ChannelState: ChannelStateValue;
 	ChannelStateDesc:
 		| "Down"
 		| "Rsrvd"
@@ -3731,7 +3748,7 @@ export type LoadAverageLimit = BaseEvent & {
 export type LocalBridge = BaseEvent & {
 	Event: "LocalBridge";
 	LocalOneChannel: string;
-	LocalOneChannelState: string;
+	LocalOneChannelState: ChannelStateValue;
 	LocalOneChannelStateDesc:
 		| "Down"
 		| "Rsrvd"
@@ -3756,7 +3773,7 @@ export type LocalBridge = BaseEvent & {
 	LocalOneUniqueid: string | number;
 	LocalOneLinkedid: number | string;
 	LocalTwoChannel: string;
-	LocalTwoChannelState: string;
+	LocalTwoChannelState: ChannelStateValue;
 	LocalTwoChannelStateDesc:
 		| "Down"
 		| "Rsrvd"
@@ -3788,7 +3805,7 @@ export type LocalBridge = BaseEvent & {
 export type LocalOptimizationBegin = BaseEvent & {
 	Event: "LocalOptimizationBegin";
 	LocalOneChannel: string;
-	LocalOneChannelState: string;
+	LocalOneChannelState: ChannelStateValue;
 	LocalOneChannelStateDesc:
 		| "Down"
 		| "Rsrvd"
@@ -3813,7 +3830,7 @@ export type LocalOptimizationBegin = BaseEvent & {
 	LocalOneUniqueid: string | number;
 	LocalOneLinkedid: number | string;
 	LocalTwoChannel: string;
-	LocalTwoChannelState: string;
+	LocalTwoChannelState: ChannelStateValue;
 	LocalTwoChannelStateDesc:
 		| "Down"
 		| "Rsrvd"
@@ -3838,7 +3855,7 @@ export type LocalOptimizationBegin = BaseEvent & {
 	LocalTwoUniqueid: string | number;
 	LocalTwoLinkedid: number | string;
 	SourceChannel: string;
-	SourceChannelState: string;
+	SourceChannelState: ChannelStateValue;
 	SourceChannelStateDesc:
 		| "Down"
 		| "Rsrvd"
@@ -3869,7 +3886,7 @@ export type LocalOptimizationBegin = BaseEvent & {
 export type LocalOptimizationEnd = BaseEvent & {
 	Event: "LocalOptimizationEnd";
 	LocalOneChannel: string;
-	LocalOneChannelState: string;
+	LocalOneChannelState: ChannelStateValue;
 	LocalOneChannelStateDesc:
 		| "Down"
 		| "Rsrvd"
@@ -3894,7 +3911,7 @@ export type LocalOptimizationEnd = BaseEvent & {
 	LocalOneUniqueid: string | number;
 	LocalOneLinkedid: number | string;
 	LocalTwoChannel: string;
-	LocalTwoChannelState: string;
+	LocalTwoChannelState: ChannelStateValue;
 	LocalTwoChannelStateDesc:
 		| "Down"
 		| "Rsrvd"
@@ -3932,7 +3949,7 @@ export type LogChannel = BaseEvent & {
 export type MCID = BaseEvent & {
 	Event: "MCID";
 	Channel: string;
-	ChannelState: string;
+	ChannelState: ChannelStateValue;
 	ChannelStateDesc:
 		| "Down"
 		| "Rsrvd"
@@ -4018,7 +4035,7 @@ export type MeetmeJoin = BaseEvent & {
 	Meetme: string;
 	User: string;
 	Channel: string;
-	ChannelState: string;
+	ChannelState: ChannelStateValue;
 	ChannelStateDesc:
 		| "Down"
 		| "Rsrvd"
@@ -4049,7 +4066,7 @@ export type MeetmeLeave = BaseEvent & {
 	Meetme: string;
 	User: string;
 	Channel: string;
-	ChannelState: string;
+	ChannelState: ChannelStateValue;
 	ChannelStateDesc:
 		| "Down"
 		| "Rsrvd"
@@ -4141,7 +4158,7 @@ export type MeetmeMute = BaseEvent & {
 	Meetme: string;
 	User: string;
 	Channel: string;
-	ChannelState: string;
+	ChannelState: ChannelStateValue;
 	ChannelStateDesc:
 		| "Down"
 		| "Rsrvd"
@@ -4174,7 +4191,7 @@ export type MeetmeTalkRequest = BaseEvent & {
 	Meetme: string;
 	User: string;
 	Channel: string;
-	ChannelState: string;
+	ChannelState: ChannelStateValue;
 	ChannelStateDesc:
 		| "Down"
 		| "Rsrvd"
@@ -4207,7 +4224,7 @@ export type MeetmeTalking = BaseEvent & {
 	Meetme: string;
 	User: string;
 	Channel: string;
-	ChannelState: string;
+	ChannelState: ChannelStateValue;
 	ChannelStateDesc:
 		| "Down"
 		| "Rsrvd"
@@ -4252,7 +4269,7 @@ export type MemoryLimit = BaseEvent & {
 export type MessageWaiting = BaseEvent & {
 	Event: "MessageWaiting";
 	Channel?: string;
-	ChannelState?: string;
+	ChannelState?: ChannelStateValue;
 	ChannelStateDesc?:
 		| "Down"
 		| "Rsrvd"
@@ -4285,7 +4302,7 @@ export type MessageWaiting = BaseEvent & {
 export type MiniVoiceMail = BaseEvent & {
 	Event: "MiniVoiceMail";
 	Channel: string;
-	ChannelState: string;
+	ChannelState: ChannelStateValue;
 	ChannelStateDesc:
 		| "Down"
 		| "Rsrvd"
@@ -4317,7 +4334,7 @@ export type MiniVoiceMail = BaseEvent & {
 export type MixMonitorMute = BaseEvent & {
 	Event: "MixMonitorMute";
 	Channel: string;
-	ChannelState: string;
+	ChannelState: ChannelStateValue;
 	ChannelStateDesc:
 		| "Down"
 		| "Rsrvd"
@@ -4348,7 +4365,7 @@ export type MixMonitorMute = BaseEvent & {
 export type MixMonitorStart = BaseEvent & {
 	Event: "MixMonitorStart";
 	Channel: string;
-	ChannelState: string;
+	ChannelState: ChannelStateValue;
 	ChannelStateDesc:
 		| "Down"
 		| "Rsrvd"
@@ -4377,7 +4394,7 @@ export type MixMonitorStart = BaseEvent & {
 export type MixMonitorStop = BaseEvent & {
 	Event: "MixMonitorStop";
 	Channel: string;
-	ChannelState: string;
+	ChannelState: ChannelStateValue;
 	ChannelStateDesc:
 		| "Down"
 		| "Rsrvd"
@@ -4406,7 +4423,7 @@ export type MixMonitorStop = BaseEvent & {
 export type MonitorStart = BaseEvent & {
 	Event: "MonitorStart";
 	Channel: string;
-	ChannelState: string;
+	ChannelState: ChannelStateValue;
 	ChannelStateDesc:
 		| "Down"
 		| "Rsrvd"
@@ -4435,7 +4452,7 @@ export type MonitorStart = BaseEvent & {
 export type MonitorStop = BaseEvent & {
 	Event: "MonitorStop";
 	Channel: string;
-	ChannelState: string;
+	ChannelState: ChannelStateValue;
 	ChannelStateDesc:
 		| "Down"
 		| "Rsrvd"
@@ -4464,7 +4481,7 @@ export type MonitorStop = BaseEvent & {
 export type MusicOnHoldStart = BaseEvent & {
 	Event: "MusicOnHoldStart";
 	Channel: string;
-	ChannelState: string;
+	ChannelState: ChannelStateValue;
 	ChannelStateDesc:
 		| "Down"
 		| "Rsrvd"
@@ -4494,7 +4511,7 @@ export type MusicOnHoldStart = BaseEvent & {
 export type MusicOnHoldStop = BaseEvent & {
 	Event: "MusicOnHoldStop";
 	Channel: string;
-	ChannelState: string;
+	ChannelState: ChannelStateValue;
 	ChannelStateDesc:
 		| "Down"
 		| "Rsrvd"
@@ -4523,7 +4540,7 @@ export type MusicOnHoldStop = BaseEvent & {
 export type NewAccountCode = BaseEvent & {
 	Event: "NewAccountCode";
 	Channel: string;
-	ChannelState: string;
+	ChannelState: ChannelStateValue;
 	ChannelStateDesc:
 		| "Down"
 		| "Rsrvd"
@@ -4553,7 +4570,7 @@ export type NewAccountCode = BaseEvent & {
 export type NewCallerid = BaseEvent & {
 	Event: "NewCallerid";
 	Channel: string;
-	ChannelState: string;
+	ChannelState: ChannelStateValue;
 	ChannelStateDesc:
 		| "Down"
 		| "Rsrvd"
@@ -4583,7 +4600,7 @@ export type NewCallerid = BaseEvent & {
 export type NewConnectedLine = BaseEvent & {
 	Event: "NewConnectedLine";
 	Channel: string;
-	ChannelState: string;
+	ChannelState: ChannelStateValue;
 	ChannelStateDesc:
 		| "Down"
 		| "Rsrvd"
@@ -4612,7 +4629,7 @@ export type NewConnectedLine = BaseEvent & {
 export type NewExten = BaseEvent & {
 	Event: "NewExten";
 	Channel: string;
-	ChannelState: string;
+	ChannelState: ChannelStateValue;
 	ChannelStateDesc:
 		| "Down"
 		| "Rsrvd"
@@ -4644,7 +4661,7 @@ export type NewExten = BaseEvent & {
 export type Newchannel = BaseEvent & {
 	Event: "Newchannel";
 	Channel: string;
-	ChannelState: string;
+	ChannelState: ChannelStateValue;
 	ChannelStateDesc:
 		| "Down"
 		| "Rsrvd"
@@ -4673,7 +4690,7 @@ export type Newchannel = BaseEvent & {
 export type Newstate = BaseEvent & {
 	Event: "Newstate";
 	Channel: string;
-	ChannelState: string;
+	ChannelState: ChannelStateValue;
 	ChannelStateDesc:
 		| "Down"
 		| "Rsrvd"
@@ -4717,7 +4734,7 @@ export type OriginateResponse = BaseEvent & {
 export type ParkedCall = BaseEvent & {
 	Event: "ParkedCall";
 	ParkeeChannel: string;
-	ParkeeChannelState: string;
+	ParkeeChannelState: ChannelStateValue;
 	ParkeeChannelStateDesc:
 		| "Down"
 		| "Rsrvd"
@@ -4751,7 +4768,7 @@ export type ParkedCall = BaseEvent & {
 export type ParkedCallGiveUp = BaseEvent & {
 	Event: "ParkedCallGiveUp";
 	ParkeeChannel: string;
-	ParkeeChannelState: string;
+	ParkeeChannelState: ChannelStateValue;
 	ParkeeChannelStateDesc:
 		| "Down"
 		| "Rsrvd"
@@ -4776,7 +4793,7 @@ export type ParkedCallGiveUp = BaseEvent & {
 	ParkeeUniqueid: string | number;
 	ParkeeLinkedid: number | string;
 	ParkerChannel: string;
-	ParkerChannelState: string;
+	ParkerChannelState: ChannelStateValue;
 	ParkerChannelStateDesc:
 		| "Down"
 		| "Rsrvd"
@@ -4810,7 +4827,7 @@ export type ParkedCallGiveUp = BaseEvent & {
 export type ParkedCallSwap = BaseEvent & {
 	Event: "ParkedCallSwap";
 	ParkeeChannel: string;
-	ParkeeChannelState: string;
+	ParkeeChannelState: ChannelStateValue;
 	ParkeeChannelStateDesc:
 		| "Down"
 		| "Rsrvd"
@@ -4835,7 +4852,7 @@ export type ParkedCallSwap = BaseEvent & {
 	ParkeeUniqueid: string | number;
 	ParkeeLinkedid: number | string;
 	ParkerChannel: string;
-	ParkerChannelState: string;
+	ParkerChannelState: ChannelStateValue;
 	ParkerChannelStateDesc:
 		| "Down"
 		| "Rsrvd"
@@ -4869,7 +4886,7 @@ export type ParkedCallSwap = BaseEvent & {
 export type ParkedCallTimeOut = BaseEvent & {
 	Event: "ParkedCallTimeOut";
 	ParkeeChannel: string;
-	ParkeeChannelState: string;
+	ParkeeChannelState: ChannelStateValue;
 	ParkeeChannelStateDesc:
 		| "Down"
 		| "Rsrvd"
@@ -4894,7 +4911,7 @@ export type ParkedCallTimeOut = BaseEvent & {
 	ParkeeUniqueid: string | number;
 	ParkeeLinkedid: number | string;
 	ParkerChannel: string;
-	ParkerChannelState: string;
+	ParkerChannelState: ChannelStateValue;
 	ParkerChannelStateDesc:
 		| "Down"
 		| "Rsrvd"
@@ -4954,7 +4971,7 @@ export type PeerStatus = BaseEvent & {
 export type Pickup = BaseEvent & {
 	Event: "Pickup";
 	Channel: string;
-	ChannelState: string;
+	ChannelState: ChannelStateValue;
 	ChannelStateDesc:
 		| "Down"
 		| "Rsrvd"
@@ -4979,7 +4996,7 @@ export type Pickup = BaseEvent & {
 	Uniqueid: string | number;
 	Linkedid: number | string;
 	TargetChannel: string;
-	TargetChannelState: string;
+	TargetChannelState: ChannelStateValue;
 	TargetChannelStateDesc:
 		| "Down"
 		| "Rsrvd"
@@ -5068,7 +5085,7 @@ export type PresenceStatus = BaseEvent & {
 export type QueueCallerAbandon = BaseEvent & {
 	Event: "QueueCallerAbandon";
 	Channel: string;
-	ChannelState: string;
+	ChannelState: ChannelStateValue;
 	ChannelStateDesc:
 		| "Down"
 		| "Rsrvd"
@@ -5101,7 +5118,7 @@ export type QueueCallerAbandon = BaseEvent & {
 export type QueueCallerJoin = BaseEvent & {
 	Event: "QueueCallerJoin";
 	Channel: string;
-	ChannelState: string;
+	ChannelState: ChannelStateValue;
 	ChannelStateDesc:
 		| "Down"
 		| "Rsrvd"
@@ -5133,7 +5150,7 @@ export type QueueCallerJoin = BaseEvent & {
 export type QueueCallerLeave = BaseEvent & {
 	Event: "QueueCallerLeave";
 	Channel: string;
-	ChannelState: string;
+	ChannelState: ChannelStateValue;
 	ChannelStateDesc:
 		| "Down"
 		| "Rsrvd"
@@ -5387,7 +5404,7 @@ export type QueueParams = BaseEvent & {
 export type RTCPReceived = BaseEvent & {
 	Event: "RTCPReceived";
 	Channel: string;
-	ChannelState: string;
+	ChannelState: ChannelStateValue;
 	ChannelStateDesc:
 		| "Down"
 		| "Rsrvd"
@@ -5433,7 +5450,7 @@ export type RTCPReceived = BaseEvent & {
 export type RTCPSent = BaseEvent & {
 	Event: "RTCPSent";
 	Channel: string;
-	ChannelState: string;
+	ChannelState: ChannelStateValue;
 	ChannelStateDesc: string;
 	CallerIDNum: string | number;
 	CallerIDName: string;
@@ -5495,7 +5512,7 @@ export type RTCPSent = BaseEvent & {
 export type ReceiveFAX = BaseEvent & {
 	Event: "ReceiveFAX";
 	Channel: string;
-	ChannelState: string;
+	ChannelState: ChannelStateValue;
 	ChannelStateDesc: string;
 	CallerIDNum: string | number;
 	CallerIDName: string;
@@ -5566,7 +5583,7 @@ export type Reload = BaseEvent & {
 export type Rename = BaseEvent & {
 	Event: "Rename";
 	Channel: string;
-	ChannelState: string;
+	ChannelState: ChannelStateValue;
 	ChannelStateDesc: string;
 	CallerIDNum: string | number;
 	CallerIDName: string;
@@ -5665,7 +5682,7 @@ export type SIPQualifyPeerDone = BaseEvent & {
 export type SendFAX = BaseEvent & {
 	Event: "SendFAX";
 	Channel: string;
-	ChannelState: string;
+	ChannelState: ChannelStateValue;
 	ChannelStateDesc: string;
 	CallerIDNum: string | number;
 	CallerIDName: string;
@@ -5726,7 +5743,7 @@ export type SessionLimit = BaseEvent & {
 export type SessionTimeout = BaseEvent & {
 	Event: "SessionTimeout";
 	Channel: string;
-	ChannelState: string;
+	ChannelState: ChannelStateValue;
 	ChannelStateDesc: string;
 	CallerIDNum: string | number;
 	CallerIDName: string;
@@ -5784,7 +5801,7 @@ export type Shutdown = BaseEvent & {
 export type SoftHangupRequest = BaseEvent & {
 	Event: "SoftHangupRequest";
 	Channel: string;
-	ChannelState: string;
+	ChannelState: ChannelStateValue;
 	ChannelStateDesc: string;
 	CallerIDNum: string | number;
 	CallerIDName: string;
@@ -5834,7 +5851,7 @@ export type Status = BaseEvent & {
 	Event: "Status";
 	ActionID?: number;
 	Channel: string;
-	ChannelState: string;
+	ChannelState: ChannelStateValue;
 	ChannelStateDesc: string;
 	CallerIDNum: string | number;
 	CallerIDName: string;
@@ -5980,7 +5997,7 @@ export type TransportDetail = BaseEvent & {
 export type UnParkedCall = BaseEvent & {
 	Event: "UnParkedCall";
 	ParkeeChannel: string;
-	ParkeeChannelState: string;
+	ParkeeChannelState: ChannelStateValue;
 	ParkeeChannelStateDesc: string;
 	ParkeeCallerIDNum: string | number;
 	ParkeeCallerIDName: string;
@@ -5994,7 +6011,7 @@ export type UnParkedCall = BaseEvent & {
 	ParkeeUniqueid: string | number;
 	ParkeeLinkedid: number | string;
 	ParkerChannel: string;
-	ParkerChannelState: string;
+	ParkerChannelState: ChannelStateValue;
 	ParkerChannelStateDesc: string;
 	ParkerCallerIDNum: string | number;
 	ParkerCallerIDName: string;
@@ -6013,7 +6030,7 @@ export type UnParkedCall = BaseEvent & {
 	ParkingTimeout: string;
 	ParkingDuration: string;
 	RetrieverChannel: string;
-	RetrieverChannelState: string;
+	RetrieverChannelState: ChannelStateValue;
 	RetrieverChannelStateDesc: string;
 	RetrieverCallerIDNum: string | number;
 	RetrieverCallerIDName: string;
@@ -6068,7 +6085,7 @@ export type UnexpectedAddress = BaseEvent & {
 export type Unhold = BaseEvent & {
 	Event: "Unhold";
 	Channel: string;
-	ChannelState: string;
+	ChannelState: ChannelStateValue;
 	ChannelStateDesc: string;
 	CallerIDNum: string | number;
 	CallerIDName: string;
@@ -6125,7 +6142,7 @@ export type Unload = BaseEvent & {
 export type UserEvent = BaseEvent & {
 	Event: "UserEvent";
 	Channel: string;
-	ChannelState: string;
+	ChannelState: ChannelStateValue;
 	ChannelStateDesc: string;
 	CallerIDNum: string | number;
 	CallerIDName: string;
@@ -6168,7 +6185,7 @@ export type UserEvent = BaseEvent & {
 export type VarSet = BaseEvent & {
 	Event: "VarSet";
 	Channel: string;
-	ChannelState: string;
+	ChannelState: ChannelStateValue;
 	ChannelStateDesc: string;
 	CallerIDNum: string | number;
 	CallerIDName: string;
@@ -6228,7 +6245,7 @@ export type VoicemailPasswordChange = BaseEvent & {
 export type Wink = BaseEvent & {
 	Event: "Wink";
 	Channel: string;
-	ChannelState: string;
+	ChannelState: ChannelStateValue;
 	ChannelStateDesc: string;
 	CallerIDNum: string | number;
 	CallerIDName: string;

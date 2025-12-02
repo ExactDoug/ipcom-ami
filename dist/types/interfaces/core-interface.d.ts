@@ -10,7 +10,7 @@ export interface I_CoreShowChannel {
     ConnectedLineName: string;
     AccountCode: number;
     Context: string;
-    Exten: number;
+    Exten: string;
     Priority: number;
     Uniqueid: number;
     Linkedid: number;

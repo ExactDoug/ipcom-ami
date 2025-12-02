@@ -11,7 +11,7 @@ export interface I_HangupRequest {
     Language: string;
     AccountCode: number;
     Context: string;
-    Exten: number;
+    Exten: string;
     Priority: number;
     Uniqueid: number;
     Linkedid: number;
@@ -29,7 +29,7 @@ export interface I_Hangup {
     Language: string;
     AccountCode: number;
     Context: string;
-    Exten: number;
+    Exten: string;
     Priority: number;
     Uniqueid: number;
     Linkedid: number;

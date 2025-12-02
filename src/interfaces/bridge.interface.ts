@@ -38,7 +38,7 @@ export interface I_BridgeEnter {
 	Language: string                //'ru',
 	AccountCode: number             //'',
 	Context: string                 //'callcenter',         menuivr
-	Exten: number                   // null,
+	Exten: string                   // null,
 	Priority: number                // 1,                  8
 	Uniqueid: number                //'1527245698.556770',  1527245675.556769
 	//Uniqueid of the oldest channel associated with this channel.
@@ -102,7 +102,7 @@ export interface I_BridgeLeave {
 	Language: string                //'ru',
 	AccountCode: number             //'',
 	Context: string                 //'callcenter',         menuivr
-	Exten: number                   // null,
+	Exten: string                   // null,
 	Priority: number                // 1,                  8
 	Uniqueid: number                //'1527245698.556770',  1527245675.556769
 	//Uniqueid of the oldest channel associated with this channel.
@@ -188,7 +188,7 @@ export interface I_BridgeInfoChannel {
 	Language: string                //'ru',
 	AccountCode: number             //'',
 	Context: string                 //'callcenter',         menuivr
-	Exten: number                   // null,
+	Exten: string                   // null,
 	Priority: number                // 1,                  8
 	Uniqueid: number                //'1527245698.556770',  1527245675.556769
 	//Uniqueid of the oldest channel associated with this channel.

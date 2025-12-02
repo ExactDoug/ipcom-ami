@@ -11,7 +11,7 @@ export interface I_Status {
     Language: string;
     AccountCode: number;
     Context: string;
-    Exten: number;
+    Exten: string;
     Priority: string;
     Uniqueid: string;
     Linkedid: string;

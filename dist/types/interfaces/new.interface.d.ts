@@ -11,7 +11,7 @@ export interface I_NewChannel {
     Language: string;
     AccountCode: number;
     Context: string;
-    Exten: number;
+    Exten: string;
     Priority: number;
     Uniqueid: number;
     Linkedid: number;
@@ -29,7 +29,7 @@ export interface I_NewState {
     Language: string;
     AccountCode: number;
     Context: string;
-    Exten: number;
+    Exten: string;
     Priority: number;
     Uniqueid: number;
     Linkedid: number;
@@ -47,7 +47,7 @@ export interface I_NewConnectedLine {
     Language: string;
     AccountCode: number;
     Context: string;
-    Exten: number;
+    Exten: string;
     Priority: number;
     Uniqueid: number;
     Linkedid: number;
@@ -63,7 +63,7 @@ export interface I_NewExten {
     ConnectedLineName: string;
     AccountCode: number;
     Context: string;
-    Exten: number;
+    Exten: string;
     Priority: number;
     Uniqueid: number;
     Linkedid: number;

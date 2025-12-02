@@ -11,7 +11,7 @@ export interface I_RTCPSent {
     Language: string;
     AccountCode: number;
     Context: string;
-    Exten: number;
+    Exten: string;
     Priority: number;
     Uniqueid: number;
     Linkedid: number;
@@ -46,7 +46,7 @@ export interface I_RTCPReceived {
     Language: string;
     AccountCode: number;
     Context: string;
-    Exten: number;
+    Exten: string;
     Priority: number;
     Uniqueid: number;
     Linkedid: number;

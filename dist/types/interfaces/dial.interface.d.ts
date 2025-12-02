@@ -10,7 +10,7 @@ export interface I_DialBegin {
     Language: string;
     AccountCode: number;
     Context: string;
-    Exten: number;
+    Exten: string;
     Priority: number;
     Uniqueid: number;
     Linkedid: number;
@@ -24,7 +24,7 @@ export interface I_DialBegin {
     DestLanguage: string;
     DestAccountCode: number;
     DestContext: string;
-    DestExten: number;
+    DestExten: string;
     DestPriority: number;
     DestUniqueid: number;
     DestLinkedid: number;
@@ -42,7 +42,7 @@ export interface I_DialEnd {
     Language: string;
     AccountCode: number;
     Context: string;
-    Exten: number;
+    Exten: string;
     Priority: number;
     Uniqueid: number;
     Linkedid: number;
@@ -56,7 +56,7 @@ export interface I_DialEnd {
     DestLanguage: string;
     DestAccountCode: number;
     DestContext: string;
-    DestExten: number;
+    DestExten: string;
     DestPriority: number;
     DestUniqueid: number;
     DestLinkedid: number;
@@ -74,7 +74,7 @@ export interface I_DialState {
     Language: string;
     AccountCode: number;
     Context: string;
-    Exten: number;
+    Exten: string;
     Priority: number;
     Uniqueid: number;
     Linkedid: number;
@@ -88,7 +88,7 @@ export interface I_DialState {
     DestLanguage: string;
     DestAccountCode: number;
     DestContext: string;
-    DestExten: number;
+    DestExten: string;
     DestPriority: number;
     DestUniqueid: number;
     DestLinkedid: number;

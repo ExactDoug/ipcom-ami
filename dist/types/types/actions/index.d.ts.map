@@ -1,0 +1,1 @@
+{"version":3,"file":"index.d.ts","sourceRoot":"","sources":["../../../../src/types/actions/index.ts"],"names":[],"mappings":"AAAA,MAAM,MAAM,WAAW,CAAC,CAAC,IAAI;IAC5B,QAAQ,EAAE,SAAS,GAAG,OAAO,CAAC;IAC9B,QAAQ,EAAE,MAAM,CAAC;IACjB,OAAO,EAAE,MAAM,CAAC;IAChB,SAAS,EAAE,MAAM,CAAC;IAClB,OAAO,EAAE,CAAC,CAAC;CACX,CAAC"}

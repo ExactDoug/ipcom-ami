@@ -532,7 +532,7 @@ declare namespace asterisk_ami {
         //Channel name to call
         Channel: string
         //Extension to use (requires Context and Priority)
-        Exten: number
+        Exten: string
         //Context to use (requires Exten and Priority)
         Context: string
         //Priority to use (requires Exten and Context)
@@ -778,7 +778,7 @@ declare namespace asterisk_ami {
         Language: string                //'ru',
         AccountCode: number             //'',
         Context: string                 //'callcenter',         menuivr
-        Exten: number                   // null,
+        Exten: string                   // null,
         Priority: number                // 1,                  8
         Uniqueid: number                //'1527245698.556770',  1527245675.556769
         //Uniqueid of the oldest channel associated with this channel.
@@ -842,7 +842,7 @@ declare namespace asterisk_ami {
         Language: string                //'ru',
         AccountCode: number             //'',
         Context: string                 //'callcenter',         menuivr
-        Exten: number                   // null,
+        Exten: string                   // null,
         Priority: number                // 1,                  8
         Uniqueid: number                //'1527245698.556770',  1527245675.556769
         //Uniqueid of the oldest channel associated with this channel.
@@ -928,7 +928,7 @@ declare namespace asterisk_ami {
         Language: string                //'ru',
         AccountCode: number             //'',
         Context: string                 //'callcenter',         menuivr
-        Exten: number                   // null,
+        Exten: string                   // null,
         Priority: number                // 1,                  8
         Uniqueid: number                //'1527245698.556770',  1527245675.556769
         //Uniqueid of the oldest channel associated with this channel.
@@ -973,7 +973,7 @@ declare namespace asterisk_ami {
         ConnectedLineName: string
         AccountCode: number
         Context: string
-        Exten: number
+        Exten: string
         Priority: number
         Uniqueid: number
         Linkedid: number
@@ -1012,7 +1012,7 @@ declare namespace asterisk_ami {
         Language: string                //'en'
         AccountCode: number             // null
         Context: string                 // 'callcenter'
-        Exten: number                   // 1877
+        Exten: string                   // 1877
         Priority: number                // 3
         Uniqueid: number                // 1528262325.580184
         Linkedid: number                // 1528262325.580183
@@ -1027,7 +1027,7 @@ declare namespace asterisk_ami {
         DestLanguage: string            //'en'
         DestAccountCode: number         // null
         DestContext: string             //'callcenter'
-        DestExten: number               // 1877
+        DestExten: string               // 1877
         DestPriority: number            // 1
         DestUniqueid: number            // 1528262348.580187
         DestLinkedid: number            // 1528262325.580183'
@@ -1046,7 +1046,7 @@ declare namespace asterisk_ami {
         Language: string                //'en'
         AccountCode: number             // null
         Context: string                 // 'callcenter'
-        Exten: number                   // 1877
+        Exten: string                   // 1877
         Priority: number                // 3
         Uniqueid: number                // 1528262325.580184
         Linkedid: number                // 1528262325.580183
@@ -1061,7 +1061,7 @@ declare namespace asterisk_ami {
         DestLanguage: string            //'en'
         DestAccountCode: number         // null
         DestContext: string             //'callcenter'
-        DestExten: number               // 1877
+        DestExten: string               // 1877
         DestPriority: number            // 1
         DestUniqueid: number            // 1528262348.580187
         DestLinkedid: number            // 1528262325.580183'
@@ -1080,7 +1080,7 @@ declare namespace asterisk_ami {
         Language: string                //'en'
         AccountCode: number             // null
         Context: string                 // 'callcenter'
-        Exten: number                   // 1877
+        Exten: string                   // 1877
         Priority: number                // 3
         Uniqueid: number                // 1528262325.580184
         Linkedid: number                // 1528262325.580183
@@ -1095,7 +1095,7 @@ declare namespace asterisk_ami {
         DestLanguage: string            //'en'
         DestAccountCode: number         // null
         DestContext: string             //'callcenter'
-        DestExten: number               // 1877
+        DestExten: string               // 1877
         DestPriority: number            // 1
         DestUniqueid: number            // 1528262348.580187
         DestLinkedid: number            // 1528262325.580183'
@@ -1117,7 +1117,7 @@ declare namespace asterisk_ami {
         ConnectedLineName: string
         AccountCode: number
         Context: string
-        Exten: number
+        Exten: string
         Priority: number
         Uniqueid: number
         Linkedid: number
@@ -1137,7 +1137,7 @@ declare namespace asterisk_ami {
         ConnectedLineName: string
         AccountCode: number
         Context: string
-        Exten: number
+        Exten: string
         Priority: number
         Uniqueid: number
         Linkedid: number
@@ -1165,7 +1165,7 @@ declare namespace asterisk_ami {
         Language: string            //'en',
         AccountCode: number         // null,
         Context: string             //'callcenter',
-        Exten: number               // 89*****4387
+        Exten: string               // 89*****4387
         Priority: number            // 1
         Uniqueid: number            // 1527245623.556767
         Linkedid: number            // 1527245623.556766
@@ -1184,7 +1184,7 @@ declare namespace asterisk_ami {
         Language: string            //'en',
         AccountCode: number         // null,
         Context: string             //'callcenter',
-        Exten: number               // 89*****4387
+        Exten: string               // 89*****4387
         Priority: number            // 1
         Uniqueid: number            // 1527245623.556767
         Linkedid: number            // 1527245623.556766
@@ -1214,7 +1214,7 @@ declare namespace asterisk_ami {
         Language: string            //'en',
         AccountCode: number         // null
         Context: string             //'callcenter',
-        Exten: number               // 89*****4387
+        Exten: string               // 89*****4387
         Priority: number            // 1
         Uniqueid: number            // 1527247326.556790
         Linkedid: number            // 1527247326.556790
@@ -1234,7 +1234,7 @@ declare namespace asterisk_ami {
         Language: string            //'en',
         AccountCode: number         // null
         Context: string             //'callcenter',
-        Exten: number               // 89*****4387
+        Exten: string               // 89*****4387
         Priority: number            // 1
         Uniqueid: number            // 1527247326.556790
         Linkedid: number            // 1527247326.556790
@@ -1254,7 +1254,7 @@ declare namespace asterisk_ami {
         Language: string            //'en',
         AccountCode: number         // null
         Context: string             //'callcenter',
-        Exten: number               // 89*****4387
+        Exten: string               // 89*****4387
         Priority: number            // 1
         Uniqueid: number            // 1527247326.556790
         Linkedid: number            // 1527247326.556790
@@ -1272,7 +1272,7 @@ declare namespace asterisk_ami {
         ConnectedLineName: string   // null',
         AccountCode: number         // null
         Context: string             //'callcenter',
-        Exten: number               // 89*****4387
+        Exten: string               // 89*****4387
         Priority: number            // 1
         Uniqueid: number            // 1527247326.556790
         Linkedid: number            // 1527247326.556790
@@ -1294,7 +1294,7 @@ declare namespace asterisk_ami {
         Response: string
         Channel: string
         Context: string
-        Exten: number
+        Exten: string
         Application: string
         Data: string
         Reason: string
@@ -1526,7 +1526,7 @@ declare namespace asterisk_ami {
         Language: string 					//'ru',
         AccountCode: number 				//0,
         Context: string 					//'callcenter',
-        Exten: number 						//891*****387,
+        Exten: string 						//891*****387,
         Priority: number 					//1,
         Uniqueid: number 					//1528531544.589918,
         Linkedid: number 					//1528531521.589916,
@@ -1579,7 +1579,7 @@ declare namespace asterisk_ami {
         Language: string 					//'ru',
         AccountCode: number 				//0,
         Context: string 					//'callcenter',
-        Exten: number 						//891*****387,
+        Exten: string 						//891*****387,
         Priority: number 					//3,
         Uniqueid: number 					//1528532694.589938,
         Linkedid: number 					//1528532694.589938,
@@ -1637,7 +1637,7 @@ declare namespace asterisk_ami {
         Language: string                    //'ru',
         AccountCode: number                 // ,
         Context: string                     //'menuivr',
-        Exten: number                       // null,
+        Exten: string                       // null,
         Priority: string                    // 8
         Uniqueid: string                    // 1527247624.556805',
         Linkedid: string                    // 1527247624.556805',
@@ -1689,7 +1689,7 @@ declare namespace asterisk_ami {
         ConnectedLineName: string
         AccountCode: number
         Context: string
-        Exten: number
+        Exten: string
         Priority: number
         Uniqueid: number
         Linkedid: number

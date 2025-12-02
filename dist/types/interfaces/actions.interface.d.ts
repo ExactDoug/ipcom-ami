@@ -69,13 +69,13 @@ export interface I_ActionOriginate extends I_Request {
     Action?: "Originate";
     ActionID?: number | string;
     Channel: string;
-    Exten: number;
+    Exten: string;
     Context: string;
     Priority?: number;
     Application?: string;
     Data?: string;
     Timeout: number;
-    CallerID?: number;
+    CallerID?: string;
     Variable?: string;
     Account?: string;
     EarlyMedia?: boolean;
