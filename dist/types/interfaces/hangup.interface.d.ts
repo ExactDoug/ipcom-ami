@@ -11,10 +11,10 @@ export interface I_HangupRequest {
     Language: string;
     AccountCode: number;
     Context: string;
-    Exten: number;
-    Priority: number;
-    Uniqueid: number;
-    Linkedid: number;
+    Exten: string;
+    Priority: string;
+    Uniqueid: string;
+    Linkedid: string;
 }
 export interface I_Hangup {
     Event: string;
@@ -29,10 +29,10 @@ export interface I_Hangup {
     Language: string;
     AccountCode: number;
     Context: string;
-    Exten: number;
-    Priority: number;
-    Uniqueid: number;
-    Linkedid: number;
+    Exten: string;
+    Priority: string;
+    Uniqueid: string;
+    Linkedid: string;
 }
 export interface I_DualHangup {
     hangup: I_Hangup | null;

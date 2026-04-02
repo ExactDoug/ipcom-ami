@@ -9,10 +9,10 @@ export interface I_UserEvent {
     ConnectedLineName: string;
     AccountCode: number;
     Context: string;
-    Exten: number;
-    Priority: number;
-    Uniqueid: number;
-    Linkedid: number;
+    Exten: string;
+    Priority: string;
+    Uniqueid: string;
+    Linkedid: string;
     UserEvent: string;
 }
 //# sourceMappingURL=user-event.interface.d.ts.map

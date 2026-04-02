@@ -12,7 +12,7 @@ export interface I_Status {
 	Language: string                    //'ru',
 	AccountCode: number                 // ,
 	Context: string                     //'menuivr',
-	Exten: number                       // null,
+	Exten: string                       // null,
 	Priority: string                    // 8
 	Uniqueid: string                    // 1527247624.556805',
 	Linkedid: string                    // 1527247624.556805',

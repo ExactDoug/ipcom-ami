@@ -112,11 +112,11 @@ export interface I_ActionOriginate extends I_Request {
 	//Channel name to call
 	Channel: string;
 	//Extension to use (requires Context and Priority)
-	Exten: number;
+	Exten: string;
 	//Context to use (requires Exten and Priority)
 	Context: string;
 	//Priority to use (requires Exten and Context)
-	Priority?: number;
+	Priority?: string;
 	//Application to execute.
 	Application?: string;
 	//Data to use (requires Application).
@@ -124,7 +124,7 @@ export interface I_ActionOriginate extends I_Request {
 	//How long to wait for call to be answered (in ms.).
 	Timeout: number;
 	//Caller ID to be set on the outgoing channel.
-	CallerID?: number;
+	CallerID?: string;
 	//Channel variable to set, multiple Variable: headers are allowed.
 	Variable?: string;
 	Account?: string;

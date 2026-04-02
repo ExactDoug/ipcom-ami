@@ -10,10 +10,10 @@ export interface I_DialBegin {
     Language: string;
     AccountCode: number;
     Context: string;
-    Exten: number;
-    Priority: number;
-    Uniqueid: number;
-    Linkedid: number;
+    Exten: string;
+    Priority: string;
+    Uniqueid: string;
+    Linkedid: string;
     DestChannel: string;
     DestChannelState: number;
     DestChannelStateDesc: string;
@@ -24,10 +24,10 @@ export interface I_DialBegin {
     DestLanguage: string;
     DestAccountCode: number;
     DestContext: string;
-    DestExten: number;
-    DestPriority: number;
-    DestUniqueid: number;
-    DestLinkedid: number;
+    DestExten: string;
+    DestPriority: string;
+    DestUniqueid: string;
+    DestLinkedid: string;
     DialStatus: string;
 }
 export interface I_DialEnd {
@@ -42,10 +42,10 @@ export interface I_DialEnd {
     Language: string;
     AccountCode: number;
     Context: string;
-    Exten: number;
-    Priority: number;
-    Uniqueid: number;
-    Linkedid: number;
+    Exten: string;
+    Priority: string;
+    Uniqueid: string;
+    Linkedid: string;
     DestChannel: string;
     DestChannelState: number;
     DestChannelStateDesc: string;
@@ -56,10 +56,10 @@ export interface I_DialEnd {
     DestLanguage: string;
     DestAccountCode: number;
     DestContext: string;
-    DestExten: number;
-    DestPriority: number;
-    DestUniqueid: number;
-    DestLinkedid: number;
+    DestExten: string;
+    DestPriority: string;
+    DestUniqueid: string;
+    DestLinkedid: string;
     DialStatus: string;
 }
 export interface I_DialState {
@@ -74,10 +74,10 @@ export interface I_DialState {
     Language: string;
     AccountCode: number;
     Context: string;
-    Exten: number;
-    Priority: number;
-    Uniqueid: number;
-    Linkedid: number;
+    Exten: string;
+    Priority: string;
+    Uniqueid: string;
+    Linkedid: string;
     DestChannel: string;
     DestChannelState: number;
     DestChannelStateDesc: string;
@@ -88,10 +88,10 @@ export interface I_DialState {
     DestLanguage: string;
     DestAccountCode: number;
     DestContext: string;
-    DestExten: number;
-    DestPriority: number;
-    DestUniqueid: number;
-    DestLinkedid: number;
+    DestExten: string;
+    DestPriority: string;
+    DestUniqueid: string;
+    DestLinkedid: string;
     DialStatus: string;
 }
 //# sourceMappingURL=dial.interface.d.ts.map

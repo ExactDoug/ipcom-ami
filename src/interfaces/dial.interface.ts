@@ -10,10 +10,10 @@ export interface I_DialBegin {
 	Language: string                //'en'
 	AccountCode: number             // null
 	Context: string                 // 'callcenter'
-	Exten: number                   // 1877
-	Priority: number                // 3
-	Uniqueid: number                // 1528262325.580184
-	Linkedid: number                // 1528262325.580183
+	Exten: string                   // 1877
+	Priority: string                // 3
+	Uniqueid: string                // 1528262325.580184
+	Linkedid: string                // 1528262325.580183
 
 	DestChannel: string             //'IAX2/aster-25872'
 	DestChannelState: number        // 5
@@ -25,10 +25,10 @@ export interface I_DialBegin {
 	DestLanguage: string            //'en'
 	DestAccountCode: number         // null
 	DestContext: string             //'callcenter'
-	DestExten: number               // 1877
-	DestPriority: number            // 1
-	DestUniqueid: number            // 1528262348.580187
-	DestLinkedid: number            // 1528262325.580183'
+	DestExten: string               // 1877
+	DestPriority: string            // 1
+	DestUniqueid: string            // 1528262348.580187
+	DestLinkedid: string            // 1528262325.580183'
 	DialStatus: string              //'RINGING'
 }
 export interface I_DialEnd {
@@ -43,10 +43,10 @@ export interface I_DialEnd {
 	Language: string                //'en'
 	AccountCode: number             // null
 	Context: string                 // 'callcenter'
-	Exten: number                   // 1877
-	Priority: number                // 3
-	Uniqueid: number                // 1528262325.580184
-	Linkedid: number                // 1528262325.580183
+	Exten: string                   // 1877
+	Priority: string                // 3
+	Uniqueid: string                // 1528262325.580184
+	Linkedid: string                // 1528262325.580183
 
 	DestChannel: string             //'IAX2/aster-25872'
 	DestChannelState: number        // 5
@@ -58,10 +58,10 @@ export interface I_DialEnd {
 	DestLanguage: string            //'en'
 	DestAccountCode: number         // null
 	DestContext: string             //'callcenter'
-	DestExten: number               // 1877
-	DestPriority: number            // 1
-	DestUniqueid: number            // 1528262348.580187
-	DestLinkedid: number            // 1528262325.580183'
+	DestExten: string               // 1877
+	DestPriority: string            // 1
+	DestUniqueid: string            // 1528262348.580187
+	DestLinkedid: string            // 1528262325.580183'
 	DialStatus: string              //'RINGING'
 }
 export interface I_DialState {
@@ -76,10 +76,10 @@ export interface I_DialState {
 	Language: string                //'en'
 	AccountCode: number             // null
 	Context: string                 // 'callcenter'
-	Exten: number                   // 1877
-	Priority: number                // 3
-	Uniqueid: number                // 1528262325.580184
-	Linkedid: number                // 1528262325.580183
+	Exten: string                   // 1877
+	Priority: string                // 3
+	Uniqueid: string                // 1528262325.580184
+	Linkedid: string                // 1528262325.580183
 
 	DestChannel: string             //'IAX2/aster-25872'
 	DestChannelState: number        // 5
@@ -91,10 +91,10 @@ export interface I_DialState {
 	DestLanguage: string            //'en'
 	DestAccountCode: number         // null
 	DestContext: string             //'callcenter'
-	DestExten: number               // 1877
-	DestPriority: number            // 1
-	DestUniqueid: number            // 1528262348.580187
-	DestLinkedid: number            // 1528262325.580183'
+	DestExten: string               // 1877
+	DestPriority: string            // 1
+	DestUniqueid: string            // 1528262348.580187
+	DestLinkedid: string            // 1528262325.580183'
 	DialStatus: string              //'RINGING'
 }
 

@@ -11,10 +11,10 @@ export interface I_HangupRequest {
 	Language: string            //'en',
 	AccountCode: number         // null,
 	Context: string             //'callcenter',
-	Exten: number               // 89*****4387
-	Priority: number            // 1
-	Uniqueid: number            // 1527245623.556767
-	Linkedid: number            // 1527245623.556766
+	Exten: string               // 89*****4387
+	Priority: string            // 1
+	Uniqueid: string            // 1527245623.556767
+	Linkedid: string            // 1527245623.556766
 }
 
 export interface I_Hangup {
@@ -30,10 +30,10 @@ export interface I_Hangup {
 	Language: string            //'en',
 	AccountCode: number         // null,
 	Context: string             //'callcenter',
-	Exten: number               // 89*****4387
-	Priority: number            // 1
-	Uniqueid: number            // 1527245623.556767
-	Linkedid: number            // 1527245623.556766
+	Exten: string               // 89*****4387
+	Priority: string            // 1
+	Uniqueid: string            // 1527245623.556767
+	Linkedid: string            // 1527245623.556766
 }
 
 export interface I_DualHangup {

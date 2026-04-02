@@ -1,5 +1,6 @@
 import { _isNull, _isUndefined } from "./functions.js";
 import { AMI_EVENTS, type eAmi } from "./index.js";
+import type { AsteriskVersion } from "./types/version.js";
 import type {
 	I_ActionBridgeInfo,
 	I_ActionBridgeList,
@@ -44,11 +45,11 @@ import type {
 	I_HangupRequest,
 } from "./interfaces/hangup.interface.js";
 
-export class eAmiActions {
-	private eAmi: eAmi;
+export class eAmiActions<V extends AsteriskVersion = '18'> {
+	private eAmi: eAmi<V>;
 	private timeOutAction: number;
 
-	constructor(eAmi: eAmi) {
+	constructor(eAmi: eAmi<V>) {
 		this.eAmi = eAmi;
 		this.timeOutAction = 5000;
 	}

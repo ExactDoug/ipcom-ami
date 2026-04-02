@@ -1,97 +1,97 @@
-# 🔴 Relatório de Memory Leak - @ipcom/asterisk-ami@0.0.28
+# 🔴 Memory Leak Report - @ipcom/asterisk-ami@0.0.28
 
-## **Contexto do Problema**
+## **Problem Context**
 
-Aplicação Node.js com Asterisk AMI apresenta **JavaScript heap out of memory** após algumas horas em produção:
+Node.js application with Asterisk AMI exhibits **JavaScript heap out of memory** after several hours in production:
 
 ```
 FATAL ERROR: Ineffective mark-compacts near heap limit
 Allocation failed - JavaScript heap out of memory
 ```
 
-**Sintomas observados**:
+**Observed symptoms**:
 1. ❌ `MaxListenersExceededWarning: 11 Action_1760380363392 listeners added`
-2. ❌ Heap cresce de ~200MB → 2GB → crash
-3. ❌ GC (Garbage Collector) em loop sem conseguir liberar memória
+2. ❌ Heap grows from ~200MB → 2GB → crash
+3. ❌ GC (Garbage Collector) in loop unable to free memory
 
 ---
 
-## **🔍 Pontos Críticos para Análise na Biblioteca**
+## **🔍 Critical Analysis Points in the Library**
 
-### **1. CRÍTICO: Listeners temporários `Action_<timestamp>` não são removidos**
+### **1. CRITICAL: Temporary `Action_<timestamp>` listeners are not removed**
 
-**Evidência do problema**:
+**Evidence of the problem**:
 ```
 (node:584862) MaxListenersExceededWarning: Possible EventEmitter memory leak detected.
 11 Action_1760380363392 listeners added to [EventEmitter].
 MaxListeners is 10. Use emitter.setMaxListeners() to increase limit
 ```
 
-**Padrão observado**: Cada chamada `ami.action()` cria um listener com nome `Action_<timestamp>`.
+**Observed pattern**: Each `ami.action()` call creates a listener named `Action_<timestamp>`.
 
-**Suspeita de implementação problemática**:
+**Suspected problematic implementation**:
 ```typescript
-// Exemplo de implementação problemática comum
+// Example of common problematic implementation
 class Eami {
   async action(params: ActionParams): Promise<ActionResponse> {
     const actionId = `Action_${Date.now()}`;
 
-    // ❌ PROBLEMA: Listener é adicionado mas NUNCA removido
+    // ❌ PROBLEM: Listener is added but NEVER removed
     this.events.once(actionId, (response) => {
       return response;
     });
 
-    // Envia o comando AMI
+    // Send AMI command
     this.socket.write(`Action: ${params.Action}\r\nActionID: ${actionId}\r\n\r\n`);
 
-    // ❌ FALTA: removeListener após timeout ou resposta
+    // ❌ MISSING: removeListener after timeout or response
   }
 }
 ```
 
-**O que investigar**:
-- ✅ Cada `Action_*` listener está sendo removido após receber resposta?
-- ✅ Há timeout implementado? Se sim, o listener é removido no timeout?
-- ✅ Em caso de erro/rejeição, o listener é limpo?
-- ✅ Usar `once()` ao invés de `on()` para eventos únicos
-- ✅ Implementar cleanup explícito: `this.events.removeListener(actionId, handler)`
+**What to investigate**:
+- ✅ Is each `Action_*` listener being removed after receiving response?
+- ✅ Is there a timeout implemented? If yes, is the listener removed on timeout?
+- ✅ On error/rejection, is the listener cleaned up?
+- ✅ Use `once()` instead of `on()` for single-use events
+- ✅ Implement explicit cleanup: `this.events.removeListener(actionId, handler)`
 
-**Volume de uso no nosso código**: ~50 chamadas `ami.action()` por minuto em alta carga.
+**Usage volume in our code**: ~50 `ami.action()` calls per minute under heavy load.
 
 ---
 
-### **2. CRÍTICO: EventEmitter global não é limpo em reconexões**
+### **2. CRITICAL: Global EventEmitter is not cleaned up on reconnections**
 
-**Código do cliente**:
+**Client code**:
 ```typescript
 // src/services/Asterisk/Ami/AmiInitialize.ts
 export const ami = new Eami({ /* config */ });
 
-// setupConnectionListeners é chamado MÚLTIPLAS vezes sem cleanup
+// setupConnectionListeners is called MULTIPLE times without cleanup
 const setupConnectionListeners = (Ami: Eami) => {
   Ami.events.on(eAMI_EVENTS.CONNECT, () => { /* ... */ });
   Ami.events.on(eAMI_EVENTS.CLOSE, () => { /* ... */ });
-  // ... 6 eventos no total
+  // ... 6 events total
 };
 
-// ❌ Chamado a cada reconexão SEM removeAllListeners antes
+// ❌ Called on every reconnection WITHOUT removeAllListeners before
 attemptReconnection() {
-  setupConnectionListeners(ami); // Adiciona 6 listeners novos
+  setupConnectionListeners(ami); // Adds 6 new listeners
 }
 ```
 
-**O que a biblioteca deve garantir**:
-- ✅ `ami.connect()` deve fazer cleanup automático de listeners antigos?
-- ✅ `ami.destroySocket()` remove todos os listeners internos?
-- ✅ Há documentação clara sobre quando chamar `events.removeAllListeners()`?
+**What the library should guarantee**:
+- ✅ Should `ami.connect()` automatically cleanup old listeners?
+- ✅ Does `ami.destroySocket()` remove all internal listeners?
+- ✅ Is there clear documentation on when to call `events.removeAllListeners()`?
 
-**Pergunta**: A biblioteca deveria expor um método `ami.cleanup()` ou `ami.reset()` para uso antes de reconectar?
+**Question**: Should the library expose a `ami.cleanup()` or `ami.reset()` method for use before reconnecting?
 
 ---
 
-### **3. MÉDIO: Padrão de reconexão automática**
+### **3. MEDIUM: Automatic reconnection pattern**
 
-**Configuração atual**:
+**Current configuration**:
 ```typescript
 additionalOptions: {
   reconnect: true,
@@ -99,46 +99,46 @@ additionalOptions: {
 }
 ```
 
-**O que investigar**:
-- ✅ A reconexão automática (`reconnect: true`) limpa todos os recursos antes de reconectar?
-- ✅ O heartbeat cria listeners que se acumulam?
-- ✅ Há um `maxReconnectAttempts` implementado? Se não, pode causar loop infinito.
+**What to investigate**:
+- ✅ Does automatic reconnection (`reconnect: true`) clean up all resources before reconnecting?
+- ✅ Does the heartbeat create listeners that accumulate?
+- ✅ Is there a `maxReconnectAttempts` implemented? If not, it could cause infinite loop.
 
 ---
 
-### **4. MÉDIO: Estrutura interna do EventEmitter**
+### **4. MEDIUM: Internal EventEmitter structure**
 
-**Verificar internamente**:
+**Verify internally**:
 ```typescript
-// A biblioteca usa EventEmitter nativo do Node.js?
+// Does the library use native Node.js EventEmitter?
 import { EventEmitter } from 'events';
 
 class Eami extends EventEmitter {
-  // OU
+  // OR
   public events: EventEmitter;
 }
 ```
 
-**Padrões problemáticos comuns**:
-❌ **Não usar `removeListener` após Promise resolver**
+**Common problematic patterns**:
+❌ **Do not use `removeListener` after Promise resolves**
 ```typescript
 return new Promise((resolve) => {
-  this.events.once('response', resolve); // ← once() é bom
-  // MAS: E se der timeout? O listener fica eternamente
+  this.events.once('response', resolve); // ← once() is good
+  // BUT: What if timeout occurs? The listener stays forever
 });
 ```
 
-✅ **Padrão correto**:
+✅ **Correct pattern**:
 ```typescript
 return new Promise((resolve, reject) => {
   const handler = (data) => {
     clearTimeout(timeoutId);
-    this.events.removeListener('response', handler); // ← Cleanup explícito
+    this.events.removeListener('response', handler); // ← Explicit cleanup
     resolve(data);
   };
 
   const timeoutId = setTimeout(() => {
-    this.events.removeListener('response', handler); // ← Cleanup no timeout
+    this.events.removeListener('response', handler); // ← Cleanup on timeout
     reject(new Error('Timeout'));
   }, 5000);
 
@@ -148,18 +148,18 @@ return new Promise((resolve, reject) => {
 
 ---
 
-### **5. BAIXO: Memory profiling do código da biblioteca**
+### **5. LOW: Memory profiling of library code**
 
-**Sugestão de teste**:
+**Test suggestion**:
 ```bash
-# Rodar teste de stress com memory profiling
+# Run stress test with memory profiling
 node --inspect --max-old-space-size=512 test-stress.js
 
-# Conectar no Chrome DevTools e fazer heap snapshot
+# Connect to Chrome DevTools and take heap snapshot
 # chrome://inspect
 ```
 
-**Script de teste sugerido** (para o desenvolvedor criar):
+**Suggested test script** (for developer to create):
 ```javascript
 const { eAmi } = require('@ipcom/asterisk-ami');
 
@@ -170,13 +170,13 @@ const ami = new eAmi({
   password: 'secret'
 });
 
-// Simular 10.000 chamadas ami.action()
+// Simulate 10,000 ami.action() calls
 async function stressTest() {
   for (let i = 0; i < 10000; i++) {
     await ami.action({ Action: 'QueueStatus' });
 
     if (i % 100 === 0) {
-      console.log(`Iteração ${i}:`, {
+      console.log(`Iteration ${i}:`, {
         listeners: ami.events.listenerCount(),
         memory: process.memoryUsage().heapUsed / 1024 / 1024
       });
@@ -187,99 +187,99 @@ async function stressTest() {
 ami.connect().then(stressTest);
 ```
 
-**Resultado esperado**:
-- ✅ `listenerCount()` deve permanecer **constante** (~10-20 listeners fixos)
-- ✅ Memória deve crescer <50MB
+**Expected result**:
+- ✅ `listenerCount()` should remain **constant** (~10-20 fixed listeners)
+- ✅ Memory should grow <50MB
 
-**Resultado problemático**:
-- ❌ `listenerCount()` cresce linearmente: 100 → 500 → 1000+
-- ❌ Memória cresce >500MB
-
----
-
-## **📋 Checklist de Verificação para o Desenvolvedor**
-
-### **Código-fonte da biblioteca**:
-- [ ] Cada `ami.action()` usa `once()` ao invés de `on()`
-- [ ] Todos os listeners temporários são removidos após resposta/timeout/erro
-- [ ] `ami.destroySocket()` limpa todos os EventEmitters internos
-- [ ] `ami.connect()` não acumula listeners em reconexões
-- [ ] Implementar `ami.cleanup()` ou `ami.reset()` método público
-- [ ] Heartbeat não cria listeners infinitos
-
-### **Testes**:
-- [ ] Teste de stress: 10.000 chamadas `ami.action()` consecutivas
-- [ ] Teste de reconexão: 50 ciclos de connect/disconnect
-- [ ] Memory profiling com heap snapshots
-- [ ] Verificar `process.memoryUsage()` e `ami.events.eventNames().length`
-
-### **Documentação**:
-- [ ] Documentar quando chamar `removeAllListeners()`
-- [ ] Exemplo de uso correto em reconexões
-- [ ] Advertência sobre chamadas `ami.action()` em loops
+**Problematic result**:
+- ❌ `listenerCount()` grows linearly: 100 → 500 → 1000+
+- ❌ Memory grows >500MB
 
 ---
 
-## **🔧 Workarounds Temporários (Lado Cliente)**
+## **📋 Verification Checklist for Developer**
 
-Enquanto aguardamos correção da biblioteca, implementamos:
+### **Library source code**:
+- [ ] Each `ami.action()` uses `once()` instead of `on()`
+- [ ] All temporary listeners are removed after response/timeout/error
+- [ ] `ami.destroySocket()` cleans up all internal EventEmitters
+- [ ] `ami.connect()` does not accumulate listeners on reconnections
+- [ ] Implement `ami.cleanup()` or `ami.reset()` public method
+- [ ] Heartbeat does not create infinite listeners
 
-1. **Aumentar limite de listeners**: `ami.events.setMaxListeners(50)`
-2. **Cleanup manual antes de reconectar**:
+### **Tests**:
+- [ ] Stress test: 10,000 consecutive `ami.action()` calls
+- [ ] Reconnection test: 50 cycles of connect/disconnect
+- [ ] Memory profiling with heap snapshots
+- [ ] Check `process.memoryUsage()` and `ami.events.eventNames().length`
+
+### **Documentation**:
+- [ ] Document when to call `removeAllListeners()`
+- [ ] Example of correct usage in reconnections
+- [ ] Warning about `ami.action()` calls in loops
+
+---
+
+## **🔧 Temporary Workarounds (Client Side)**
+
+While waiting for library fix, we implemented:
+
+1. **Increase listener limit**: `ami.events.setMaxListeners(50)`
+2. **Manual cleanup before reconnecting**:
 ```typescript
 const reconnect = () => {
-  ami.events.removeAllListeners(); // ← Forçar limpeza
+  ami.events.removeAllListeners(); // ← Force cleanup
   ami.destroySocket();
   ami.connect();
 };
 ```
-3. **Limitar buffer de mensagens pendentes**: Max 100 mensagens
+3. **Limit pending message buffer**: Max 100 messages
 
 ---
 
-## **📊 Dados do Ambiente**
+## **📊 Environment Data**
 
-- **Node.js**: v22+ (com V8 otimizado)
-- **Biblioteca**: `@ipcom/asterisk-ami@0.0.28`
-- **Carga**: ~50 `ami.action()` por minuto
-- **Reconexões**: ~5-10 por dia (Asterisk reinicia)
-- **Tempo até crash**: 4-8 horas em produção
-
----
-
-## **❓ Perguntas Específicas para o Desenvolvedor**
-
-1. **A biblioteca usa `once()` ou `on()` para eventos temporários?**
-2. **Existe um método `ami.cleanup()` ou similar para limpar recursos?**
-3. **O `reconnect: true` automático faz cleanup antes de reconectar?**
-4. **Qual o comportamento esperado de `ami.destroySocket()`? Ele limpa listeners?**
-5. **Há algum teste de memória/stress na biblioteca?**
-6. **É possível ter acesso ao código-fonte da biblioteca para análise?** (Se não for open source)
+- **Node.js**: v22+ (with optimized V8)
+- **Library**: `@ipcom/asterisk-ami@0.0.28`
+- **Load**: ~50 `ami.action()` per minute
+- **Reconnections**: ~5-10 per day (Asterisk restarts)
+- **Time to crash**: 4-8 hours in production
 
 ---
 
-## **📂 Arquivos Relevantes do Cliente**
+## **❓ Specific Questions for Developer**
 
-### Principais chamadas `ami.action()`:
-- `src/services/UsersAgents/AddNewAgentToQueue.service.ts` - 12 chamadas
-- `src/watchers/UseQueueMembers.ts` - 15 chamadas
-- `src/sockets/message.socket.ts` - múltiplas chamadas em eventos
-
-### Configuração AMI:
-- `src/services/Asterisk/Ami/AmiInitialize.ts` - Setup e reconexão
-
----
-
-## **🎯 Objetivo Final**
-
-Eliminar o memory leak para permitir:
-- ✅ Aplicação rodar **semanas** sem restart
-- ✅ Heap estável em ~200-500MB
-- ✅ Zero warnings de `MaxListenersExceeded`
-- ✅ GC saudável com ciclos rápidos (<50ms)
+1. **Does the library use `once()` or `on()` for temporary events?**
+2. **Is there a `ami.cleanup()` or similar method to clean up resources?**
+3. **Does automatic `reconnect: true` cleanup before reconnecting?**
+4. **What is the expected behavior of `ami.destroySocket()`? Does it clean up listeners?**
+5. **Are there any memory/stress tests in the library?**
+6. **Is it possible to have access to the library source code for analysis?** (If not open source)
 
 ---
 
-**Data do relatório**: 2025-10-13
-**Versão da biblioteca analisada**: @ipcom/asterisk-ami@0.0.28
-**Ambiente**: Produção - PBX IPCOM Backend
+## **📂 Relevant Client Files**
+
+### Main `ami.action()` calls:
+- `src/services/UsersAgents/AddNewAgentToQueue.service.ts` - 12 calls
+- `src/watchers/UseQueueMembers.ts` - 15 calls
+- `src/sockets/message.socket.ts` - multiple calls in events
+
+### AMI Configuration:
+- `src/services/Asterisk/Ami/AmiInitialize.ts` - Setup and reconnection
+
+---
+
+## **🎯 Final Objective**
+
+Eliminate the memory leak to allow:
+- ✅ Application running **weeks** without restart
+- ✅ Stable heap at ~200-500MB
+- ✅ Zero `MaxListenersExceeded` warnings
+- ✅ Healthy GC with fast cycles (<50ms)
+
+---
+
+**Report date**: 2025-10-13
+**Library version analyzed**: @ipcom/asterisk-ami@0.0.28
+**Environment**: Production - PBX IPCOM Backend

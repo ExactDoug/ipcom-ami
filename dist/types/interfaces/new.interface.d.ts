@@ -11,10 +11,10 @@ export interface I_NewChannel {
     Language: string;
     AccountCode: number;
     Context: string;
-    Exten: number;
-    Priority: number;
-    Uniqueid: number;
-    Linkedid: number;
+    Exten: string;
+    Priority: string;
+    Uniqueid: string;
+    Linkedid: string;
 }
 export interface I_NewState {
     Event: string;
@@ -29,10 +29,10 @@ export interface I_NewState {
     Language: string;
     AccountCode: number;
     Context: string;
-    Exten: number;
-    Priority: number;
-    Uniqueid: number;
-    Linkedid: number;
+    Exten: string;
+    Priority: string;
+    Uniqueid: string;
+    Linkedid: string;
 }
 export interface I_NewConnectedLine {
     Event: string;
@@ -47,10 +47,10 @@ export interface I_NewConnectedLine {
     Language: string;
     AccountCode: number;
     Context: string;
-    Exten: number;
-    Priority: number;
-    Uniqueid: number;
-    Linkedid: number;
+    Exten: string;
+    Priority: string;
+    Uniqueid: string;
+    Linkedid: string;
 }
 export interface I_NewExten {
     Event: string;
@@ -63,10 +63,10 @@ export interface I_NewExten {
     ConnectedLineName: string;
     AccountCode: number;
     Context: string;
-    Exten: number;
-    Priority: number;
-    Uniqueid: number;
-    Linkedid: number;
+    Exten: string;
+    Priority: string;
+    Uniqueid: string;
+    Linkedid: string;
     Extension: string;
     Application: string;
     AppData: string;

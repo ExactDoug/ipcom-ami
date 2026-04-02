@@ -25,17 +25,20 @@ import type {
 	I_Response,
 } from "./interfaces/actions.interface.js";
 import type { IeAmiOptions } from "./interfaces/configure.interface.js";
+import type { AsteriskVersion } from "./types/version.js";
 type Timer = ReturnType<typeof setTimeout>;
 
 export * from "./typeGuards.js";
 export * from "./types/events.js";
+export * from "./types/version.js";
 
 export const eAMI_EVENTS = _eAMI_EVENTS;
 export const AMI_EVENTS = _AMI_EVENTS;
 
-export class eAmi {
+export class eAmi<V extends AsteriskVersion = '18'> {
 	public debug: boolean;
 
+	private _version: V;
 	private _host: string;
 	private _port: number;
 	private _userName: string;
@@ -61,7 +64,7 @@ export class eAmi {
 
 	private _queueRequest: I_Request[];
 	public _socketHandler?: Socket = undefined;
-	private _actions: eAmiActions;
+	private _actions: eAmiActions<V>;
 	public events: EventEmitter;
 
 	private _maxAuthCount: number;
@@ -71,12 +74,13 @@ export class eAmi {
 	 * Creates a new instance of the AMI connection.
 	 *
 	 * @constructor
-	 * @param {IeAmiOptions} allOptions - Object containing all the necessary options to configure the connection.
+	 * @param {IeAmiOptions<V>} allOptions - Object containing all the necessary options to configure the connection.
 	 * @param {string} allOptions.host - The address of the AMI server.
 	 * @param {number} [allOptions.port=5038] - The port of the AMI server. If not specified, the default port 5038 will be used.
 	 * @param {string} allOptions.userName - The username for AMI authentication.
 	 * @param {string} allOptions.password - The password for AMI authentication.
 	 * @param {Object} [allOptions.additionalOptions] - Additional configuration options.
+	 * @param {V} [allOptions.additionalOptions.version='18'] - Asterisk version ('18' or '20'). Defaults to '18' for backward compatibility.
 	 * @param {boolean} [allOptions.additionalOptions.reconnect=true] - Whether to automatically reconnect in case of connection failure.
 	 * @param {number} [allOptions.additionalOptions.heartbeatInterval=5] - Interval in seconds to send heartbeat packets.
 	 * @param {number} [allOptions.additionalOptions.resendTimeOut=5] - Timeout in seconds to resend requests that failed.
@@ -85,12 +89,13 @@ export class eAmi {
 	 * @param {boolean} [allOptions.additionalOptions.debug=false] - Whether to enable debug mode, which prints detailed logs.
 	 * @param {number} [allOptions.additionalOptions.maxReconnectCount=5] - Maximum number of reconnection attempts before giving up.
 	 */
-	constructor(allOptions: IeAmiOptions) {
+	constructor(allOptions: IeAmiOptions<V>) {
 		const connect = allOptions;
 		const options = _isUndefined(connect.additionalOptions)
 			? {}
 			: connect.additionalOptions;
 
+		this._version = (options?.version ?? '18') as V;
 		this._host = connect.host;
 		this._port = _isNull(connect.port) ? DEFAULT_PORT : connect.port;
 		this._userName = connect.userName;
@@ -149,6 +154,10 @@ export class eAmi {
 		});
 	}
 
+	get version(): V {
+		return this._version;
+	}
+
 	get excludeEvents(): string[] {
 		return this._excludeEvents;
 	}
@@ -165,7 +174,7 @@ export class eAmi {
 		return this._lastConnectedTime;
 	}
 
-	get actions(): eAmiActions {
+	get actions(): eAmiActions<V> {
 		return this._actions;
 	}
 

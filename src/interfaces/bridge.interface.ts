@@ -38,12 +38,12 @@ export interface I_BridgeEnter {
 	Language: string                //'ru',
 	AccountCode: number             //'',
 	Context: string                 //'callcenter',         menuivr
-	Exten: number                   // null,
-	Priority: number                // 1,                  8
-	Uniqueid: number                //'1527245698.556770',  1527245675.556769
+	Exten: string                   // null,
+	Priority: string                // 1,                  8
+	Uniqueid: string                //'1527245698.556770',  1527245675.556769
 	//Uniqueid of the oldest channel associated with this channel.
-	Linkedid: number                //'1527245675.556769'   1527245675.556769
-	SwapUniqueid: number
+	Linkedid: string                //'1527245675.556769'   1527245675.556769
+	SwapUniqueid: string
 }
 
 export interface I_BridgeCreate {
@@ -102,12 +102,12 @@ export interface I_BridgeLeave {
 	Language: string                //'ru',
 	AccountCode: number             //'',
 	Context: string                 //'callcenter',         menuivr
-	Exten: number                   // null,
-	Priority: number                // 1,                  8
-	Uniqueid: number                //'1527245698.556770',  1527245675.556769
+	Exten: string                   // null,
+	Priority: string                // 1,                  8
+	Uniqueid: string                //'1527245698.556770',  1527245675.556769
 	//Uniqueid of the oldest channel associated with this channel.
-	Linkedid: number                //'1527245675.556769'   1527245675.556769
-	SwapUniqueid?: number
+	Linkedid: string                //'1527245675.556769'   1527245675.556769
+	SwapUniqueid?: string
 }
 
 export interface I_BridgeDestroy {
@@ -188,11 +188,11 @@ export interface I_BridgeInfoChannel {
 	Language: string                //'ru',
 	AccountCode: number             //'',
 	Context: string                 //'callcenter',         menuivr
-	Exten: number                   // null,
-	Priority: number                // 1,                  8
-	Uniqueid: number                //'1527245698.556770',  1527245675.556769
+	Exten: string                   // null,
+	Priority: string                // 1,                  8
+	Uniqueid: string                //'1527245698.556770',  1527245675.556769
 	//Uniqueid of the oldest channel associated with this channel.
-	Linkedid: number                //'1527245675.556769'   1527245675.556769
+	Linkedid: string                //'1527245675.556769'   1527245675.556769
 }
 
 

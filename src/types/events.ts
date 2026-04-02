@@ -10,6 +10,23 @@ type BaseEvent = {
 };
 
 /**
+ * Represents the valid values for ChannelState fields in Asterisk AMI events.
+ *
+ * Values correspond to:
+ * - 0: Down
+ * - 1: Rsrvd (Reserved)
+ * - 2: OffHook
+ * - 3: Dialing
+ * - 4: Ring
+ * - 5: Ringing
+ * - 6: Up
+ * - 7: Busy
+ * - 8: Dialing Offhook
+ * - 9: Pre-ring
+ */
+export type ChannelStateValue = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9;
+
+/**
  * Represents the data structure for the AGIExecEnd event in Asterisk.
  *
  * **Synopsis**: Raised when an AGI command finishes execution.
@@ -59,9 +76,9 @@ export type AGIExecEnd = BaseEvent & {
 	AccountCode: string;
 	Context: string;
 	Exten: string | number;
-	Priority: number;
-	Uniqueid: string | number;
-	Linkedid: number | string;
+	Priority: string;
+	Uniqueid: string;
+	Linkedid: string | string;
 	Command: string;
 	CommandId: string;
 	ResultCode: string;
@@ -116,9 +133,9 @@ export type AGIExecStart = BaseEvent & {
 	AccountCode: string;
 	Context: string;
 	Exten: string | number;
-	Priority: number;
-	Uniqueid: string | number;
-	Linkedid: number | string;
+	Priority: string;
+	Uniqueid: string;
+	Linkedid: string | string;
 	Command: string;
 	CommandId: string;
 };
@@ -179,9 +196,9 @@ export type AOCD = BaseEvent & {
 	AccountCode: string;
 	Context: string;
 	Exten: string | number;
-	Priority: number;
-	Uniqueid: string | number;
-	Linkedid: number | string;
+	Priority: string;
+	Uniqueid: string;
+	Linkedid: string | string;
 	Charge: string;
 	Type: string;
 	BillingID: string;
@@ -255,9 +272,9 @@ export type AOCE = BaseEvent & {
 	AccountCode: string;
 	Context: string;
 	Exten: string | number;
-	Priority: number;
-	Uniqueid: string | number;
-	Linkedid: number | string;
+	Priority: string;
+	Uniqueid: string;
+	Linkedid: string | string;
 	ChargingAssociation: string;
 	Number: string;
 	Plan: string;
@@ -333,9 +350,9 @@ export type AOCS = BaseEvent & {
 	AccountCode: string;
 	Context: string;
 	Exten: string | number;
-	Priority: number;
-	Uniqueid: string | number;
-	Linkedid: number | string;
+	Priority: string;
+	Uniqueid: string;
+	Linkedid: string | string;
 	Chargeable: string;
 	RateType: string;
 	Currency: string;
@@ -396,7 +413,7 @@ export type AOCS = BaseEvent & {
  * - `DestAccountCode: number | string`
  * - `DestContext: string`
  * - `DestExten: string`
- * - `DestPriority: number`
+ * - `DestPriority: string`
  * - `DestUniqueid: string`
  * - `DestLinkedid: string`
  * - `Queue: string`
@@ -416,9 +433,9 @@ export type AgentCalled = BaseEvent & {
 	AccountCode: string;
 	Context: string;
 	Exten: string | number;
-	Priority: number;
-	Uniqueid: string | number;
-	Linkedid: number | string;
+	Priority: string;
+	Uniqueid: string;
+	Linkedid: string | string;
 	DestChannel: string;
 	DestChannelState: number;
 	DestChannelStateDesc: string;
@@ -430,9 +447,9 @@ export type AgentCalled = BaseEvent & {
 	DestAccountCode: number | string;
 	DestContext: string;
 	DestExten: string | number;
-	DestPriority: number;
-	DestUniqueid: string | number;
-	DestLinkedid: number | string;
+	DestPriority: string;
+	DestUniqueid: string;
+	DestLinkedid: string | string;
 	Queue: string;
 	MemberName: string;
 	Interface: string;
@@ -484,7 +501,7 @@ export type AgentCalled = BaseEvent & {
  * - `DestAccountCode: number | string`
  * - `DestContext: string`
  * - `DestExten: string`
- * - `DestPriority: number`
+ * - `DestPriority: string`
  * - `DestUniqueid: string`
  * - `DestLinkedid: string`
  * - `Queue: string`
@@ -507,9 +524,9 @@ export type AgentComplete = BaseEvent & {
 	AccountCode: string;
 	Context: string;
 	Exten: string | number;
-	Priority: number;
-	Uniqueid: string | number;
-	Linkedid: number | string;
+	Priority: string;
+	Uniqueid: string;
+	Linkedid: string | string;
 	DestChannel: string;
 	DestChannelState: number;
 	DestChannelStateDesc: string;
@@ -521,9 +538,9 @@ export type AgentComplete = BaseEvent & {
 	DestAccountCode: number | string;
 	DestContext: string;
 	DestExten: string | number;
-	DestPriority: number;
-	DestUniqueid: string | number;
-	DestLinkedid: number | string;
+	DestPriority: string;
+	DestUniqueid: string;
+	DestLinkedid: string | string;
 	Queue: string;
 	MemberName: string;
 	Interface: string;
@@ -550,7 +567,7 @@ export type AgentComplete = BaseEvent & {
  * - `AccountCode: string`
  * - `Context: string`
  * - `Exten: string`
- * - `Priority: number`
+ * - `Priority: string`
  * - `Uniqueid: string`
  * - `Linkedid: string`
  * - `DestChannel: string`
@@ -564,7 +581,7 @@ export type AgentComplete = BaseEvent & {
  * - `DestAccountCode: number | string`
  * - `DestContext: string`
  * - `DestExten: string`
- * - `DestPriority: number`
+ * - `DestPriority: string`
  * - `DestUniqueid: string`
  * - `DestLinkedid: string`
  * - `Queue: string`
@@ -605,7 +622,7 @@ export type AgentComplete = BaseEvent & {
  * - `DestAccountCode: number | string`
  * - `DestContext: string`
  * - `DestExten: string`
- * - `DestPriority: number`
+ * - `DestPriority: string`
  * - `DestUniqueid: string`
  * - `DestLinkedid: string`
  * - `Queue: string`
@@ -627,9 +644,9 @@ export type AgentConnect = BaseEvent & {
 	AccountCode: string;
 	Context: string;
 	Exten: string | number;
-	Priority: number;
-	Uniqueid: string | number;
-	Linkedid: number | string;
+	Priority: string;
+	Uniqueid: string;
+	Linkedid: string | string;
 	DestChannel: string;
 	DestChannelState: number;
 	DestChannelStateDesc: string;
@@ -641,9 +658,9 @@ export type AgentConnect = BaseEvent & {
 	DestAccountCode: number | string;
 	DestContext: string;
 	DestExten: string | number;
-	DestPriority: number;
-	DestUniqueid: string | number;
-	DestLinkedid: number | string;
+	DestPriority: string;
+	DestUniqueid: string;
+	DestLinkedid: string | string;
 	Queue: string;
 	MemberName: string;
 	Interface: string;
@@ -669,7 +686,7 @@ export type AgentConnect = BaseEvent & {
  * - `AccountCode: string`
  * - `Context: string`
  * - `Exten: string`
- * - `Priority: number`
+ * - `Priority: string`
  * - `Uniqueid: string`
  * - `Linkedid: string`
  * - `DestChannel: string`
@@ -683,7 +700,7 @@ export type AgentConnect = BaseEvent & {
  * - `DestAccountCode: number | string`
  * - `DestContext: string`
  * - `DestExten: string`
- * - `DestPriority: number`
+ * - `DestPriority: string`
  * - `DestUniqueid: string`
  * - `DestLinkedid: string`
  * - `Queue: string`
@@ -722,7 +739,7 @@ export type AgentConnect = BaseEvent & {
  * - `DestAccountCode: number | string`
  * - `DestContext: string`
  * - `DestExten: string`
- * - `DestPriority: number`
+ * - `DestPriority: string`
  * - `DestUniqueid: string`
  * - `DestLinkedid: string`
  * - `Queue: string`
@@ -742,9 +759,9 @@ export type AgentDump = BaseEvent & {
 	AccountCode: string;
 	Context: string;
 	Exten: string | number;
-	Priority: number;
-	Uniqueid: string | number;
-	Linkedid: number | string;
+	Priority: string;
+	Uniqueid: string;
+	Linkedid: string | string;
 	DestChannel: string;
 	DestChannelState: number;
 	DestChannelStateDesc: string;
@@ -756,9 +773,9 @@ export type AgentDump = BaseEvent & {
 	DestAccountCode: number | string;
 	DestContext: string;
 	DestExten: string | number;
-	DestPriority: number;
-	DestUniqueid: string | number;
-	DestLinkedid: number | string;
+	DestPriority: string;
+	DestUniqueid: string;
+	DestLinkedid: string | string;
 	Queue: string;
 	MemberName: string;
 	Interface: string;
@@ -812,9 +829,9 @@ export type AgentLogin = BaseEvent & {
 	AccountCode: string;
 	Context: string;
 	Exten: string | number;
-	Priority: number;
-	Uniqueid: string | number;
-	Linkedid: number | string;
+	Priority: string;
+	Uniqueid: string;
+	Linkedid: string | string;
 	Agent: string;
 };
 
@@ -892,7 +909,7 @@ export type AgentLogoff = BaseEvent & {
  * - `DestAccountCode: number | string`
  * - `DestContext: string`
  * - `DestExten: string`
- * - `DestPriority: number`
+ * - `DestPriority: string`
  * - `DestUniqueid: string`
  * - `DestLinkedid: string`
  * - `Queue: string`
@@ -913,9 +930,9 @@ export type AgentRingNoAnswer = BaseEvent & {
 	AccountCode: string;
 	Context: string;
 	Exten: string | number;
-	Priority: number;
-	Uniqueid: string | number;
-	Linkedid: number | string;
+	Priority: string;
+	Uniqueid: string;
+	Linkedid: string | string;
 	DestChannel: string;
 	DestChannelState: number;
 	DestChannelStateDesc: string;
@@ -927,9 +944,9 @@ export type AgentRingNoAnswer = BaseEvent & {
 	DestAccountCode: number | string;
 	DestContext: string;
 	DestExten: string | number;
-	DestPriority: number;
-	DestUniqueid: string | number;
-	DestLinkedid: number | string;
+	DestPriority: string;
+	DestUniqueid: string;
+	DestLinkedid: string | string;
 	Queue: string;
 	MemberName: string;
 	Interface: string;
@@ -1212,7 +1229,7 @@ export type AorListComplete = BaseEvent & {
 export type AsyncAGIEnd = BaseEvent & {
 	Event: "AsyncAGIEnd";
 	Channel: string;
-	ChannelState: string;
+	ChannelState: ChannelStateValue;
 	ChannelStateDesc: string;
 	CallerIDNum: string | number;
 	CallerIDName: string;
@@ -1222,9 +1239,9 @@ export type AsyncAGIEnd = BaseEvent & {
 	AccountCode: string;
 	Context: string;
 	Exten: string | number;
-	Priority: number;
-	Uniqueid: string | number;
-	Linkedid: number | string;
+	Priority: string;
+	Uniqueid: string;
+	Linkedid: string | string;
 };
 
 /**
@@ -1241,7 +1258,7 @@ export type AsyncAGIEnd = BaseEvent & {
 export type AsyncAGIExec = BaseEvent & {
 	Event: "AsyncAGIExec";
 	Channel: string;
-	ChannelState: string;
+	ChannelState: ChannelStateValue;
 	ChannelStateDesc: string;
 	CallerIDNum: string | number;
 	CallerIDName: string;
@@ -1251,9 +1268,9 @@ export type AsyncAGIExec = BaseEvent & {
 	AccountCode: string;
 	Context: string;
 	Exten: string | number;
-	Priority: number;
-	Uniqueid: string | number;
-	Linkedid: number | string;
+	Priority: string;
+	Uniqueid: string;
+	Linkedid: string | string;
 	CommandID?: string;
 	Result: string;
 };
@@ -1295,7 +1312,7 @@ export type AsyncAGIExec = BaseEvent & {
 export type AsyncAGIStart = BaseEvent & {
 	Event: "AsyncAGIStart";
 	Channel: string;
-	ChannelState: string;
+	ChannelState: ChannelStateValue;
 	ChannelStateDesc: string;
 	CallerIDNum: string | number;
 	CallerIDName: string;
@@ -1305,9 +1322,9 @@ export type AsyncAGIStart = BaseEvent & {
 	AccountCode: string;
 	Context: string;
 	Exten: string | number;
-	Priority: number;
-	Uniqueid: string | number;
-	Linkedid: number | string;
+	Priority: string;
+	Uniqueid: string;
+	Linkedid: string | string;
 	Env: string;
 };
 
@@ -1319,17 +1336,17 @@ export type AsyncAGIStart = BaseEvent & {
  * **Syntax**:
  * - `Event: AttendedTransfer`
  * - `TransfererChannel: string`
- * - `TransfererUniqueid: number | string`
+ * - `TransfererUniqueid: string | string`
  * - `TransfereeChannel: string`
- * - `TransfereeUniqueid: number | string`
+ * - `TransfereeUniqueid: string | string`
  * - `TransferTargetChannel: string`
  * - `TransferTargetUniqueid: string`
  * - `TransfererContext: string`
  * - `TransfererExten: number | string`
- * - `TransfererPriority: number | number`
+ * - `TransfererPriority: string | number`
  * - `TransferTargetContext: string`
  * - `TransferTargetExten: string`
- * - `TransferTargetPriority: number`
+ * - `TransferTargetPriority: string`
  * - `Result: string`
  */
 export type AttendedTransfer = BaseEvent & {
@@ -1346,10 +1363,10 @@ export type AttendedTransfer = BaseEvent & {
 	OrigTransfererAccountCode: number | string;
 	OrigTransfererContext: string;
 	OrigTransfererExten: number | string;
-	OrigTransfererPriority: number;
-	OrigTransfererUniqueid: number | string;
-	OrigTransfererLinkedid: number | string;
-	OrigBridgeUniqueid: string | number;
+	OrigTransfererPriority: string;
+	OrigTransfererUniqueid: string | string;
+	OrigTransfererLinkedid: string | string;
+	OrigBridgeUniqueid: string;
 	OrigBridgeType: string;
 	OrigBridgeTechnology: string;
 	OrigBridgeCreator: string;
@@ -1368,10 +1385,10 @@ export type AttendedTransfer = BaseEvent & {
 	SecondTransfererAccountCode: number | string;
 	SecondTransfererContext: string;
 	SecondTransfererExten: number | string;
-	SecondTransfererPriority: number;
-	SecondTransfererUniqueid: number | string;
-	SecondTransfererLinkedid: number | string;
-	SecondBridgeUniqueid: string | number;
+	SecondTransfererPriority: string;
+	SecondTransfererUniqueid: string | string;
+	SecondTransfererLinkedid: string | string;
+	SecondBridgeUniqueid: string;
 	SecondBridgeType: string;
 	SecondBridgeTechnology: string;
 	SecondBridgeCreator: string;
@@ -1383,7 +1400,7 @@ export type AttendedTransfer = BaseEvent & {
 	DestBridgeUniqueid?: string;
 	DestApp?: string;
 	LocalOneChannel: string;
-	LocalOneChannelState: string;
+	LocalOneChannelState: ChannelStateValue;
 	LocalOneChannelStateDesc: string;
 	LocalOneCallerIDNum: string | number;
 	LocalOneCallerIDName: string;
@@ -1393,11 +1410,11 @@ export type AttendedTransfer = BaseEvent & {
 	LocalOneAccountCode: string;
 	LocalOneContext: string;
 	LocalOneExten: string | number;
-	LocalOnePriority: number;
-	LocalOneUniqueid: string | number;
-	LocalOneLinkedid: number | string;
+	LocalOnePriority: string;
+	LocalOneUniqueid: string;
+	LocalOneLinkedid: string | string;
 	LocalTwoChannel: string;
-	LocalTwoChannelState: string;
+	LocalTwoChannelState: ChannelStateValue;
 	LocalTwoChannelStateDesc: string;
 	LocalTwoCallerIDNum: string | number;
 	LocalTwoCallerIDName: string;
@@ -1407,9 +1424,9 @@ export type AttendedTransfer = BaseEvent & {
 	LocalTwoAccountCode: string;
 	LocalTwoContext: string;
 	LocalTwoExten: string | number;
-	LocalTwoPriority: number;
-	LocalTwoUniqueid: string | number;
-	LocalTwoLinkedid: number | string;
+	LocalTwoPriority: string;
+	LocalTwoUniqueid: string;
+	LocalTwoLinkedid: string | string;
 	DestTransfererChannel?: string;
 	TransfereeChannel: string;
 	TransfereeChannelState: number;
@@ -1433,21 +1450,21 @@ export type AttendedTransfer = BaseEvent & {
 	TransfereeAccountCode: number | string;
 	TransfereeContext: string;
 	TransfereeExten: number | string;
-	TransfereePriority: number;
-	TransfereeUniqueid: number | string;
-	TransfereeLinkedid: number | string;
+	TransfereePriority: string;
+	TransfereeUniqueid: string | string;
+	TransfereeLinkedid: string | string;
 	TransferTargetChannel: string;
 	TransferTargetChannelState: number;
 	TransferTargetChannelStateDesc: string;
 	TransferTargetCallerIDNum: string | number;
 	TransferTargetCallerIDName: string;
 	TransferTargetConnectedLineName: string;
-	TransferTargetAccountCode: string | number;
+	TransferTargetAccountCode: string;
 	TransferTargetContext: string;
 	TransferTargetExten: number | string;
-	TransferTargetPriority: number;
-	TransferTargetUniqueid: string | number;
-	TransferTargetLinkedid: string | number;
+	TransferTargetPriority: string;
+	TransferTargetUniqueid: string;
+	TransferTargetLinkedid: string;
 	IsExternal: string;
 };
 
@@ -1591,15 +1608,15 @@ export type AuthMethodNotAllowed = BaseEvent & {
  * **Syntax**:
  * - `Event: BlindTransfer`
  * - `TransfererChannel: string`
- * - `TransfererUniqueid: number | string`
+ * - `TransfererUniqueid: string | string`
  * - `TransfereeChannel: string`
- * - `TransfereeUniqueid: number | string`
+ * - `TransfereeUniqueid: string | string`
  * - `TransfererContext: string`
  * - `TransfererExten: number | string`
- * - `TransfererPriority: number | number`
+ * - `TransfererPriority: string | number`
  * - `TransfereeContext: string`
  * - `TransfereeExten: number | string`
- * - `TransfereePriority: number`
+ * - `TransfereePriority: string`
  * - `Result: string`
  */
 export type BlindTransfer = BaseEvent & {
@@ -1627,9 +1644,9 @@ export type BlindTransfer = BaseEvent & {
 	TransfererAccountCode: number | string;
 	TransfererContext: string;
 	TransfererExten: number | string;
-	TransfererPriority: number | string;
-	TransfererUniqueid: number | string;
-	TransfererLinkedid: number | string;
+	TransfererPriority: string | string;
+	TransfererUniqueid: string | string;
+	TransfererLinkedid: string | string;
 	TransfereeChannel: string;
 	TransfereeChannelState: number;
 	TransfereeChannelStateDesc:
@@ -1652,10 +1669,10 @@ export type BlindTransfer = BaseEvent & {
 	TransfereeAccountCode: number | string;
 	TransfereeContext: string;
 	TransfereeExten: number | string;
-	TransfereePriority: number;
-	TransfereeUniqueid: number | string;
-	TransfereeLinkedid: number | string;
-	BridgeUniqueid: string | number;
+	TransfereePriority: string;
+	TransfereeUniqueid: string | string;
+	TransfereeLinkedid: string | string;
+	BridgeUniqueid: string;
 	BridgeType: string;
 	BridgeTechnology: string;
 	BridgeCreator: string;
@@ -1684,7 +1701,7 @@ export type BlindTransfer = BaseEvent & {
  */
 export type BridgeCreate = BaseEvent & {
 	Event: "BridgeCreate";
-	BridgeUniqueid: string | number;
+	BridgeUniqueid: string;
 	BridgeType: string;
 	BridgeTechnology: string;
 	BridgeCreator: string;
@@ -1710,7 +1727,7 @@ export type BridgeCreate = BaseEvent & {
  */
 export type BridgeDestroy = BaseEvent & {
 	Event: "BridgeDestroy";
-	BridgeUniqueid: string | number;
+	BridgeUniqueid: string;
 	BridgeType: string;
 	BridgeTechnology: string;
 	BridgeCreator: string;
@@ -1737,7 +1754,7 @@ export type BridgeDestroy = BaseEvent & {
  */
 export type BridgeEnter = BaseEvent & {
 	Event: "BridgeEnter";
-	BridgeUniqueid: string | number;
+	BridgeUniqueid: string;
 	BridgeType: string;
 	BridgeTechnology: string;
 	BridgeCreator: string;
@@ -1767,9 +1784,9 @@ export type BridgeEnter = BaseEvent & {
 	AccountCode: string;
 	Context: string;
 	Exten: string | number;
-	Priority: number;
-	Uniqueid: string | number;
-	Linkedid: number | string;
+	Priority: string;
+	Uniqueid: string;
+	Linkedid: string | string;
 	SwapUniqueid?: string;
 };
 
@@ -1809,9 +1826,9 @@ export type BridgeInfoChannel = BaseEvent & {
 	AccountCode: string;
 	Context: string;
 	Exten: string | number;
-	Priority: number;
-	Uniqueid: string | number;
-	Linkedid: number | string;
+	Priority: string;
+	Uniqueid: string;
+	Linkedid: string | string;
 };
 
 /**
@@ -1826,7 +1843,7 @@ export type BridgeInfoChannel = BaseEvent & {
  */
 export type BridgeInfoComplete = BaseEvent & {
 	Event: "BridgeInfoComplete";
-	BridgeUniqueid: string | number;
+	BridgeUniqueid: string;
 	BridgeType: string;
 	BridgeTechnology: string;
 	BridgeCreator: string;
@@ -1853,7 +1870,7 @@ export type BridgeInfoComplete = BaseEvent & {
  */
 export type BridgeLeave = BaseEvent & {
 	Event: "BridgeLeave";
-	BridgeUniqueid: string | number;
+	BridgeUniqueid: string;
 	BridgeType: string;
 	BridgeTechnology: string;
 	BridgeCreator: string;
@@ -1883,9 +1900,9 @@ export type BridgeLeave = BaseEvent & {
 	AccountCode: string;
 	Context: string;
 	Exten: string | number;
-	Priority: number;
-	Uniqueid: string | number;
-	Linkedid: number | string;
+	Priority: string;
+	Uniqueid: string;
+	Linkedid: string | string;
 };
 
 /**
@@ -1904,7 +1921,7 @@ export type BridgeLeave = BaseEvent & {
  */
 export type BridgeMerge = BaseEvent & {
 	Event: "BridgeMerge";
-	ToBridgeUniqueid: string | number;
+	ToBridgeUniqueid: string;
 	ToBridgeType: string;
 	ToBridgeTechnology: string;
 	ToBridgeCreator: string;
@@ -1912,7 +1929,7 @@ export type BridgeMerge = BaseEvent & {
 	ToBridgeNumChannels: number;
 	ToBridgeVideoSourceMode: "none" | "talker" | "single";
 	ToBridgeVideoSource?: string;
-	FromBridgeUniqueid: string | number;
+	FromBridgeUniqueid: string;
 	FromBridgeType: string;
 	FromBridgeTechnology: string;
 	FromBridgeCreator: string;
@@ -1936,7 +1953,7 @@ export type BridgeMerge = BaseEvent & {
  */
 export type BridgeVideoSourceUpdate = BaseEvent & {
 	Event: "BridgeVideoSourceUpdate";
-	BridgeUniqueid: string | number;
+	BridgeUniqueid: string;
 	BridgeType: string;
 	BridgeTechnology: string;
 	BridgeCreator: string;
@@ -2147,7 +2164,7 @@ export type ChallengeSent = BaseEvent & {
 export type ChanSpyStart = BaseEvent & {
 	Event: "ChanSpyStart";
 	SpyerChannel: string;
-	SpyerChannelState: string;
+	SpyerChannelState: ChannelStateValue;
 	SpyerChannelStateDesc:
 		| "Down"
 		| "Rsrvd"
@@ -2168,11 +2185,11 @@ export type ChanSpyStart = BaseEvent & {
 	SpyerAccountCode: string;
 	SpyerContext: string;
 	SpyerExten: string | number;
-	SpyerPriority: number;
-	SpyerUniqueid: string | number;
-	SpyerLinkedid: number | string;
+	SpyerPriority: string;
+	SpyerUniqueid: string;
+	SpyerLinkedid: string | string;
 	SpyeeChannel: string;
-	SpyeeChannelState: string;
+	SpyeeChannelState: ChannelStateValue;
 	SpyeeChannelStateDesc:
 		| "Down"
 		| "Rsrvd"
@@ -2193,15 +2210,15 @@ export type ChanSpyStart = BaseEvent & {
 	SpyeeAccountCode: string;
 	SpyeeContext: string;
 	SpyeeExten: string | number;
-	SpyeePriority: number;
-	SpyeeUniqueid: string | number;
-	SpyeeLinkedid: number | string;
+	SpyeePriority: string;
+	SpyeeUniqueid: string;
+	SpyeeLinkedid: string | string;
 };
 
 export type ChanSpyStop = BaseEvent & {
 	Event: "ChanSpyStop";
 	SpyerChannel: string;
-	SpyerChannelState: string;
+	SpyerChannelState: ChannelStateValue;
 	SpyerChannelStateDesc:
 		| "Down"
 		| "Rsrvd"
@@ -2222,11 +2239,11 @@ export type ChanSpyStop = BaseEvent & {
 	SpyerAccountCode: string;
 	SpyerContext: string;
 	SpyerExten: string | number;
-	SpyerPriority: number;
-	SpyerUniqueid: string | number;
-	SpyerLinkedid: number | string;
+	SpyerPriority: string;
+	SpyerUniqueid: string;
+	SpyerLinkedid: string | string;
 	SpyeeChannel: string;
-	SpyeeChannelState: string;
+	SpyeeChannelState: ChannelStateValue;
 	SpyeeChannelStateDesc:
 		| "Down"
 		| "Rsrvd"
@@ -2247,15 +2264,15 @@ export type ChanSpyStop = BaseEvent & {
 	SpyeeAccountCode: string;
 	SpyeeContext: string;
 	SpyeeExten: string | number;
-	SpyeePriority: number;
-	SpyeeUniqueid: string | number;
-	SpyeeLinkedid: number | string;
+	SpyeePriority: string;
+	SpyeeUniqueid: string;
+	SpyeeLinkedid: string | string;
 };
 
 export type ChannelTalkingStart = BaseEvent & {
 	Event: "ChannelTalkingStart";
 	Channel: string;
-	ChannelState: string;
+	ChannelState: ChannelStateValue;
 	ChannelStateDesc:
 		| "Down"
 		| "Rsrvd"
@@ -2276,15 +2293,15 @@ export type ChannelTalkingStart = BaseEvent & {
 	AccountCode: string;
 	Context: string;
 	Exten: string | number;
-	Priority: number;
-	Uniqueid: string | number;
-	Linkedid: number | string;
+	Priority: string;
+	Uniqueid: string;
+	Linkedid: string | string;
 };
 
 export type ChannelTalkingStop = BaseEvent & {
 	Event: "ChannelTalkingStop";
 	Channel: string;
-	ChannelState: string;
+	ChannelState: ChannelStateValue;
 	ChannelStateDesc:
 		| "Down"
 		| "Rsrvd"
@@ -2305,16 +2322,16 @@ export type ChannelTalkingStop = BaseEvent & {
 	AccountCode: string;
 	Context: string;
 	Exten: string | number;
-	Priority: number;
-	Uniqueid: string | number;
-	Linkedid: number | string;
+	Priority: string;
+	Uniqueid: string;
+	Linkedid: string | string;
 	Duration: string;
 };
 
 export type ConfbridgeEnd = BaseEvent & {
 	Event: "ConfbridgeEnd";
 	Conference: string;
-	BridgeUniqueid: string | number;
+	BridgeUniqueid: string;
 	BridgeType: string;
 	BridgeTechnology: string;
 	BridgeCreator: string;
@@ -2327,7 +2344,7 @@ export type ConfbridgeEnd = BaseEvent & {
 export type ConfbridgeJoin = BaseEvent & {
 	Event: "ConfbridgeJoin";
 	Conference: string;
-	BridgeUniqueid: string | number;
+	BridgeUniqueid: string;
 	BridgeType: string;
 	BridgeTechnology: string;
 	BridgeCreator: string;
@@ -2336,7 +2353,7 @@ export type ConfbridgeJoin = BaseEvent & {
 	BridgeVideoSourceMode: "none" | "talker" | "single";
 	BridgeVideoSource?: string;
 	Channel: string;
-	ChannelState: string;
+	ChannelState: ChannelStateValue;
 	ChannelStateDesc:
 		| "Down"
 		| "Rsrvd"
@@ -2357,9 +2374,9 @@ export type ConfbridgeJoin = BaseEvent & {
 	AccountCode: string;
 	Context: string;
 	Exten: string | number;
-	Priority: number;
-	Uniqueid: string | number;
-	Linkedid: number | string;
+	Priority: string;
+	Uniqueid: string;
+	Linkedid: string | string;
 	Admin: "Yes" | "No";
 	Muted: "Yes" | "No";
 };
@@ -2367,7 +2384,7 @@ export type ConfbridgeJoin = BaseEvent & {
 export type ConfbridgeLeave = BaseEvent & {
 	Event: "ConfbridgeLeave";
 	Conference: string;
-	BridgeUniqueid: string | number;
+	BridgeUniqueid: string;
 	BridgeType: string;
 	BridgeTechnology: string;
 	BridgeCreator: string;
@@ -2376,7 +2393,7 @@ export type ConfbridgeLeave = BaseEvent & {
 	BridgeVideoSourceMode: "none" | "talker" | "single";
 	BridgeVideoSource?: string;
 	Channel: string;
-	ChannelState: string;
+	ChannelState: ChannelStateValue;
 	ChannelStateDesc:
 		| "Down"
 		| "Rsrvd"
@@ -2397,9 +2414,9 @@ export type ConfbridgeLeave = BaseEvent & {
 	AccountCode: string;
 	Context: string;
 	Exten: string | number;
-	Priority: number;
-	Uniqueid: string | number;
-	Linkedid: number | string;
+	Priority: string;
+	Uniqueid: string;
+	Linkedid: string | string;
 	Admin: "Yes" | "No";
 };
 
@@ -2415,7 +2432,7 @@ export type ConfbridgeList = BaseEvent & {
 	Talking: "Yes" | "No";
 	AnsweredTime: string;
 	Channel: string;
-	ChannelState: string;
+	ChannelState: ChannelStateValue;
 	ChannelStateDesc:
 		| "Down"
 		| "Rsrvd"
@@ -2436,9 +2453,9 @@ export type ConfbridgeList = BaseEvent & {
 	AccountCode: string;
 	Context: string;
 	Exten: string | number;
-	Priority: number;
-	Uniqueid: string | number;
-	Linkedid: number | string;
+	Priority: string;
+	Uniqueid: string;
+	Linkedid: string | string;
 };
 
 /**
@@ -2466,7 +2483,7 @@ export type ConfbridgeListRooms = BaseEvent & {
 export type ConfbridgeMute = BaseEvent & {
 	Event: "ConfbridgeMute";
 	Conference: string;
-	BridgeUniqueid: string | number;
+	BridgeUniqueid: string;
 	BridgeType: string;
 	BridgeTechnology: string;
 	BridgeCreator: string;
@@ -2475,7 +2492,7 @@ export type ConfbridgeMute = BaseEvent & {
 	BridgeVideoSourceMode: "none" | "talker" | "single";
 	BridgeVideoSource?: string;
 	Channel: string;
-	ChannelState: string;
+	ChannelState: ChannelStateValue;
 	ChannelStateDesc:
 		| "Down"
 		| "Rsrvd"
@@ -2496,16 +2513,16 @@ export type ConfbridgeMute = BaseEvent & {
 	AccountCode: string;
 	Context: string;
 	Exten: string | number;
-	Priority: number;
-	Uniqueid: string | number;
-	Linkedid: number | string;
+	Priority: string;
+	Uniqueid: string;
+	Linkedid: string | string;
 	Admin: "Yes" | "No";
 };
 
 export type ConfbridgeRecord = BaseEvent & {
 	Event: "ConfbridgeRecord";
 	Conference: string;
-	BridgeUniqueid: string | number;
+	BridgeUniqueid: string;
 	BridgeType: string;
 	BridgeTechnology: string;
 	BridgeCreator: string;
@@ -2518,7 +2535,7 @@ export type ConfbridgeRecord = BaseEvent & {
 export type ConfbridgeStart = BaseEvent & {
 	Event: "ConfbridgeStart";
 	Conference: string;
-	BridgeUniqueid: string | number;
+	BridgeUniqueid: string;
 	BridgeType: string;
 	BridgeTechnology: string;
 	BridgeCreator: string;
@@ -2531,7 +2548,7 @@ export type ConfbridgeStart = BaseEvent & {
 export type ConfbridgeStopRecord = BaseEvent & {
 	Event: "ConfbridgeStopRecord";
 	Conference: string;
-	BridgeUniqueid: string | number;
+	BridgeUniqueid: string;
 	BridgeType: string;
 	BridgeTechnology: string;
 	BridgeCreator: string;
@@ -2544,7 +2561,7 @@ export type ConfbridgeStopRecord = BaseEvent & {
 export type ConfbridgeTalking = BaseEvent & {
 	Event: "ConfbridgeTalking";
 	Conference: string;
-	BridgeUniqueid: string | number;
+	BridgeUniqueid: string;
 	BridgeType: string;
 	BridgeTechnology: string;
 	BridgeCreator: string;
@@ -2553,7 +2570,7 @@ export type ConfbridgeTalking = BaseEvent & {
 	BridgeVideoSourceMode: "none" | "talker" | "single";
 	BridgeVideoSource?: string;
 	Channel: string;
-	ChannelState: string;
+	ChannelState: ChannelStateValue;
 	ChannelStateDesc:
 		| "Down"
 		| "Rsrvd"
@@ -2574,9 +2591,9 @@ export type ConfbridgeTalking = BaseEvent & {
 	AccountCode: string;
 	Context: string;
 	Exten: string | number;
-	Priority: number;
-	Uniqueid: string | number;
-	Linkedid: number | string;
+	Priority: string;
+	Uniqueid: string;
+	Linkedid: string | string;
 	TalkingStatus: "on" | "off";
 	Admin: "Yes" | "No";
 };
@@ -2584,7 +2601,7 @@ export type ConfbridgeTalking = BaseEvent & {
 export type ConfbridgeUnmute = BaseEvent & {
 	Event: "ConfbridgeUnmute";
 	Conference: string;
-	BridgeUniqueid: string | number;
+	BridgeUniqueid: string;
 	BridgeType: string;
 	BridgeTechnology: string;
 	BridgeCreator: string;
@@ -2593,7 +2610,7 @@ export type ConfbridgeUnmute = BaseEvent & {
 	BridgeVideoSourceMode: "none" | "talker" | "single";
 	BridgeVideoSource?: string;
 	Channel: string;
-	ChannelState: string;
+	ChannelState: ChannelStateValue;
 	ChannelStateDesc:
 		| "Down"
 		| "Rsrvd"
@@ -2614,9 +2631,9 @@ export type ConfbridgeUnmute = BaseEvent & {
 	AccountCode: string;
 	Context: string;
 	Exten: string | number;
-	Priority: number;
-	Uniqueid: string | number;
-	Linkedid: number | string;
+	Priority: string;
+	Uniqueid: string;
+	Linkedid: string | string;
 	Admin: "Yes" | "No";
 };
 
@@ -2631,7 +2648,7 @@ export type ContactList = BaseEvent & {
 	RegServer: number;
 	PruneOnBoot: boolean;
 	Path: string;
-	Endpoint: string | number;
+	Endpoint: string;
 	AuthenticateQualify: boolean;
 	Uri: string;
 	QualifyFrequency: number;
@@ -2696,7 +2713,7 @@ export type CoreShowChannel = BaseEvent & {
 	Event: "CoreShowChannel";
 	ActionID: number;
 	Channel: string;
-	ChannelState: string;
+	ChannelState: ChannelStateValue;
 	ChannelStateDesc:
 		| "Down"
 		| "Rsrvd"
@@ -2717,9 +2734,9 @@ export type CoreShowChannel = BaseEvent & {
 	AccountCode: string;
 	Context: string;
 	Exten: string | number;
-	Priority: number;
-	Uniqueid: string | number;
-	Linkedid: number | string;
+	Priority: string;
+	Uniqueid: string;
+	Linkedid: string | string;
 	BridgeId?: string;
 	Application: string;
 	ApplicationData: string;
@@ -2763,7 +2780,7 @@ export type CoreShowChannelsComplete = BaseEvent & {
 export type DAHDIChannel = BaseEvent & {
 	Event: "DAHDIChannel";
 	Channel: string;
-	ChannelState: string;
+	ChannelState: ChannelStateValue;
 	ChannelStateDesc:
 		| "Down"
 		| "Rsrvd"
@@ -2784,9 +2801,9 @@ export type DAHDIChannel = BaseEvent & {
 	AccountCode: string;
 	Context: string;
 	Exten: string | number;
-	Priority: number;
-	Uniqueid: string | number;
-	Linkedid: number | string;
+	Priority: string;
+	Uniqueid: string;
+	Linkedid: string | string;
 	DAHDIGroup: string;
 	DAHDISpan: string;
 	DAHDIChannel: string;
@@ -2811,7 +2828,7 @@ export type DNDState = BaseEvent & {
 export type DTMFBegin = BaseEvent & {
 	Event: "DTMFBegin";
 	Channel: string;
-	ChannelState: string;
+	ChannelState: ChannelStateValue;
 	ChannelStateDesc:
 		| "Down"
 		| "Rsrvd"
@@ -2832,9 +2849,9 @@ export type DTMFBegin = BaseEvent & {
 	AccountCode: string;
 	Context: string;
 	Exten: string | number;
-	Priority: number;
-	Uniqueid: string | number;
-	Linkedid: number | string;
+	Priority: string;
+	Uniqueid: string;
+	Linkedid: string | string;
 	Digit: string; // Assuming string here because DTMF digits include characters like # and *
 	Direction: "Received" | "Sent";
 };
@@ -2842,7 +2859,7 @@ export type DTMFBegin = BaseEvent & {
 export type DTMFEnd = BaseEvent & {
 	Event: "DTMFEnd";
 	Channel: string;
-	ChannelState: string;
+	ChannelState: ChannelStateValue;
 	ChannelStateDesc:
 		| "Down"
 		| "Rsrvd"
@@ -2863,9 +2880,9 @@ export type DTMFEnd = BaseEvent & {
 	AccountCode: string;
 	Context: string;
 	Exten: string | number;
-	Priority: number;
-	Uniqueid: string | number;
-	Linkedid: number | string;
+	Priority: string;
+	Uniqueid: string;
+	Linkedid: string | string;
 	Digit: string;
 	DurationMs: string;
 	Direction: "Received" | "Sent";
@@ -2920,7 +2937,7 @@ export type DeviceStateListComplete = BaseEvent & {
 export type DialBegin = BaseEvent & {
 	Event: "DialBegin";
 	Channel: string;
-	ChannelState: string;
+	ChannelState: ChannelStateValue;
 	ChannelStateDesc:
 		| "Down"
 		| "Rsrvd"
@@ -2941,11 +2958,11 @@ export type DialBegin = BaseEvent & {
 	AccountCode: string;
 	Context: string;
 	Exten: string | number;
-	Priority: number;
-	Uniqueid: string | number;
-	Linkedid: number | string;
+	Priority: string;
+	Uniqueid: string;
+	Linkedid: string | string;
 	DestChannel: string;
-	DestChannelState: string;
+	DestChannelState: ChannelStateValue;
 	DestChannelStateDesc:
 		| "Down"
 		| "Rsrvd"
@@ -2966,16 +2983,16 @@ export type DialBegin = BaseEvent & {
 	DestAccountCode: number | string;
 	DestContext: string;
 	DestExten: string | number;
-	DestPriority: number;
-	DestUniqueid: string | number;
-	DestLinkedid: number | string;
+	DestPriority: string;
+	DestUniqueid: string;
+	DestLinkedid: string | string;
 	DialString: string;
 };
 
 export type DialEnd = BaseEvent & {
 	Event: "DialEnd";
 	Channel: string;
-	ChannelState: string;
+	ChannelState: ChannelStateValue;
 	ChannelStateDesc:
 		| "Down"
 		| "Rsrvd"
@@ -2996,11 +3013,11 @@ export type DialEnd = BaseEvent & {
 	AccountCode: string;
 	Context: string;
 	Exten: string | number;
-	Priority: number;
-	Uniqueid: string | number;
-	Linkedid: number | string;
+	Priority: string;
+	Uniqueid: string;
+	Linkedid: string | string;
 	DestChannel: string;
-	DestChannelState: string;
+	DestChannelState: ChannelStateValue;
 	DestChannelStateDesc:
 		| "Down"
 		| "Rsrvd"
@@ -3021,9 +3038,9 @@ export type DialEnd = BaseEvent & {
 	DestAccountCode: number | string;
 	DestContext: string;
 	DestExten: string | number;
-	DestPriority: number;
-	DestUniqueid: string | number;
-	DestLinkedid: number | string;
+	DestPriority: string;
+	DestUniqueid: string;
+	DestLinkedid: string | string;
 	DialStatus:
 		| "ABORT"
 		| "ANSWER"
@@ -3040,7 +3057,7 @@ export type DialEnd = BaseEvent & {
 export type DialState = BaseEvent & {
 	Event: "DialState";
 	Channel: string;
-	ChannelState: string;
+	ChannelState: ChannelStateValue;
 	ChannelStateDesc:
 		| "Down"
 		| "Rsrvd"
@@ -3061,11 +3078,11 @@ export type DialState = BaseEvent & {
 	AccountCode: string;
 	Context: string;
 	Exten: string | number;
-	Priority: number;
-	Uniqueid: string | number;
-	Linkedid: number | string;
+	Priority: string;
+	Uniqueid: string;
+	Linkedid: string | string;
 	DestChannel: string;
-	DestChannelState: string;
+	DestChannelState: ChannelStateValue;
 	DestChannelStateDesc:
 		| "Down"
 		| "Rsrvd"
@@ -3086,9 +3103,9 @@ export type DialState = BaseEvent & {
 	DestAccountCode: number | string;
 	DestContext: string;
 	DestExten: string | number;
-	DestPriority: number;
-	DestUniqueid: string | number;
-	DestLinkedid: number | string;
+	DestPriority: string;
+	DestUniqueid: string;
+	DestLinkedid: string | string;
 	DialStatus: "RINGING" | "PROCEEDING" | "PROGRESS";
 	Forward?: string;
 };
@@ -3353,7 +3370,7 @@ export type FAXStats = BaseEvent & {
 export type FAXStatus = BaseEvent & {
 	Event: "FAXStatus";
 	Channel: string;
-	ChannelState: string;
+	ChannelState: ChannelStateValue;
 	ChannelStateDesc:
 		| "Down"
 		| "Rsrvd"
@@ -3374,9 +3391,9 @@ export type FAXStatus = BaseEvent & {
 	AccountCode: string;
 	Context: string;
 	Exten: string | number;
-	Priority: number;
-	Uniqueid: string | number;
-	Linkedid: number | string;
+	Priority: string;
+	Uniqueid: string;
+	Linkedid: string | string;
 	Operation: "gateway" | "receive" | "send";
 	Status: string;
 	LocalStationID: string;
@@ -3401,7 +3418,7 @@ export type FailedACL = BaseEvent & {
 export type Flash = BaseEvent & {
 	Event: "Flash";
 	Channel: string;
-	ChannelState: string;
+	ChannelState: ChannelStateValue;
 	ChannelStateDesc:
 		| "Down"
 		| "Rsrvd"
@@ -3422,9 +3439,9 @@ export type Flash = BaseEvent & {
 	AccountCode: string;
 	Context: string;
 	Exten: string | number;
-	Priority: number;
-	Uniqueid: string | number;
-	Linkedid: number | string;
+	Priority: string;
+	Uniqueid: string;
+	Linkedid: string | string;
 };
 
 /**
@@ -3448,7 +3465,7 @@ export type FullyBooted = BaseEvent & {
 export type Hangup = BaseEvent & {
 	Event: "Hangup";
 	Channel: string;
-	ChannelState: string;
+	ChannelState: ChannelStateValue;
 	ChannelStateDesc:
 		| "Down"
 		| "Rsrvd"
@@ -3469,9 +3486,9 @@ export type Hangup = BaseEvent & {
 	AccountCode: string;
 	Context: string;
 	Exten: string | number;
-	Priority: number;
-	Uniqueid: string | number;
-	Linkedid: number | string;
+	Priority: string;
+	Uniqueid: string;
+	Linkedid: string | string;
 	Cause: string;
 	"Cause-txt": string;
 };
@@ -3479,7 +3496,7 @@ export type Hangup = BaseEvent & {
 export type HangupHandlerPop = BaseEvent & {
 	Event: "HangupHandlerPop";
 	Channel: string;
-	ChannelState: string;
+	ChannelState: ChannelStateValue;
 	ChannelStateDesc:
 		| "Down"
 		| "Rsrvd"
@@ -3500,16 +3517,16 @@ export type HangupHandlerPop = BaseEvent & {
 	AccountCode: string;
 	Context: string;
 	Exten: string | number;
-	Priority: number;
-	Uniqueid: string | number;
-	Linkedid: number | string;
+	Priority: string;
+	Uniqueid: string;
+	Linkedid: string | string;
 	Handler: string;
 };
 
 export type HangupHandlerPush = BaseEvent & {
 	Event: "HangupHandlerPush";
 	Channel: string;
-	ChannelState: string;
+	ChannelState: ChannelStateValue;
 	ChannelStateDesc:
 		| "Down"
 		| "Rsrvd"
@@ -3530,16 +3547,16 @@ export type HangupHandlerPush = BaseEvent & {
 	AccountCode: string;
 	Context: string;
 	Exten: string | number;
-	Priority: number;
-	Uniqueid: string | number;
-	Linkedid: number | string;
+	Priority: string;
+	Uniqueid: string;
+	Linkedid: string | string;
 	Handler: string;
 };
 
 export type HangupHandlerRun = BaseEvent & {
 	Event: "HangupHandlerRun";
 	Channel: string;
-	ChannelState: string;
+	ChannelState: ChannelStateValue;
 	ChannelStateDesc:
 		| "Down"
 		| "Rsrvd"
@@ -3560,16 +3577,16 @@ export type HangupHandlerRun = BaseEvent & {
 	AccountCode: string;
 	Context: string;
 	Exten: string | number;
-	Priority: number;
-	Uniqueid: string | number;
-	Linkedid: number | string;
+	Priority: string;
+	Uniqueid: string;
+	Linkedid: string | string;
 	Handler: string;
 };
 
 export type HangupRequest = BaseEvent & {
 	Event: "HangupRequest";
 	Channel: string;
-	ChannelState: string;
+	ChannelState: ChannelStateValue;
 	ChannelStateDesc:
 		| "Down"
 		| "Rsrvd"
@@ -3590,16 +3607,16 @@ export type HangupRequest = BaseEvent & {
 	AccountCode: string;
 	Context: string;
 	Exten: string | number;
-	Priority: number;
-	Uniqueid: string | number;
-	Linkedid: number | string;
+	Priority: string;
+	Uniqueid: string;
+	Linkedid: string | string;
 	Cause: string;
 };
 
 export type Hold = BaseEvent & {
 	Event: "Hold";
 	Channel: string;
-	ChannelState: string;
+	ChannelState: ChannelStateValue;
 	ChannelStateDesc:
 		| "Down"
 		| "Rsrvd"
@@ -3620,9 +3637,9 @@ export type Hold = BaseEvent & {
 	AccountCode: string;
 	Context: string;
 	Exten: string | number;
-	Priority: number;
-	Uniqueid: string | number;
-	Linkedid: number | string;
+	Priority: string;
+	Uniqueid: string;
+	Linkedid: string | string;
 	MusicClass: string;
 };
 
@@ -3635,7 +3652,7 @@ export type Hold = BaseEvent & {
  * - `Event: "IdentifyDetail"`
  * - `ObjectType: "identify"`
  * - `ObjectName: string`
- * - `Endpoint: string | number`
+ * - `Endpoint: string`
  * - `SrvLookups: string`
  * - `Match: string`
  * - `MatchHeader: string`
@@ -3645,7 +3662,7 @@ export type IdentifyDetail = BaseEvent & {
 	Event: "IdentifyDetail";
 	ObjectType: "identify";
 	ObjectName: string;
-	Endpoint: string | number;
+	Endpoint: string;
 	SrvLookups: string;
 	Match: string;
 	MatchHeader: string;
@@ -3731,7 +3748,7 @@ export type LoadAverageLimit = BaseEvent & {
 export type LocalBridge = BaseEvent & {
 	Event: "LocalBridge";
 	LocalOneChannel: string;
-	LocalOneChannelState: string;
+	LocalOneChannelState: ChannelStateValue;
 	LocalOneChannelStateDesc:
 		| "Down"
 		| "Rsrvd"
@@ -3752,11 +3769,11 @@ export type LocalBridge = BaseEvent & {
 	LocalOneAccountCode: string;
 	LocalOneContext: string;
 	LocalOneExten: string | number;
-	LocalOnePriority: number;
-	LocalOneUniqueid: string | number;
-	LocalOneLinkedid: number | string;
+	LocalOnePriority: string;
+	LocalOneUniqueid: string;
+	LocalOneLinkedid: string | string;
 	LocalTwoChannel: string;
-	LocalTwoChannelState: string;
+	LocalTwoChannelState: ChannelStateValue;
 	LocalTwoChannelStateDesc:
 		| "Down"
 		| "Rsrvd"
@@ -3777,9 +3794,9 @@ export type LocalBridge = BaseEvent & {
 	LocalTwoAccountCode: string;
 	LocalTwoContext: string;
 	LocalTwoExten: string | number;
-	LocalTwoPriority: number;
-	LocalTwoUniqueid: string | number;
-	LocalTwoLinkedid: number | string;
+	LocalTwoPriority: string;
+	LocalTwoUniqueid: string;
+	LocalTwoLinkedid: string | string;
 	Context: string;
 	Exten: string | number;
 	LocalOptimization: "Yes" | "No";
@@ -3788,7 +3805,7 @@ export type LocalBridge = BaseEvent & {
 export type LocalOptimizationBegin = BaseEvent & {
 	Event: "LocalOptimizationBegin";
 	LocalOneChannel: string;
-	LocalOneChannelState: string;
+	LocalOneChannelState: ChannelStateValue;
 	LocalOneChannelStateDesc:
 		| "Down"
 		| "Rsrvd"
@@ -3809,11 +3826,11 @@ export type LocalOptimizationBegin = BaseEvent & {
 	LocalOneAccountCode: string;
 	LocalOneContext: string;
 	LocalOneExten: string | number;
-	LocalOnePriority: number;
-	LocalOneUniqueid: string | number;
-	LocalOneLinkedid: number | string;
+	LocalOnePriority: string;
+	LocalOneUniqueid: string;
+	LocalOneLinkedid: string | string;
 	LocalTwoChannel: string;
-	LocalTwoChannelState: string;
+	LocalTwoChannelState: ChannelStateValue;
 	LocalTwoChannelStateDesc:
 		| "Down"
 		| "Rsrvd"
@@ -3834,11 +3851,11 @@ export type LocalOptimizationBegin = BaseEvent & {
 	LocalTwoAccountCode: string;
 	LocalTwoContext: string;
 	LocalTwoExten: string | number;
-	LocalTwoPriority: number;
-	LocalTwoUniqueid: string | number;
-	LocalTwoLinkedid: number | string;
+	LocalTwoPriority: string;
+	LocalTwoUniqueid: string;
+	LocalTwoLinkedid: string | string;
 	SourceChannel: string;
-	SourceChannelState: string;
+	SourceChannelState: ChannelStateValue;
 	SourceChannelStateDesc:
 		| "Down"
 		| "Rsrvd"
@@ -3859,9 +3876,9 @@ export type LocalOptimizationBegin = BaseEvent & {
 	SourceAccountCode: string;
 	SourceContext: string;
 	SourceExten: string | number;
-	SourcePriority: number;
-	SourceUniqueid: string | number;
-	SourceLinkedid: number | string;
+	SourcePriority: string;
+	SourceUniqueid: string;
+	SourceLinkedid: string | string;
 	DestUniqueId: string | number;
 	Id: string;
 };
@@ -3869,7 +3886,7 @@ export type LocalOptimizationBegin = BaseEvent & {
 export type LocalOptimizationEnd = BaseEvent & {
 	Event: "LocalOptimizationEnd";
 	LocalOneChannel: string;
-	LocalOneChannelState: string;
+	LocalOneChannelState: ChannelStateValue;
 	LocalOneChannelStateDesc:
 		| "Down"
 		| "Rsrvd"
@@ -3890,11 +3907,11 @@ export type LocalOptimizationEnd = BaseEvent & {
 	LocalOneAccountCode: string;
 	LocalOneContext: string;
 	LocalOneExten: string | number;
-	LocalOnePriority: number;
-	LocalOneUniqueid: string | number;
-	LocalOneLinkedid: number | string;
+	LocalOnePriority: string;
+	LocalOneUniqueid: string;
+	LocalOneLinkedid: string | string;
 	LocalTwoChannel: string;
-	LocalTwoChannelState: string;
+	LocalTwoChannelState: ChannelStateValue;
 	LocalTwoChannelStateDesc:
 		| "Down"
 		| "Rsrvd"
@@ -3915,9 +3932,9 @@ export type LocalOptimizationEnd = BaseEvent & {
 	LocalTwoAccountCode: string;
 	LocalTwoContext: string;
 	LocalTwoExten: string | number;
-	LocalTwoPriority: number;
-	LocalTwoUniqueid: string | number;
-	LocalTwoLinkedid: number | string;
+	LocalTwoPriority: string;
+	LocalTwoUniqueid: string;
+	LocalTwoLinkedid: string | string;
 	Success: string;
 	Id: string;
 };
@@ -3932,7 +3949,7 @@ export type LogChannel = BaseEvent & {
 export type MCID = BaseEvent & {
 	Event: "MCID";
 	Channel: string;
-	ChannelState: string;
+	ChannelState: ChannelStateValue;
 	ChannelStateDesc:
 		| "Down"
 		| "Rsrvd"
@@ -3953,9 +3970,9 @@ export type MCID = BaseEvent & {
 	AccountCode: string;
 	Context: string;
 	Exten: string | number;
-	Priority: number;
-	Uniqueid: string | number;
-	Linkedid: number | string;
+	Priority: string;
+	Uniqueid: string;
+	Linkedid: string | string;
 	MCallerIDNumValid: string;
 	MCallerIDNum: string | number;
 	MCallerIDton: string;
@@ -4018,7 +4035,7 @@ export type MeetmeJoin = BaseEvent & {
 	Meetme: string;
 	User: string;
 	Channel: string;
-	ChannelState: string;
+	ChannelState: ChannelStateValue;
 	ChannelStateDesc:
 		| "Down"
 		| "Rsrvd"
@@ -4039,9 +4056,9 @@ export type MeetmeJoin = BaseEvent & {
 	AccountCode: string;
 	Context: string;
 	Exten: string | number;
-	Priority: number;
-	Uniqueid: string | number;
-	Linkedid: number | string;
+	Priority: string;
+	Uniqueid: string;
+	Linkedid: string | string;
 };
 
 export type MeetmeLeave = BaseEvent & {
@@ -4049,7 +4066,7 @@ export type MeetmeLeave = BaseEvent & {
 	Meetme: string;
 	User: string;
 	Channel: string;
-	ChannelState: string;
+	ChannelState: ChannelStateValue;
 	ChannelStateDesc:
 		| "Down"
 		| "Rsrvd"
@@ -4070,9 +4087,9 @@ export type MeetmeLeave = BaseEvent & {
 	AccountCode: string;
 	Context: string;
 	Exten: string | number;
-	Priority: number;
-	Uniqueid: string | number;
-	Linkedid: number | string;
+	Priority: string;
+	Uniqueid: string;
+	Linkedid: string | string;
 	Duration: string;
 };
 
@@ -4141,7 +4158,7 @@ export type MeetmeMute = BaseEvent & {
 	Meetme: string;
 	User: string;
 	Channel: string;
-	ChannelState: string;
+	ChannelState: ChannelStateValue;
 	ChannelStateDesc:
 		| "Down"
 		| "Rsrvd"
@@ -4162,9 +4179,9 @@ export type MeetmeMute = BaseEvent & {
 	AccountCode: string;
 	Context: string;
 	Exten: string | number;
-	Priority: number;
-	Uniqueid: string | number;
-	Linkedid: number | string;
+	Priority: string;
+	Uniqueid: string;
+	Linkedid: string | string;
 	Duration: string;
 	Status: "on" | "off";
 };
@@ -4174,7 +4191,7 @@ export type MeetmeTalkRequest = BaseEvent & {
 	Meetme: string;
 	User: string;
 	Channel: string;
-	ChannelState: string;
+	ChannelState: ChannelStateValue;
 	ChannelStateDesc:
 		| "Down"
 		| "Rsrvd"
@@ -4195,9 +4212,9 @@ export type MeetmeTalkRequest = BaseEvent & {
 	AccountCode: string;
 	Context: string;
 	Exten: string | number;
-	Priority: number;
-	Uniqueid: string | number;
-	Linkedid: number | string;
+	Priority: string;
+	Uniqueid: string;
+	Linkedid: string | string;
 	Duration: string;
 	Status: "on" | "off";
 };
@@ -4207,7 +4224,7 @@ export type MeetmeTalking = BaseEvent & {
 	Meetme: string;
 	User: string;
 	Channel: string;
-	ChannelState: string;
+	ChannelState: ChannelStateValue;
 	ChannelStateDesc:
 		| "Down"
 		| "Rsrvd"
@@ -4228,9 +4245,9 @@ export type MeetmeTalking = BaseEvent & {
 	AccountCode: string;
 	Context: string;
 	Exten: string | number;
-	Priority: number;
-	Uniqueid: string | number;
-	Linkedid: number | string;
+	Priority: string;
+	Uniqueid: string;
+	Linkedid: string | string;
 	Duration: string;
 	Status: "on" | "off";
 };
@@ -4252,7 +4269,7 @@ export type MemoryLimit = BaseEvent & {
 export type MessageWaiting = BaseEvent & {
 	Event: "MessageWaiting";
 	Channel?: string;
-	ChannelState?: string;
+	ChannelState?: ChannelStateValue;
 	ChannelStateDesc?:
 		| "Down"
 		| "Rsrvd"
@@ -4285,7 +4302,7 @@ export type MessageWaiting = BaseEvent & {
 export type MiniVoiceMail = BaseEvent & {
 	Event: "MiniVoiceMail";
 	Channel: string;
-	ChannelState: string;
+	ChannelState: ChannelStateValue;
 	ChannelStateDesc:
 		| "Down"
 		| "Rsrvd"
@@ -4306,9 +4323,9 @@ export type MiniVoiceMail = BaseEvent & {
 	AccountCode: string;
 	Context: string;
 	Exten: string | number;
-	Priority: number;
-	Uniqueid: string | number;
-	Linkedid: number | string;
+	Priority: string;
+	Uniqueid: string;
+	Linkedid: string | string;
 	Action: "SentNotification";
 	Mailbox: string;
 	Counter: string;
@@ -4317,7 +4334,7 @@ export type MiniVoiceMail = BaseEvent & {
 export type MixMonitorMute = BaseEvent & {
 	Event: "MixMonitorMute";
 	Channel: string;
-	ChannelState: string;
+	ChannelState: ChannelStateValue;
 	ChannelStateDesc:
 		| "Down"
 		| "Rsrvd"
@@ -4338,9 +4355,9 @@ export type MixMonitorMute = BaseEvent & {
 	AccountCode: string;
 	Context: string;
 	Exten: string | number;
-	Priority: number;
-	Uniqueid: string | number;
-	Linkedid: number | string;
+	Priority: string;
+	Uniqueid: string;
+	Linkedid: string | string;
 	Direction: "read" | "write" | "both";
 	State: 1 | 0; // 1 when muted, 0 when unmuted
 };
@@ -4348,7 +4365,7 @@ export type MixMonitorMute = BaseEvent & {
 export type MixMonitorStart = BaseEvent & {
 	Event: "MixMonitorStart";
 	Channel: string;
-	ChannelState: string;
+	ChannelState: ChannelStateValue;
 	ChannelStateDesc:
 		| "Down"
 		| "Rsrvd"
@@ -4369,15 +4386,15 @@ export type MixMonitorStart = BaseEvent & {
 	AccountCode: string;
 	Context: string;
 	Exten: string | number;
-	Priority: number;
-	Uniqueid: string | number;
-	Linkedid: number | string;
+	Priority: string;
+	Uniqueid: string;
+	Linkedid: string | string;
 };
 
 export type MixMonitorStop = BaseEvent & {
 	Event: "MixMonitorStop";
 	Channel: string;
-	ChannelState: string;
+	ChannelState: ChannelStateValue;
 	ChannelStateDesc:
 		| "Down"
 		| "Rsrvd"
@@ -4398,15 +4415,15 @@ export type MixMonitorStop = BaseEvent & {
 	AccountCode: string;
 	Context: string;
 	Exten: string | number;
-	Priority: number;
-	Uniqueid: string | number;
-	Linkedid: number | string;
+	Priority: string;
+	Uniqueid: string;
+	Linkedid: string | string;
 };
 
 export type MonitorStart = BaseEvent & {
 	Event: "MonitorStart";
 	Channel: string;
-	ChannelState: string;
+	ChannelState: ChannelStateValue;
 	ChannelStateDesc:
 		| "Down"
 		| "Rsrvd"
@@ -4427,15 +4444,15 @@ export type MonitorStart = BaseEvent & {
 	AccountCode: string;
 	Context: string;
 	Exten: string | number;
-	Priority: number;
-	Uniqueid: string | number;
-	Linkedid: number | string;
+	Priority: string;
+	Uniqueid: string;
+	Linkedid: string | string;
 };
 
 export type MonitorStop = BaseEvent & {
 	Event: "MonitorStop";
 	Channel: string;
-	ChannelState: string;
+	ChannelState: ChannelStateValue;
 	ChannelStateDesc:
 		| "Down"
 		| "Rsrvd"
@@ -4456,15 +4473,15 @@ export type MonitorStop = BaseEvent & {
 	AccountCode: string;
 	Context: string;
 	Exten: string | number;
-	Priority: number;
-	Uniqueid: string | number;
-	Linkedid: number | string;
+	Priority: string;
+	Uniqueid: string;
+	Linkedid: string | string;
 };
 
 export type MusicOnHoldStart = BaseEvent & {
 	Event: "MusicOnHoldStart";
 	Channel: string;
-	ChannelState: string;
+	ChannelState: ChannelStateValue;
 	ChannelStateDesc:
 		| "Down"
 		| "Rsrvd"
@@ -4485,16 +4502,16 @@ export type MusicOnHoldStart = BaseEvent & {
 	AccountCode: string;
 	Context: string;
 	Exten: string | number;
-	Priority: number;
-	Uniqueid: string | number;
-	Linkedid: number | string;
+	Priority: string;
+	Uniqueid: string;
+	Linkedid: string | string;
 	Class: string;
 };
 
 export type MusicOnHoldStop = BaseEvent & {
 	Event: "MusicOnHoldStop";
 	Channel: string;
-	ChannelState: string;
+	ChannelState: ChannelStateValue;
 	ChannelStateDesc:
 		| "Down"
 		| "Rsrvd"
@@ -4515,15 +4532,15 @@ export type MusicOnHoldStop = BaseEvent & {
 	AccountCode: string;
 	Context: string;
 	Exten: string | number;
-	Priority: number;
-	Uniqueid: string | number;
-	Linkedid: number | string;
+	Priority: string;
+	Uniqueid: string;
+	Linkedid: string | string;
 };
 
 export type NewAccountCode = BaseEvent & {
 	Event: "NewAccountCode";
 	Channel: string;
-	ChannelState: string;
+	ChannelState: ChannelStateValue;
 	ChannelStateDesc:
 		| "Down"
 		| "Rsrvd"
@@ -4544,16 +4561,16 @@ export type NewAccountCode = BaseEvent & {
 	AccountCode: string;
 	Context: string;
 	Exten: string | number;
-	Priority: number;
-	Uniqueid: string | number;
-	Linkedid: number | string;
+	Priority: string;
+	Uniqueid: string;
+	Linkedid: string | string;
 	OldAccountCode: string;
 };
 
 export type NewCallerid = BaseEvent & {
 	Event: "NewCallerid";
 	Channel: string;
-	ChannelState: string;
+	ChannelState: ChannelStateValue;
 	ChannelStateDesc:
 		| "Down"
 		| "Rsrvd"
@@ -4574,16 +4591,16 @@ export type NewCallerid = BaseEvent & {
 	AccountCode: string;
 	Context: string;
 	Exten: string | number;
-	Priority: number;
-	Uniqueid: string | number;
-	Linkedid: number | string;
+	Priority: string;
+	Uniqueid: string;
+	Linkedid: string | string;
 	"CID-CallingPres": string;
 };
 
 export type NewConnectedLine = BaseEvent & {
 	Event: "NewConnectedLine";
 	Channel: string;
-	ChannelState: string;
+	ChannelState: ChannelStateValue;
 	ChannelStateDesc:
 		| "Down"
 		| "Rsrvd"
@@ -4604,15 +4621,15 @@ export type NewConnectedLine = BaseEvent & {
 	AccountCode: string;
 	Context: string;
 	Exten: string | number;
-	Priority: number;
-	Uniqueid: string | number;
-	Linkedid: number | string;
+	Priority: string;
+	Uniqueid: string;
+	Linkedid: string | string;
 };
 
 export type NewExten = BaseEvent & {
 	Event: "NewExten";
 	Channel: string;
-	ChannelState: string;
+	ChannelState: ChannelStateValue;
 	ChannelStateDesc:
 		| "Down"
 		| "Rsrvd"
@@ -4633,9 +4650,9 @@ export type NewExten = BaseEvent & {
 	AccountCode: string;
 	Context: string;
 	Exten: string | number;
-	Priority: number;
-	Uniqueid: string | number;
-	Linkedid: number | string;
+	Priority: string;
+	Uniqueid: string;
+	Linkedid: string | string;
 	Extension: string | number;
 	Application: string;
 	AppData: string;
@@ -4644,7 +4661,7 @@ export type NewExten = BaseEvent & {
 export type Newchannel = BaseEvent & {
 	Event: "Newchannel";
 	Channel: string;
-	ChannelState: string;
+	ChannelState: ChannelStateValue;
 	ChannelStateDesc:
 		| "Down"
 		| "Rsrvd"
@@ -4665,15 +4682,15 @@ export type Newchannel = BaseEvent & {
 	AccountCode: string;
 	Context: string;
 	Exten: string | number;
-	Priority: number;
-	Uniqueid: string | number;
-	Linkedid: number | string;
+	Priority: string;
+	Uniqueid: string;
+	Linkedid: string | string;
 };
 
 export type Newstate = BaseEvent & {
 	Event: "Newstate";
 	Channel: string;
-	ChannelState: string;
+	ChannelState: ChannelStateValue;
 	ChannelStateDesc:
 		| "Down"
 		| "Rsrvd"
@@ -4694,9 +4711,9 @@ export type Newstate = BaseEvent & {
 	AccountCode: string;
 	Context: string;
 	Exten: string | number;
-	Priority: number;
-	Uniqueid: string | number;
-	Linkedid: number | string;
+	Priority: string;
+	Uniqueid: string;
+	Linkedid: string | string;
 };
 
 export type OriginateResponse = BaseEvent & {
@@ -4709,7 +4726,7 @@ export type OriginateResponse = BaseEvent & {
 	Application: string;
 	Data: string;
 	Reason: string;
-	Uniqueid: string | number;
+	Uniqueid: string;
 	CallerIDNum: string | number;
 	CallerIDName: string;
 };
@@ -4717,7 +4734,7 @@ export type OriginateResponse = BaseEvent & {
 export type ParkedCall = BaseEvent & {
 	Event: "ParkedCall";
 	ParkeeChannel: string;
-	ParkeeChannelState: string;
+	ParkeeChannelState: ChannelStateValue;
 	ParkeeChannelStateDesc:
 		| "Down"
 		| "Rsrvd"
@@ -4738,9 +4755,9 @@ export type ParkedCall = BaseEvent & {
 	ParkeeAccountCode: string;
 	ParkeeContext: string;
 	ParkeeExten: string | number;
-	ParkeePriority: number;
-	ParkeeUniqueid: string | number;
-	ParkeeLinkedid: number | string;
+	ParkeePriority: string;
+	ParkeeUniqueid: string;
+	ParkeeLinkedid: string | string;
 	ParkerDialString: string;
 	Parkinglot: string;
 	ParkingSpace: string;
@@ -4751,7 +4768,7 @@ export type ParkedCall = BaseEvent & {
 export type ParkedCallGiveUp = BaseEvent & {
 	Event: "ParkedCallGiveUp";
 	ParkeeChannel: string;
-	ParkeeChannelState: string;
+	ParkeeChannelState: ChannelStateValue;
 	ParkeeChannelStateDesc:
 		| "Down"
 		| "Rsrvd"
@@ -4772,11 +4789,11 @@ export type ParkedCallGiveUp = BaseEvent & {
 	ParkeeAccountCode: string;
 	ParkeeContext: string;
 	ParkeeExten: string | number;
-	ParkeePriority: number;
-	ParkeeUniqueid: string | number;
-	ParkeeLinkedid: number | string;
+	ParkeePriority: string;
+	ParkeeUniqueid: string;
+	ParkeeLinkedid: string | string;
 	ParkerChannel: string;
-	ParkerChannelState: string;
+	ParkerChannelState: ChannelStateValue;
 	ParkerChannelStateDesc:
 		| "Down"
 		| "Rsrvd"
@@ -4797,9 +4814,9 @@ export type ParkedCallGiveUp = BaseEvent & {
 	ParkerAccountCode: string;
 	ParkerContext: string;
 	ParkerExten: string | number;
-	ParkerPriority: number;
-	ParkerUniqueid: string | number;
-	ParkerLinkedid: number | string;
+	ParkerPriority: string;
+	ParkerUniqueid: string;
+	ParkerLinkedid: string | string;
 	ParkerDialString: string;
 	Parkinglot: string;
 	ParkingSpace: string;
@@ -4810,7 +4827,7 @@ export type ParkedCallGiveUp = BaseEvent & {
 export type ParkedCallSwap = BaseEvent & {
 	Event: "ParkedCallSwap";
 	ParkeeChannel: string;
-	ParkeeChannelState: string;
+	ParkeeChannelState: ChannelStateValue;
 	ParkeeChannelStateDesc:
 		| "Down"
 		| "Rsrvd"
@@ -4831,11 +4848,11 @@ export type ParkedCallSwap = BaseEvent & {
 	ParkeeAccountCode: string;
 	ParkeeContext: string;
 	ParkeeExten: string | number;
-	ParkeePriority: number;
-	ParkeeUniqueid: string | number;
-	ParkeeLinkedid: number | string;
+	ParkeePriority: string;
+	ParkeeUniqueid: string;
+	ParkeeLinkedid: string | string;
 	ParkerChannel: string;
-	ParkerChannelState: string;
+	ParkerChannelState: ChannelStateValue;
 	ParkerChannelStateDesc:
 		| "Down"
 		| "Rsrvd"
@@ -4856,9 +4873,9 @@ export type ParkedCallSwap = BaseEvent & {
 	ParkerAccountCode: string;
 	ParkerContext: string;
 	ParkerExten: string | number;
-	ParkerPriority: number;
-	ParkerUniqueid: string | number;
-	ParkerLinkedid: number | string;
+	ParkerPriority: string;
+	ParkerUniqueid: string;
+	ParkerLinkedid: string | string;
 	ParkerDialString: string;
 	Parkinglot: string;
 	ParkingSpace: string;
@@ -4869,7 +4886,7 @@ export type ParkedCallSwap = BaseEvent & {
 export type ParkedCallTimeOut = BaseEvent & {
 	Event: "ParkedCallTimeOut";
 	ParkeeChannel: string;
-	ParkeeChannelState: string;
+	ParkeeChannelState: ChannelStateValue;
 	ParkeeChannelStateDesc:
 		| "Down"
 		| "Rsrvd"
@@ -4890,11 +4907,11 @@ export type ParkedCallTimeOut = BaseEvent & {
 	ParkeeAccountCode: string;
 	ParkeeContext: string;
 	ParkeeExten: string | number;
-	ParkeePriority: number;
-	ParkeeUniqueid: string | number;
-	ParkeeLinkedid: number | string;
+	ParkeePriority: string;
+	ParkeeUniqueid: string;
+	ParkeeLinkedid: string | string;
 	ParkerChannel: string;
-	ParkerChannelState: string;
+	ParkerChannelState: ChannelStateValue;
 	ParkerChannelStateDesc:
 		| "Down"
 		| "Rsrvd"
@@ -4915,9 +4932,9 @@ export type ParkedCallTimeOut = BaseEvent & {
 	ParkerAccountCode: string;
 	ParkerContext: string;
 	ParkerExten: string | number;
-	ParkerPriority: number;
-	ParkerUniqueid: string | number;
-	ParkerLinkedid: number | string;
+	ParkerPriority: string;
+	ParkerUniqueid: string;
+	ParkerLinkedid: string | string;
 	ParkerDialString: string;
 	Parkinglot: string;
 	ParkingSpace: string;
@@ -4954,7 +4971,7 @@ export type PeerStatus = BaseEvent & {
 export type Pickup = BaseEvent & {
 	Event: "Pickup";
 	Channel: string;
-	ChannelState: string;
+	ChannelState: ChannelStateValue;
 	ChannelStateDesc:
 		| "Down"
 		| "Rsrvd"
@@ -4975,11 +4992,11 @@ export type Pickup = BaseEvent & {
 	AccountCode: string;
 	Context: string;
 	Exten: string | number;
-	Priority: number;
-	Uniqueid: string | number;
-	Linkedid: number | string;
+	Priority: string;
+	Uniqueid: string;
+	Linkedid: string | string;
 	TargetChannel: string;
-	TargetChannelState: string;
+	TargetChannelState: ChannelStateValue;
 	TargetChannelStateDesc:
 		| "Down"
 		| "Rsrvd"
@@ -5000,9 +5017,9 @@ export type Pickup = BaseEvent & {
 	TargetAccountCode: string;
 	TargetContext: string;
 	TargetExten: string | number;
-	TargetPriority: number;
-	TargetUniqueid: string | number;
-	TargetLinkedid: number | string;
+	TargetPriority: string;
+	TargetUniqueid: string;
+	TargetLinkedid: string | string;
 };
 
 /**
@@ -5068,7 +5085,7 @@ export type PresenceStatus = BaseEvent & {
 export type QueueCallerAbandon = BaseEvent & {
 	Event: "QueueCallerAbandon";
 	Channel: string;
-	ChannelState: string;
+	ChannelState: ChannelStateValue;
 	ChannelStateDesc:
 		| "Down"
 		| "Rsrvd"
@@ -5089,9 +5106,9 @@ export type QueueCallerAbandon = BaseEvent & {
 	AccountCode: string;
 	Context: string;
 	Exten: string | number;
-	Priority: number;
-	Uniqueid: string | number;
-	Linkedid: number | string;
+	Priority: string;
+	Uniqueid: string;
+	Linkedid: string | string;
 	Queue: string;
 	Position: string;
 	OriginalPosition: string;
@@ -5101,7 +5118,7 @@ export type QueueCallerAbandon = BaseEvent & {
 export type QueueCallerJoin = BaseEvent & {
 	Event: "QueueCallerJoin";
 	Channel: string;
-	ChannelState: string;
+	ChannelState: ChannelStateValue;
 	ChannelStateDesc:
 		| "Down"
 		| "Rsrvd"
@@ -5122,9 +5139,9 @@ export type QueueCallerJoin = BaseEvent & {
 	AccountCode: string;
 	Context: string;
 	Exten: string | number;
-	Priority: number;
-	Uniqueid: string | number;
-	Linkedid: number | string;
+	Priority: string;
+	Uniqueid: string;
+	Linkedid: string | string;
 	Queue: string;
 	Position: string;
 	Count: string;
@@ -5133,7 +5150,7 @@ export type QueueCallerJoin = BaseEvent & {
 export type QueueCallerLeave = BaseEvent & {
 	Event: "QueueCallerLeave";
 	Channel: string;
-	ChannelState: string;
+	ChannelState: ChannelStateValue;
 	ChannelStateDesc:
 		| "Down"
 		| "Rsrvd"
@@ -5154,9 +5171,9 @@ export type QueueCallerLeave = BaseEvent & {
 	AccountCode: string;
 	Context: string;
 	Exten: string | number;
-	Priority: number;
-	Uniqueid: string | number;
-	Linkedid: number | string;
+	Priority: string;
+	Uniqueid: string;
+	Linkedid: string | string;
 	Queue: string;
 	Count: string;
 	Position: string;
@@ -5185,15 +5202,23 @@ export type QueueEntry = BaseEvent & {
 	Queue: string;
 	Position: string;
 	Channel: string;
-	Uniqueid: string | number;
+	Uniqueid: string;
 	CallerIDNum: string | number;
 	CallerIDName: string;
 	ConnectedLineNum: string;
 	ConnectedLineName: string;
 	Wait: string;
-	Priority: number;
+	Priority: string;
 };
 
+/**
+ * QueueSummary event - Asterisk 20+
+ *
+ * Provides aggregate queue statistics in response to a QueueSummary AMI action.
+ * This event includes summary information about a queue without detailed member data.
+ *
+ * @since Asterisk 20
+ */
 export type QueueSummary = BaseEvent & {
 	Event: "QueueSummary";
 	Queue: string;
@@ -5207,6 +5232,14 @@ export type QueueSummary = BaseEvent & {
 	TimeEvent: number;
 };
 
+/**
+ * QueueSummaryComplete event - Asterisk 20+
+ *
+ * Marks the completion of a QueueSummary action response.
+ * This event indicates that all QueueSummary events have been sent for the requested action.
+ *
+ * @since Asterisk 20
+ */
 export type QueueSummaryComplete = BaseEvent & {
 	Event: "QueueSummaryComplete";
 	ActionID: number;
@@ -5229,7 +5262,7 @@ export type QueueMember = BaseEvent & {
 	InCall: number;
 	Status: number;
 	Paused: number;
-	PausedReason?: string | number;
+	PausedReason?: string;
 	Wrapuptime: number;
 	ActionID: number;
 };
@@ -5249,7 +5282,7 @@ export type QueueMemberAdded = BaseEvent & {
 	InCall: 0 | 1;
 	Status: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
 	Paused: 0 | 1;
-	PausedReason?: string | number;
+	PausedReason?: string;
 	Ringinuse: 0 | 1;
 	Wrapuptime: number;
 };
@@ -5269,7 +5302,7 @@ export type QueueMemberPause = BaseEvent & {
 	InCall: 0 | 1;
 	Status: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
 	Paused: 0 | 1;
-	PausedReason?: string | number;
+	PausedReason?: string;
 	Ringinuse: 0 | 1;
 	Wrapuptime: number;
 };
@@ -5289,7 +5322,7 @@ export type QueueMemberPenalty = BaseEvent & {
 	InCall: 0 | 1;
 	Status: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
 	Paused: 0 | 1;
-	PausedReason?: string | number;
+	PausedReason?: string;
 	Ringinuse: 0 | 1;
 	Wrapuptime: number;
 };
@@ -5309,7 +5342,7 @@ export type QueueMemberRemoved = BaseEvent & {
 	InCall: 0 | 1;
 	Status: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
 	Paused: 0 | 1;
-	PausedReason?: string | number;
+	PausedReason?: string;
 	Ringinuse: 0 | 1;
 	Wrapuptime: number;
 };
@@ -5329,7 +5362,7 @@ export type QueueMemberRinginuse = BaseEvent & {
 	InCall: 0 | 1;
 	Status: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
 	Paused: 0 | 1;
-	PausedReason?: string | number;
+	PausedReason?: string;
 	Ringinuse: 0 | 1;
 	Wrapuptime: number;
 };
@@ -5349,7 +5382,7 @@ export type QueueMemberStatus = BaseEvent & {
 	InCall: 0 | 1;
 	Status: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
 	Paused: 0 | 1;
-	PausedReason?: string | number;
+	PausedReason?: string;
 	Ringinuse: 0 | 1;
 	Wrapuptime: number;
 };
@@ -5387,7 +5420,7 @@ export type QueueParams = BaseEvent & {
 export type RTCPReceived = BaseEvent & {
 	Event: "RTCPReceived";
 	Channel: string;
-	ChannelState: string;
+	ChannelState: ChannelStateValue;
 	ChannelStateDesc:
 		| "Down"
 		| "Rsrvd"
@@ -5408,9 +5441,9 @@ export type RTCPReceived = BaseEvent & {
 	AccountCode: string;
 	Context: string;
 	Exten: string | number;
-	Priority: number;
-	Uniqueid: string | number;
-	Linkedid: number | string;
+	Priority: string;
+	Uniqueid: string;
+	Linkedid: string | string;
 	SSRC: string;
 	PT: "200(SR)" | "201(RR)";
 	From: string;
@@ -5433,7 +5466,7 @@ export type RTCPReceived = BaseEvent & {
 export type RTCPSent = BaseEvent & {
 	Event: "RTCPSent";
 	Channel: string;
-	ChannelState: string;
+	ChannelState: ChannelStateValue;
 	ChannelStateDesc: string;
 	CallerIDNum: string | number;
 	CallerIDName: string;
@@ -5443,9 +5476,9 @@ export type RTCPSent = BaseEvent & {
 	AccountCode: string;
 	Context: string;
 	Exten: string | number;
-	Priority: number;
-	Uniqueid: string | number;
-	Linkedid: number | string;
+	Priority: string;
+	Uniqueid: string;
+	Linkedid: string | string;
 	SSRC: string;
 	PT: "200(SR)" | "201(RR)";
 	To: string;
@@ -5495,7 +5528,7 @@ export type RTCPSent = BaseEvent & {
 export type ReceiveFAX = BaseEvent & {
 	Event: "ReceiveFAX";
 	Channel: string;
-	ChannelState: string;
+	ChannelState: ChannelStateValue;
 	ChannelStateDesc: string;
 	CallerIDNum: string | number;
 	CallerIDName: string;
@@ -5505,9 +5538,9 @@ export type ReceiveFAX = BaseEvent & {
 	AccountCode: string;
 	Context: string;
 	Exten: string | number;
-	Priority: number;
-	Uniqueid: string | number;
-	Linkedid: number | string;
+	Priority: string;
+	Uniqueid: string;
+	Linkedid: string | string;
 	LocalStationID: string;
 	RemoteStationID: string;
 	PagesTransferred: string;
@@ -5566,7 +5599,7 @@ export type Reload = BaseEvent & {
 export type Rename = BaseEvent & {
 	Event: "Rename";
 	Channel: string;
-	ChannelState: string;
+	ChannelState: ChannelStateValue;
 	ChannelStateDesc: string;
 	CallerIDNum: string | number;
 	CallerIDName: string;
@@ -5576,9 +5609,9 @@ export type Rename = BaseEvent & {
 	AccountCode: string;
 	Context: string;
 	Exten: string | number;
-	Priority: number;
-	Uniqueid: string | number;
-	Linkedid: number | string;
+	Priority: string;
+	Uniqueid: string;
+	Linkedid: string | string;
 };
 
 export type RequestBadFormat = BaseEvent & {
@@ -5665,7 +5698,7 @@ export type SIPQualifyPeerDone = BaseEvent & {
 export type SendFAX = BaseEvent & {
 	Event: "SendFAX";
 	Channel: string;
-	ChannelState: string;
+	ChannelState: ChannelStateValue;
 	ChannelStateDesc: string;
 	CallerIDNum: string | number;
 	CallerIDName: string;
@@ -5675,9 +5708,9 @@ export type SendFAX = BaseEvent & {
 	AccountCode: string;
 	Context: string;
 	Exten: string | number;
-	Priority: number;
-	Uniqueid: string | number;
-	Linkedid: number | string;
+	Priority: string;
+	Uniqueid: string;
+	Linkedid: string | string;
 	LocalStationID: string;
 	RemoteStationID: string;
 	PagesTransferred: string;
@@ -5726,7 +5759,7 @@ export type SessionLimit = BaseEvent & {
 export type SessionTimeout = BaseEvent & {
 	Event: "SessionTimeout";
 	Channel: string;
-	ChannelState: string;
+	ChannelState: ChannelStateValue;
 	ChannelStateDesc: string;
 	CallerIDNum: string | number;
 	CallerIDName: string;
@@ -5736,9 +5769,9 @@ export type SessionTimeout = BaseEvent & {
 	AccountCode: string;
 	Context: string;
 	Exten: string | number;
-	Priority: number;
-	Uniqueid: string | number;
-	Linkedid: number | string;
+	Priority: string;
+	Uniqueid: string;
+	Linkedid: string | string;
 	Source: "RTPTimeout" | "SIPSessionTimer";
 };
 
@@ -5784,7 +5817,7 @@ export type Shutdown = BaseEvent & {
 export type SoftHangupRequest = BaseEvent & {
 	Event: "SoftHangupRequest";
 	Channel: string;
-	ChannelState: string;
+	ChannelState: ChannelStateValue;
 	ChannelStateDesc: string;
 	CallerIDNum: string | number;
 	CallerIDName: string;
@@ -5794,9 +5827,9 @@ export type SoftHangupRequest = BaseEvent & {
 	AccountCode: string;
 	Context: string;
 	Exten: string | number;
-	Priority: number;
-	Uniqueid: string | number;
-	Linkedid: number | string;
+	Priority: string;
+	Uniqueid: string;
+	Linkedid: string | string;
 	Cause: string;
 };
 
@@ -5834,7 +5867,7 @@ export type Status = BaseEvent & {
 	Event: "Status";
 	ActionID?: number;
 	Channel: string;
-	ChannelState: string;
+	ChannelState: ChannelStateValue;
 	ChannelStateDesc: string;
 	CallerIDNum: string | number;
 	CallerIDName: string;
@@ -5844,9 +5877,9 @@ export type Status = BaseEvent & {
 	AccountCode: string;
 	Context: string;
 	Exten: string | number;
-	Priority: number;
-	Uniqueid: string | number;
-	Linkedid: number | string;
+	Priority: string;
+	Uniqueid: string;
+	Linkedid: string | string;
 	Type: string;
 	DNID: string;
 	EffectiveConnectedLineNum: string;
@@ -5980,7 +6013,7 @@ export type TransportDetail = BaseEvent & {
 export type UnParkedCall = BaseEvent & {
 	Event: "UnParkedCall";
 	ParkeeChannel: string;
-	ParkeeChannelState: string;
+	ParkeeChannelState: ChannelStateValue;
 	ParkeeChannelStateDesc: string;
 	ParkeeCallerIDNum: string | number;
 	ParkeeCallerIDName: string;
@@ -5990,11 +6023,11 @@ export type UnParkedCall = BaseEvent & {
 	ParkeeAccountCode: string;
 	ParkeeContext: string;
 	ParkeeExten: string | number;
-	ParkeePriority: number;
-	ParkeeUniqueid: string | number;
-	ParkeeLinkedid: number | string;
+	ParkeePriority: string;
+	ParkeeUniqueid: string;
+	ParkeeLinkedid: string | string;
 	ParkerChannel: string;
-	ParkerChannelState: string;
+	ParkerChannelState: ChannelStateValue;
 	ParkerChannelStateDesc: string;
 	ParkerCallerIDNum: string | number;
 	ParkerCallerIDName: string;
@@ -6004,16 +6037,16 @@ export type UnParkedCall = BaseEvent & {
 	ParkerAccountCode: string;
 	ParkerContext: string;
 	ParkerExten: string | number;
-	ParkerPriority: number;
-	ParkerUniqueid: string | number;
-	ParkerLinkedid: number | string;
+	ParkerPriority: string;
+	ParkerUniqueid: string;
+	ParkerLinkedid: string | string;
 	ParkerDialString: string;
 	Parkinglot: string;
 	ParkingSpace: string;
 	ParkingTimeout: string;
 	ParkingDuration: string;
 	RetrieverChannel: string;
-	RetrieverChannelState: string;
+	RetrieverChannelState: ChannelStateValue;
 	RetrieverChannelStateDesc: string;
 	RetrieverCallerIDNum: string | number;
 	RetrieverCallerIDName: string;
@@ -6023,9 +6056,9 @@ export type UnParkedCall = BaseEvent & {
 	RetrieverAccountCode: string;
 	RetrieverContext: string;
 	RetrieverExten: string | number;
-	RetrieverPriority: number;
-	RetrieverUniqueid: string | number;
-	RetrieverLinkedid: number | string;
+	RetrieverPriority: string;
+	RetrieverUniqueid: string;
+	RetrieverLinkedid: string | string;
 };
 
 export type UnexpectedAddress = BaseEvent & {
@@ -6068,7 +6101,7 @@ export type UnexpectedAddress = BaseEvent & {
 export type Unhold = BaseEvent & {
 	Event: "Unhold";
 	Channel: string;
-	ChannelState: string;
+	ChannelState: ChannelStateValue;
 	ChannelStateDesc: string;
 	CallerIDNum: string | number;
 	CallerIDName: string;
@@ -6078,9 +6111,9 @@ export type Unhold = BaseEvent & {
 	AccountCode: string;
 	Context: string;
 	Exten: string | number;
-	Priority: number;
-	Uniqueid: string | number;
-	Linkedid: number | string;
+	Priority: string;
+	Uniqueid: string;
+	Linkedid: string | string;
 };
 
 /**
@@ -6125,7 +6158,7 @@ export type Unload = BaseEvent & {
 export type UserEvent = BaseEvent & {
 	Event: "UserEvent";
 	Channel: string;
-	ChannelState: string;
+	ChannelState: ChannelStateValue;
 	ChannelStateDesc: string;
 	CallerIDNum: string | number;
 	CallerIDName: string;
@@ -6135,9 +6168,9 @@ export type UserEvent = BaseEvent & {
 	AccountCode: string;
 	Context: string;
 	Exten: string | number;
-	Priority: number;
-	Uniqueid: string | number;
-	Linkedid: number | string;
+	Priority: string;
+	Uniqueid: string;
+	Linkedid: string | string;
 	UserEvent: string;
 };
 
@@ -6168,7 +6201,7 @@ export type UserEvent = BaseEvent & {
 export type VarSet = BaseEvent & {
 	Event: "VarSet";
 	Channel: string;
-	ChannelState: string;
+	ChannelState: ChannelStateValue;
 	ChannelStateDesc: string;
 	CallerIDNum: string | number;
 	CallerIDName: string;
@@ -6178,9 +6211,9 @@ export type VarSet = BaseEvent & {
 	AccountCode: string;
 	Context: string;
 	Exten: string | number;
-	Priority: number;
-	Uniqueid: string | number;
-	Linkedid: number | string;
+	Priority: string;
+	Uniqueid: string;
+	Linkedid: string | string;
 	Variable: string;
 	Value: string;
 };
@@ -6228,7 +6261,7 @@ export type VoicemailPasswordChange = BaseEvent & {
 export type Wink = BaseEvent & {
 	Event: "Wink";
 	Channel: string;
-	ChannelState: string;
+	ChannelState: ChannelStateValue;
 	ChannelStateDesc: string;
 	CallerIDNum: string | number;
 	CallerIDName: string;
@@ -6238,9 +6271,9 @@ export type Wink = BaseEvent & {
 	AccountCode: string;
 	Context: string;
 	Exten: string | number;
-	Priority: number;
-	Uniqueid: string | number;
-	Linkedid: number | string;
+	Priority: string;
+	Uniqueid: string;
+	Linkedid: string | string;
 };
 
 export type AMIEvent =

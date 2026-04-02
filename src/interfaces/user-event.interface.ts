@@ -12,10 +12,10 @@ export interface I_UserEvent {
 	ConnectedLineName: string
 	AccountCode: number
 	Context: string
-	Exten: number
-	Priority: number
-	Uniqueid: number
-	Linkedid: number
+	Exten: string
+	Priority: string
+	Uniqueid: string
+	Linkedid: string
 	//The event name, as specified in the dialplan.
 
 	UserEvent: string

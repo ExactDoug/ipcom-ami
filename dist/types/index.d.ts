@@ -3,8 +3,10 @@ import { Socket } from "node:net";
 import { eAmiActions } from "./e-ami-actions.js";
 import type { I_Request } from "./interfaces/actions.interface.js";
 import type { IeAmiOptions } from "./interfaces/configure.interface.js";
+import type { AsteriskVersion } from "./types/version.js";
 export * from "./typeGuards.js";
 export * from "./types/events.js";
+export * from "./types/version.js";
 export declare const eAMI_EVENTS: {
     CONNECT: string;
     DO_RECONNECT: string;
@@ -63,8 +65,9 @@ export declare const AMI_EVENTS: {
     RTCP_RECEIVED: string;
     STATUS: string;
 };
-export declare class eAmi {
+export declare class eAmi<V extends AsteriskVersion = '18'> {
     debug: boolean;
+    private _version;
     private _host;
     private _port;
     private _userName;
@@ -92,12 +95,13 @@ export declare class eAmi {
      * Creates a new instance of the AMI connection.
      *
      * @constructor
-     * @param {IeAmiOptions} allOptions - Object containing all the necessary options to configure the connection.
+     * @param {IeAmiOptions<V>} allOptions - Object containing all the necessary options to configure the connection.
      * @param {string} allOptions.host - The address of the AMI server.
      * @param {number} [allOptions.port=5038] - The port of the AMI server. If not specified, the default port 5038 will be used.
      * @param {string} allOptions.userName - The username for AMI authentication.
      * @param {string} allOptions.password - The password for AMI authentication.
      * @param {Object} [allOptions.additionalOptions] - Additional configuration options.
+     * @param {V} [allOptions.additionalOptions.version='18'] - Asterisk version ('18' or '20'). Defaults to '18' for backward compatibility.
      * @param {boolean} [allOptions.additionalOptions.reconnect=true] - Whether to automatically reconnect in case of connection failure.
      * @param {number} [allOptions.additionalOptions.heartbeatInterval=5] - Interval in seconds to send heartbeat packets.
      * @param {number} [allOptions.additionalOptions.resendTimeOut=5] - Timeout in seconds to resend requests that failed.
@@ -106,7 +110,7 @@ export declare class eAmi {
      * @param {boolean} [allOptions.additionalOptions.debug=false] - Whether to enable debug mode, which prints detailed logs.
      * @param {number} [allOptions.additionalOptions.maxReconnectCount=5] - Maximum number of reconnection attempts before giving up.
      */
-    constructor(allOptions: IeAmiOptions);
+    constructor(allOptions: IeAmiOptions<V>);
     /**
      * Configura listeners internos necessários para o funcionamento da biblioteca.
      *
@@ -118,11 +122,12 @@ export declare class eAmi {
      * @private
      */
     private internalListeners;
+    get version(): V;
     get excludeEvents(): string[];
     set excludeEvents(events: string[]);
     get isLoggedIn(): boolean;
     get lastConnectTime(): number;
-    get actions(): eAmiActions;
+    get actions(): eAmiActions<V>;
     get queueRequest(): I_Request[];
     private addSocketListeners;
     destroySocket(): void;
