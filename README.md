@@ -1,5 +1,7 @@
 # @ipcom/asterisk-ami
 
+> **Part of the FreePBX / voice ecosystem.** This fork of `@ipcom/asterisk-ami` is kept for reference; no current project uses it. How this repo fits with the other FreePBX/Asterisk voice projects (what runs on pbx01, which repo owns which piece, what lives outside git) is documented in the shared hub, [ExactDoug/freepbx-docs-shared](https://github.com/ExactDoug/freepbx-docs-shared) (local: `~/dev/projects/github/freepbx-docs-shared`). Start with its `project-ecosystem-overview.md`.
+
 **@ipcom/asterisk-ami** is an AMI (Asterisk Manager Interface) client developed in TypeScript. It allows you to connect to Asterisk through TCP port 5038 or any other port configured in `manager.conf`, listening to standard Asterisk events and performing action requests.
 
 ## Table of Contents
